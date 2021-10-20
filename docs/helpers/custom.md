@@ -1,6 +1,6 @@
 # Custom Helpers
 
-Writing custom helpers is straightforward: write a class for it, register
+Developing a custom helper is straightforward: write a class for it, register
 it with the _HelperLocator_, then use it in a template.
 
 ## The Helper Class
