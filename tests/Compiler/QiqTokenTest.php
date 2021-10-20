@@ -142,6 +142,11 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
             ['endwhile'],
             ['break'],
             ['continue'],
+            ['isset($foo) ? "this" : "that"'],
+            ['empty($foo) ? "this" : "that"'],
+            ['list ($foo, $bar) = $baz'],
+            ['namespace NsName'],
+            ['use ClassName'],
         ];
     }
 

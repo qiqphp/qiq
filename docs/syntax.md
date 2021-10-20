@@ -30,8 +30,8 @@ attribute values will be space-separated. The following Qiq code ...
 <span id="foo" class="bar baz dib">Text</span>
 ```
 
-You can echo any variable, literal, function, method, expression, or constant,
-including the magic constants `__DIR__`, `__FILE__`, and `__LINE__`.
+You can echo just about any variable, literal, function, method, expression, or
+constant, including the magic constants `__DIR__`, `__FILE__`, and `__LINE__`.
 
 ```qiq
 {{h $this->foo }}
@@ -107,7 +107,15 @@ Qiq syntax recognizes most PHP control structures:
 Qiq does not recognize `else if`, `switch`, `case`, or `match`; for these, you
 can always fall back to plain PHP.
 
-Qiq also recognizes the `namespace` and `use` keywords for completeness' sake.
+## Reserved Words
+
+Qiq recognizes the following reserved words.
+
+- `empty`
+- `isset`
+- `list`
+- `namespace`
+- `use`
 
 ## Helpers
 
@@ -131,7 +139,6 @@ method. The following Qiq syntax ...
     'value' => $this->street,
 ]) ?>
 ```
-
 
 ## Other PHP Code
 
