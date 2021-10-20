@@ -14,6 +14,7 @@ For example, a `list` partial template might look like this:
 <ul>
     {{ foreach ($items as $item): }}
     <li>{{h $item}}</li>
+    {{ endforeach }}
 </ul>
 ```
 
