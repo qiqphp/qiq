@@ -58,8 +58,8 @@ Now you can use the helper in template, either as Qiq code ...
 
 ... or as PHP:
 
-````html+php
-<p><?= $this->rotOneThree('Uryyb Jbeyq!'); ?></p>
+```html+php
+<p><?= $this->rotOneThree('Uryyb Jbeyq!') ?></p>
 ```
 
 Either way, the output will be the same:
