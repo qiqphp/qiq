@@ -1,6 +1,6 @@
 # Template Syntax
 
-Qiq templates are native PHP templates, with an optional `{{...}}` syntax for
+Qiq templates are native PHP templates, with an optional `{{ ... }}` syntax for
 concise escaping and helper use.
 
 ## Escaping and Output
@@ -66,7 +66,7 @@ code ...
 
 All control structures are written exactly as in PHP, using the
 [alternative control structure syntax](https://php.net/control-structures.alternative-syntax)
-when available, inside `{{...}}` Qiq tags.
+when available, inside `{{ ... }}` Qiq tags.
 
 For example, this Qiq code ...
 
@@ -142,7 +142,7 @@ method. The following Qiq syntax ...
 
 ## Other PHP Code
 
-Qiq treats all other code inside `{{...}}` tags as plain old PHP code. For
+Qiq treats all other code inside `{{ ... }}` tags as plain old PHP code. For
 example, this Qiq syntax ...
 
 ```qiq

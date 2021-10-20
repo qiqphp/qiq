@@ -1,6 +1,6 @@
 # Compiler
 
-Although Qiq templates use native PHP, the `{{...}}` syntax sugar does require
+Although Qiq templates use native PHP, the `{{ ... }}` syntax sugar does require
 a compiling process. That process is very simple, even naive, but it does
 exist:
 
@@ -8,11 +8,11 @@ exist:
   than the source template file, the _QiqCompiler_ returns the already-existing
   compiled template. Otherwise ...
 
-- The _QiqCompiler_ reads the source template file, splits out the `{{...}}`
+- The _QiqCompiler_ reads the source template file, splits out the `{{ ... }}`
   tags using a regular expression, and retains them as _QiqToken_ objects .
 
 - The _QiqCompiler_ then invokes each _QiqToken_ to get back the PHP code
-  replacement for the `{{...}}` tag, and reassembles all the parts in order.
+  replacement for the `{{ ... }}` tag, and reassembles all the parts in order.
 
 - The compiled template is saved to the compiler cache directory. The same
   source template will not be compiled again -- at least, not until it gets

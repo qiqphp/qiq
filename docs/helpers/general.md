@@ -17,7 +17,7 @@ Helper for `<a>` tags.
     [                               // (array) optional attributes
         'id' => 'qiq-link'
     ]
-}}
+) }}
 ```
 
 ```html
@@ -35,7 +35,7 @@ To output the anchor text without escaping, use the pseudo-attribute `_raw`:
         'id' => 'qiq-link'
         '_raw' => true
     ]
-}}
+) }}
 ```
 
 ```html
@@ -51,7 +51,7 @@ Helper for `<base>` tags.
 ```qiq
 {{= base (
     '/base'                         // (string) href
-}}
+) }}
 ```
 
 ```html
@@ -102,7 +102,7 @@ Helper for `<img>` tags.
     [                               // (array) optional attributes
         'id' => 'image-id'
     ]
-}}
+) }}
 ```
 
 ```html
@@ -136,7 +136,7 @@ Helper for a `<link>` tag.
 {{= link ([                         // (array) attributes
     'rel' => 'prev',
     'href' => '/path/to/prev',
-] }}
+]) }}
 ```
 
 ```html

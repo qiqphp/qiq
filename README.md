@@ -3,7 +3,7 @@
 This package provides a PHP 8.0 implementation of the
 [TemplateView](http://martinfowler.com/eaaCatalog/templateView.html) and
 [TwoStepView](http://martinfowler.com/eaaCatalog/twoStepView.html) patterns
-using PHP itself as the templating language, along with an optional `{{...}}`
+using PHP itself as the templating language, along with an optional `{{ ... }}`
 syntax for concise escaping and helper use.
 
 ## Background
