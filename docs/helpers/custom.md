@@ -27,10 +27,11 @@ class Rot13 extends Helper
 
 ## The Helper Locator
 
-Now that you have the helper class, you will need to register a factory for it
-in the _HelperLocator_. (Registering a factory allows the _HelperLocator_ to
-lazy-load the helper only when it is called.)  The registration key will be the
-Qiq code word, or `$this` helper method, you use for that helper in a template.
+Now that you have the helper class, you will need to register a callable factory
+for it in the _HelperLocator_. (Registering a callable factory allows
+the _HelperLocator_ to lazy-load the helper only when it is called.)  The
+registration key will be the Qiq helper name, or the PHP `$this` helper method,
+you use for that helper in a template.
 
 ```php
 $tpl = Template::new(...);
