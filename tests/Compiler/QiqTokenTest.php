@@ -89,6 +89,7 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
             $this->assertPhp($php, $qiq);
         }
     }
+
     public function echoProvider() : array
     {
         return [
@@ -106,6 +107,7 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
             ['false'],
             ['null'],
             ['PHP_VERSION'],
+            ['/* comment */'],
         ];
     }
 
