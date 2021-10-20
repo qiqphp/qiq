@@ -224,7 +224,7 @@ This Qiq code ...
 
 ... compiles to this PHP code:
 
-```php
+```qiq
 <ul>
     <?php \Qiq\Indent::set('    ') ?><?= $this->items(['foo', 'bar', 'baz']) ?>
 </ul>
