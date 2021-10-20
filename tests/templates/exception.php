@@ -1,0 +1,2 @@
+<?php
+syntax-error
