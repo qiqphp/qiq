@@ -33,7 +33,7 @@ $tpl = Template::new(
 
 The _QiqCompiler_ saves the compiled templates in the cache using the full path
 of the source template file. For example, the cache path is `/private/tmp` and
-the source template file is at '/www/site/resources/templates/foo.php'. That
+the source template file is at `/www/site/resources/templates/foo.php`. That
 means the compiled template file will be cached at:
 
     /private/tmp/www/site/resources/templates/foo.php
