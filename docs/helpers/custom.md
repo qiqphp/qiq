@@ -50,14 +50,20 @@ already in the _HelperLocator_.
 
 ## Use The Helper
 
-Now you can use the helper in template code.
+Now you can use the helper in template, either as Qiq code ...
 
 ```
-Qiq:
+<p>{{= rotOneThree ('Uryyb Jbeyq!') }}</p>
+```
 
-{{= rotOneThree ('Uryyb Jbeyq!') }}
+... or as PHP:
 
-PHP:
+````html+php
+<p><?= $this->rotOneThree('Uryyb Jbeyq!'); ?></p>
+```
 
-<?= $this->rotOneThree('Uryyb Jbeyq!'); ?>
+Either way, the output will be the same:
+
+```html
+<p>Hello World!</p>
 ```
