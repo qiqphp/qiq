@@ -10,7 +10,7 @@ class QiqCompiler implements Compiler
     public function __construct(protected ?string $cachePath = null)
     {
         $this->cachePath ??= rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR)
-            . DIRECTORY_SEPARATOR . '/qiq';
+            . DIRECTORY_SEPARATOR . 'qiq';
     }
 
     public function __invoke(string $source) : string
