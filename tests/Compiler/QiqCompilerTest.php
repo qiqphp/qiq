@@ -13,6 +13,10 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
         $this->cachePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'cache';
         $this->compiler = new QiqCompiler($this->cachePath);
         $this->compiler->clear();
+        if (! is_dir($this->cachePath)) {
+            mkdir($this->cachePath, 0777, true);
+            touch($this->cachePath . DIRECTORY_SEPARATOR . '.gitkeep');
+        }
     }
 
     protected function compile(string $name)
