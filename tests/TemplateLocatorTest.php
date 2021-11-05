@@ -16,7 +16,6 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
 
     protected function osdir(string $path)
     {
-        $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
         if (DIRECTORY_SEPARATOR == '\\') {
             $path = str_replace('\\', '\\\\', $path);
         }

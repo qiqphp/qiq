@@ -9,10 +9,20 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp() : void
     {
-        $this->sourceDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'templates';
-        $this->cachePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'cache';
+        $this->sourceDir = $this->osdir(dirname(__DIR__) . '/templates');
+        $this->cachePath = $this->osdir(dirname(__DIR__) . '/cache');
         $this->compiler = new QiqCompiler($this->cachePath);
         $this->compiler->clear();
+    }
+
+    protected function osdir(string $path)
+    {
+        $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+        return str_replace(
+            DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR,
+            DIRECTORY_SEPARATOR,
+            $path
+        );
     }
 
     protected function compile(string $name)
@@ -37,10 +47,7 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 
     protected function cachedFile(string $name)
     {
-        return $this->cachePath
-            . $this->sourceDir
-            . DIRECTORY_SEPARATOR
-            . "{$name}.php";
+        return $this->osdir("{$this->cachePath}/{$this->sourceDir}/{$name}.php");
     }
 
     public function test()
@@ -63,8 +70,8 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
     public function testFilemtime()
     {
         copy(
-            $this->sourceDir . '/index.php',
-            $this->sourceDir . '/mtime.php'
+            $this->osdir($this->sourceDir . '/index.php'),
+            $this->osdir($this->sourceDir . '/mtime.php')
         );
 
         $expect = $this->cachedFile('mtime');
@@ -74,11 +81,11 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
         $this->assertReadable($expect);
 
         sleep(1);
-        touch($this->sourceDir . '/mtime.php');
+        touch($this->osdir($this->sourceDir . '/mtime.php'));
         $actual = $this->compile('mtime');
         $this->assertSame($expect, $actual);
         $this->assertReadable($expect);
 
-        unlink($this->sourceDir . '/mtime.php');
+        unlink($this->osdir($this->sourceDir . '/mtime.php'));
     }
 }
