@@ -30,6 +30,10 @@ class QiqCompiler implements Compiler
 
     public function clear() : void
     {
+        if (! is_dir($this->cachePath)) {
+            return;
+        }
+
         $files = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator(
                 (string) $this->cachePath,
