@@ -29,9 +29,10 @@ class TemplateLocator
 
         $key = $name;
         list($collection, $name) = $this->split($name);
+        $name = str_replace('/', DIRECTORY_SEPARATOR, $name);
 
         foreach ($this->paths[$collection] as $path) {
-            $file = Fsio::concat($path, "{$name}{$this->extension}");
+            $file = $path . DIRECTORY_SEPARATOR . $name . $this->extension;
             if (is_readable($file)) {
                 $this->found[$key] = $file;
                 return true;
@@ -118,7 +119,6 @@ class TemplateLocator
     protected function split(string $spec) : array
     {
         $offset = (PHP_OS_FAMILY === 'Windows') ? 2 : 0;
-
         $pos = strpos($spec, ':', $offset);
 
         if (! $pos) {

@@ -11,8 +11,8 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp() : void
     {
-        $this->sourceDir = Fsio::concat(dirname(__DIR__), 'templates');
-        $this->cachePath = Fsio::concat(dirname(__DIR__), 'cache');
+        $this->sourceDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'templates';
+        $this->cachePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'cache';
         $this->compiler = new QiqCompiler($this->cachePath);
         $this->compiler->clear();
     }
