@@ -20,7 +20,7 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($this->templateLocator->has('index'));
         $actual = $this->templateLocator->get('index');
-        $this->assertSame(__DIR__ . '/templates/index.php', $actual);
+        $this->assertSame(Fsio::osdirsep(__DIR__ . '/templates/index.php'), $actual);
 
         $this->assertFalse($this->templateLocator->has('no-such-template'));
         $this->expectException(Exception\TemplateNotFound::CLASS);
