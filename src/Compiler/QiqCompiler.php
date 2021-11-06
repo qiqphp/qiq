@@ -10,12 +10,16 @@ class QiqCompiler implements Compiler
 {
     public function __construct(protected ?string $cachePath = null)
     {
-        $this->cachePath ??= Fsio::concat(sys_get_temp_dir(), 'qiq');
+        $this->cachePath ??= sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'qiq';
     }
 
     public function __invoke(string $source) : string
     {
-        $cached = Fsio::concat($this->cachePath, $source);
+        $append = (PHP_OS_FAMILY === 'Windows')
+            ? substr($source, 2)
+            : $source;
+
+        $cached = $this->cachePath . $source;
 
         if (! $this->isCompiled($source, $cached)) {
             $text = (string) Fsio::fileGetContents($source);
