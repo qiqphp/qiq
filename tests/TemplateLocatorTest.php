@@ -77,7 +77,7 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
 
     public function testFindFallbacks()
     {
-        $dir = __DIR__ . '/templates/';
+        $dir = Fsio::osdirsep(__DIR__ . '/templates/');
 
         $templateLocator = $this->newTemplateLocator([
             $dir . 'foo',
