@@ -1,8 +1,6 @@
 <?php
 namespace Qiq\Compiler;
 
-use Qiq\Fsio;
-
 class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 {
     protected QiqCompiler $compiler;

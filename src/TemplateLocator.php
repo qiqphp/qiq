@@ -3,7 +3,6 @@ namespace Qiq;
 
 use Qiq\Compiler\Compiler;
 use Qiq\Compiler\QiqCompiler;
-use Qiq\Fsio;
 
 class TemplateLocator
 {
@@ -63,16 +62,10 @@ class TemplateLocator
         return $this->paths;
     }
 
-    protected function rtrimPath($path)
-    {
-        $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
-        return rtrim($path, DIRECTORY_SEPARATOR);
-    }
-
     public function prependPath(string $path) : void
     {
         list ($collection, $path) = $this->split($path);
-        array_unshift($this->paths[$collection], $this->rtrimPath($path));
+        array_unshift($this->paths[$collection], $this->fixPath($path));
         $this->found = [];
         $this->compiled = [];
     }
@@ -80,7 +73,7 @@ class TemplateLocator
     public function appendPath(string $path) : void
     {
         list ($collection, $path) = $this->split($path);
-        $this->paths[$collection][] = $this->rtrimPath($path);
+        $this->paths[$collection][] = $this->fixPath($path);
         $this->found = [];
         $this->compiled = [];
     }
@@ -91,7 +84,7 @@ class TemplateLocator
 
         foreach ($paths as $path) {
             list ($collection, $path) = $this->split($path);
-            $this->paths[$collection][] = $this->rtrimPath($path);
+            $this->paths[$collection][] = $this->fixPath($path);
         }
 
         $this->found = [];
@@ -120,6 +113,12 @@ class TemplateLocator
         }
 
         return $this->compiled[$name];
+    }
+
+    protected function fixPath(string $path) : string
+    {
+        $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+        return rtrim($path, DIRECTORY_SEPARATOR);
     }
 
     protected function split(string $spec) : array

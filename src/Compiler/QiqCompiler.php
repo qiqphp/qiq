@@ -4,13 +4,13 @@ namespace Qiq\Compiler;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
-use Qiq\Fsio;
 
 class QiqCompiler implements Compiler
 {
     public function __construct(protected ?string $cachePath = null)
     {
-        $this->cachePath ??= sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'qiq';
+        $this->cachePath ??= rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR)
+            . DIRECTORY_SEPARATOR . 'qiq';
     }
 
     public function __invoke(string $source) : string
@@ -38,7 +38,7 @@ class QiqCompiler implements Compiler
 
         $files = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator(
-                $this->cachePath,
+                (string) $this->cachePath,
                 FilesystemIterator::SKIP_DOTS
             ),
             RecursiveIteratorIterator::CHILD_FIRST
