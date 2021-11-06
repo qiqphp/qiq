@@ -57,16 +57,16 @@ class QiqCompiler implements Compiler
     {
         $dir = dirname($cached);
 
-        if (! Fsio::isDir($dir)) {
-            Fsio::mkdir($dir, 0777, true);
+        if (! is_dir($dir)) {
+            mkdir($dir, 0777, true);
             return false;
         }
 
-        if (! Fsio::isReadable($cached)) {
+        if (! is_readable($cached)) {
             return false;
         }
 
-        if (Fsio::filemtime($cached) < Fsio::filemtime($source)) {
+        if (filemtime($cached) < filemtime($source)) {
             return false;
         }
 
