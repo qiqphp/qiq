@@ -13,7 +13,6 @@ class Fsio
 
         if (DIRECTORY_SEPARATOR === '\\') {
             $path = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path);
-            $path = str_replace(DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, $path);
         }
 
         return $path;
