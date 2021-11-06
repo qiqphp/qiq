@@ -118,7 +118,9 @@ class TemplateLocator
 
     protected function split(string $spec) : array
     {
-        $pos = strpos($spec, ':');
+        $offset = (DIRECTORY_SEPARATOR === '\\') ? 2 : 0;
+
+        $pos = strpos($spec, ':', $offset);
 
         if (! $pos) {
             // not present, or at character zero
