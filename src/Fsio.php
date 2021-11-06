@@ -17,54 +17,6 @@ class Fsio
         return is_readable(static::osdirsep($path));
     }
 
-    static public function isDir($path)
-    {
-        return is_dir(static::osdirsep($path));
-    }
-
-    static public function fileGetContents($path)
-    {
-        return file_get_contents(static::osdirsep($path));
-    }
-
-    static public function filePutContents($path, $text)
-    {
-        return file_put_contents(static::osdirsep($path), $text);
-    }
-
-    static public function rrmdir($path)
-    {
-        if (! static::isDir($path)) {
-            return;
-        }
-
-        $files = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator(
-                static::osdirsep($path),
-                FilesystemIterator::SKIP_DOTS
-            ),
-            RecursiveIteratorIterator::CHILD_FIRST
-        );
-
-        foreach ($files as $file) {
-            if ($file->isDir()) {
-                rmdir($file->getPathname());
-            } else {
-                unlink($file->getPathname());
-            }
-        }
-    }
-
-    static public function mkdir($path, $perm, $deep)
-    {
-        return mkdir(static::osdirsep($path), $perm, $deep);
-    }
-
-    static public function filemtime($path)
-    {
-        return filemtime(static::osdirsep($path));
-    }
-
     static public function trim(string $path)
     {
         return trim(static::osdirsep($path), DIRECTORY_SEPARATOR);
