@@ -20,7 +20,9 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($this->templateLocator->has('index'));
         $actual = $this->templateLocator->get('index');
-        $this->assertSame(Fsio::osdirsep(__DIR__ . '/templates/index.php'), $actual);
+
+        $expect = str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/templates/index.php');
+        $this->assertSame($expect, $actual);
 
         $this->assertFalse($this->templateLocator->has('no-such-template'));
         $this->expectException(Exception\TemplateNotFound::CLASS);
@@ -36,9 +38,9 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
 
         // set the paths
         $expect = ['__DEFAULT__' => [
-            Fsio::osdirsep('/foo'),
-            Fsio::osdirsep('/bar'),
-            Fsio::osdirsep('/baz'),
+            DIRECTORY_SEPARATOR . 'foo',
+            DIRECTORY_SEPARATOR . 'bar',
+            DIRECTORY_SEPARATOR . 'baz',
         ]];
         $this->templateLocator->setPaths(['/foo', '/bar', '/baz']);
         $actual = $this->templateLocator->getPaths();
@@ -52,9 +54,9 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $this->templateLocator->prependPath('/baz');
 
         $expect = ['__DEFAULT__' => [
-            Fsio::osdirsep('/baz'),
-            Fsio::osdirsep('/bar'),
-            Fsio::osdirsep('/foo'),
+            DIRECTORY_SEPARATOR . 'baz',
+            DIRECTORY_SEPARATOR . 'bar',
+            DIRECTORY_SEPARATOR . 'foo',
         ]];
         $actual = $this->templateLocator->getPaths();
         $this->assertSame($expect, $actual);
@@ -67,9 +69,9 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $this->templateLocator->appendPath('/baz');
 
         $expect = ['__DEFAULT__' => [
-            Fsio::osdirsep('/foo'),
-            Fsio::osdirsep('/bar'),
-            Fsio::osdirsep('/baz'),
+            DIRECTORY_SEPARATOR . 'foo',
+            DIRECTORY_SEPARATOR . 'bar',
+            DIRECTORY_SEPARATOR . 'baz',
         ]];
         $actual = $this->templateLocator->getPaths();
         $this->assertSame($expect, $actual);
