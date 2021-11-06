@@ -34,23 +34,22 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 
     protected function sourceFile(string $name)
     {
-        return Fsio::osdirsep(
-            Fsio::concat(
-                $this->sourceDir,
-                "{$name}.php"
-            )
-        );
+        return $this->sourceDir . DIRECTORY_SEPARATOR
+            . str_replace('/', DIRECTORY_SEPARATOR, $name)
+            . '.php';
     }
 
     protected function cachedFile(string $name)
     {
-        return Fsio::osdirsep(
-            Fsio::concat(
-                $this->cachePath,
-                $this->sourceDir,
-                "{$name}.php"
-            )
-        );
+        $file = $this->cachePath;
+
+        $file .= (PHP_OS_FAMILY === 'Windows')
+            ? substr($this->sourceDir, 2)
+            : $this->sourceDir;
+
+        return $file . DIRECTORY_SEPARATOR
+            . str_replace('/', DIRECTORY_SEPARATOR, $name)
+            . '.php';
     }
 
     public function test()
