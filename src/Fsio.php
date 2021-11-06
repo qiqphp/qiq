@@ -86,12 +86,18 @@ class Fsio
 
     static public function ltrim(string $path)
     {
+        if (substr($path, 0, 2) === 'D:') {
+            $path = substr($path, 2);
+        }
+
         return ltrim(static::osdirsep($path), DIRECTORY_SEPARATOR);
     }
 
+    // problem is you get to absolute paths concatted, which is fine on unix,
+    // but on win you get D:\....D:\...
     static public function concat(...$parts)
     {
-        $path = '';
+        $path = array_shift($parts);
 
         while (! empty($parts)) {
             $part = array_shift($parts);
