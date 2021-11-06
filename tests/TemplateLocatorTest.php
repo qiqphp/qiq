@@ -35,7 +35,11 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
 
         // set the paths
-        $expect = ['__DEFAULT__' => ['/foo', '/bar', '/baz']];
+        $expect = ['__DEFAULT__' => [
+            Fsio::osdirsep('/foo'),
+            Fsio::osdirsep('/bar'),
+            Fdio::osdirsep('/baz'),
+        ]];
         $this->templateLocator->setPaths(['/foo', '/bar', '/baz']);
         $actual = $this->templateLocator->getPaths();
         $this->assertSame($expect, $actual);
@@ -47,7 +51,11 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $this->templateLocator->prependPath('/bar');
         $this->templateLocator->prependPath('/baz');
 
-        $expect = ['__DEFAULT__' => ['/baz', '/bar', '/foo']];
+        $expect = ['__DEFAULT__' => [
+            Fdio::osdirsep('/baz'),
+            Fsio::osdirsep('/bar'),
+            Fsio::osdirsep('/foo'),
+        ]];
         $actual = $this->templateLocator->getPaths();
         $this->assertSame($expect, $actual);
     }
@@ -58,7 +66,11 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $this->templateLocator->appendPath('/bar');
         $this->templateLocator->appendPath('/baz');
 
-        $expect = ['__DEFAULT__' => ['/foo', '/bar', '/baz']];
+        $expect = ['__DEFAULT__' => [
+            Fsio::osdirsep('/foo'),
+            Fsio::osdirsep('/bar'),
+            Fdio::osdirsep('/baz'),
+        ]];
         $actual = $this->templateLocator->getPaths();
         $this->assertSame($expect, $actual);
     }
