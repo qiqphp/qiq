@@ -9,7 +9,14 @@ class Fsio
 {
     static public function osdirsep($path)
     {
-        return str_replace('/', DIRECTORY_SEPARATOR, $path);
+        $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+
+        if (DIRECTORY_SEPARATOR === '\\') {
+            $path = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path);
+            $path = str_replace(DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, $path);
+        }
+
+        return $path;
     }
 
     static public function isReadable($path) : bool
