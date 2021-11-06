@@ -21,11 +21,10 @@ class QiqCompiler implements Compiler
 
         $cached = $this->cachePath . $append;
 
-
         if (! $this->isCompiled($source, $cached)) {
-            $text = (string) Fsio::fileGetContents($source);
+            $text = (string) file_get_contents($source);
             $code = $this->compile($text);
-            Fsio::filePutContents($cached, $code);
+            file_put_contents($cached, $code);
         }
 
         return $cached;
