@@ -9,16 +9,7 @@ class Fsio
 {
     static public function osdirsep($path)
     {
-        $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
-
-        // if (DIRECTORY_SEPARATOR === '\\') {
-        //     $path = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path);
-        //     if (substr($path, 0, 3) === '\\D:') {
-        //         $path = substr($path, 1);
-        //     }
-        // }
-
-        return $path;
+        return str_replace('/', DIRECTORY_SEPARATOR, $path);
     }
 
     static public function isReadable($path) : bool
@@ -96,8 +87,6 @@ class Fsio
         return ltrim(static::osdirsep($path), DIRECTORY_SEPARATOR);
     }
 
-    // problem is you get to absolute paths concatted, which is fine on unix,
-    // but on win you get D:\....D:\...
     static public function concat(...$parts)
     {
         $path = array_shift($parts);
