@@ -2,4 +2,3 @@
 /composer.lock
 /vendor
 /tests/cache
-!/tests/cache/.gitkeep
