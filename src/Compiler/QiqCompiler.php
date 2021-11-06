@@ -19,7 +19,8 @@ class QiqCompiler implements Compiler
             ? substr($source, 2)
             : $source;
 
-        $cached = $this->cachePath . $source;
+        $cached = $this->cachePath . $append;
+
 
         if (! $this->isCompiled($source, $cached)) {
             $text = (string) Fsio::fileGetContents($source);
