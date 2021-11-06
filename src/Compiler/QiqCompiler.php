@@ -32,7 +32,25 @@ class QiqCompiler implements Compiler
 
     public function clear() : void
     {
-        Fsio::rrmdir($this->cachePath);
+        if (! is_dir($this->cachePath)) {
+            return;
+        }
+
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator(
+                $this->cachePath,
+                FilesystemIterator::SKIP_DOTS
+            ),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+
+        foreach ($files as $file) {
+            if ($file->isDir()) {
+                rmdir($file->getPathname());
+            } else {
+                unlink($file->getPathname());
+            }
+        }
     }
 
     protected function isCompiled(string $source, string $cached) : bool
