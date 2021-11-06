@@ -83,8 +83,6 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
             $dir . 'foo',
         ]);
 
-        var_dump($templateLocator->getPaths());
-
         $this->assertOutput('foo', $templateLocator->get('test'));
 
         $templateLocator = $this->newTemplateLocator([
