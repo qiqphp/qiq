@@ -117,7 +117,7 @@ class TemplateLocator
 
     protected function split(string $spec) : array
     {
-        $offset = (DIRECTORY_SEPARATOR === '\\') ? 2 : 0;
+        $offset = (PHP_OS_FAMILY === 'Windows') ? 2 : 0;
 
         $pos = strpos($spec, ':', $offset);
 
