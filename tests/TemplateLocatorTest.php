@@ -79,7 +79,8 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
 
     public function testFindFallbacks()
     {
-        $dir = Fsio::osdirsep(__DIR__ . '/templates/');
+        $dir = __DIR__ . DIRECTORY_SEPARATOR
+            . 'templates' . DIRECTORY_SEPARATOR;
 
         $templateLocator = $this->newTemplateLocator([
             $dir . 'foo',
@@ -114,9 +115,9 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $dir = __DIR__ . '/templates';
 
         $this->templateLocator->setPaths([
-            "foo:$dir/foo",
-            "bar:$dir/bar",
-            "baz:$dir/baz",
+            "foo:{$dir}/foo",
+            "bar:{$dir}/bar",
+            "baz:{$dir}/baz",
         ]);
 
         $this->assertOutput('foo', $this->templateLocator->get('foo:test'));
