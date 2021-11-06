@@ -57,7 +57,7 @@ class Fsio
 
     static public function mkdir($path, $perm, $deep)
     {
-        return @mkdir(static::osdirsep($path), $perm, $deep);
+        return mkdir(static::osdirsep($path), $perm, $deep);
     }
 
     static public function filemtime($path)
