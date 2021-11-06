@@ -11,12 +11,12 @@ class Fsio
     {
         $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
 
-        if (DIRECTORY_SEPARATOR === '\\') {
-            $path = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path);
-            if (substr($path, 0, 3) === '\\D:') {
-                $path = substr($path, 1);
-            }
-        }
+        // if (DIRECTORY_SEPARATOR === '\\') {
+        //     $path = str_replace(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR, $path);
+        //     if (substr($path, 0, 3) === '\\D:') {
+        //         $path = substr($path, 1);
+        //     }
+        // }
 
         return $path;
     }
