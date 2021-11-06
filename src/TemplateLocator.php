@@ -32,6 +32,7 @@ class TemplateLocator
 
         foreach ($this->paths[$collection] as $path) {
             $file = Fsio::concat($path, "{$name}{$this->extension}");
+            var_dump($file);
             if (Fsio::isReadable($file)) {
                 $this->found[$key] = $file;
                 return true;
