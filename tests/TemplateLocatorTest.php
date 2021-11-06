@@ -14,26 +14,13 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         return new TemplateLocator($paths, '.php', new Compiler\FakeCompiler());
     }
 
-    protected function osdir(string $path)
-    {
-        if (DIRECTORY_SEPARATOR == '\\') {
-            $path = str_replace('\\', '\\\\', $path);
-        }
-        return $path;
-    }
-
     public function testHasGet()
     {
-        $this->templateLocator->setPaths([
-            $this->osdir(__DIR__ . '/templates')
-        ]);
+        $this->templateLocator->setPaths([__DIR__ . '/templates']);
 
         $this->assertTrue($this->templateLocator->has('index'));
         $actual = $this->templateLocator->get('index');
-        $this->assertSame(
-            $this->osdir(__DIR__ . '/templates/index.php'),
-            $actual
-        );
+        $this->assertSame(__DIR__ . '/templates/index.php', $actual);
 
         $this->assertFalse($this->templateLocator->has('no-such-template'));
         $this->expectException(Exception\TemplateNotFound::CLASS);
@@ -48,56 +35,37 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
 
         // set the paths
-        $paths = [
-            $this->osdir('/foo'),
-            $this->osdir('/bar'),
-            $this->osdir('/baz'),
-        ];
-
-        $expect = ['__DEFAULT__' => $paths];
-
-        $this->templateLocator->setPaths($paths);
+        $expect = ['__DEFAULT__' => ['/foo', '/bar', '/baz']];
+        $this->templateLocator->setPaths(['/foo', '/bar', '/baz']);
         $actual = $this->templateLocator->getPaths();
         $this->assertSame($expect, $actual);
     }
 
     public function testPrependPath()
     {
-        $this->templateLocator->prependPath($this->osdir('/foo'));
-        $this->templateLocator->prependPath($this->osdir('/bar'));
-        $this->templateLocator->prependPath($this->osdir('/baz'));
+        $this->templateLocator->prependPath('/foo');
+        $this->templateLocator->prependPath('/bar');
+        $this->templateLocator->prependPath('/baz');
 
-        $paths = [
-            $this->osdir('/baz'),
-            $this->osdir('/bar'),
-            $this->osdir('/foo'),
-        ];
-
-        $expect = ['__DEFAULT__' => $paths];
+        $expect = ['__DEFAULT__' => ['/baz', '/bar', '/foo']];
         $actual = $this->templateLocator->getPaths();
         $this->assertSame($expect, $actual);
     }
 
     public function testAppendPath()
     {
-        $this->templateLocator->appendPath($this->osdir('/foo'));
-        $this->templateLocator->appendPath($this->osdir('/bar'));
-        $this->templateLocator->appendPath($this->osdir('/baz'));
+        $this->templateLocator->appendPath('/foo');
+        $this->templateLocator->appendPath('/bar');
+        $this->templateLocator->appendPath('/baz');
 
-        $paths = [
-            $this->osdir('/foo'),
-            $this->osdir('/bar'),
-            $this->osdir('/baz'),
-        ];
-
-        $expect = ['__DEFAULT__' => $paths];
+        $expect = ['__DEFAULT__' => ['/foo', '/bar', '/baz']];
         $actual = $this->templateLocator->getPaths();
         $this->assertSame($expect, $actual);
     }
 
     public function testFindFallbacks()
     {
-        $dir = $this->osdir(__DIR__ . '/templates/');
+        $dir = __DIR__ . '/templates/';
 
         $templateLocator = $this->newTemplateLocator([
             $dir . 'foo',
@@ -131,9 +99,9 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $dir = __DIR__ . '/templates';
 
         $this->templateLocator->setPaths([
-            $this->osdir("foo:$dir/foo"),
-            $this->osdir("bar:$dir/bar"),
-            $this->osdir("baz:$dir/baz"),
+            "foo:$dir/foo",
+            "bar:$dir/bar",
+            "baz:$dir/baz",
         ]);
 
         $this->assertOutput('foo', $this->templateLocator->get('foo:test'));
