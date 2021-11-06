@@ -66,7 +66,7 @@ class TemplateLocator
     public function prependPath(string $path) : void
     {
         list ($collection, $path) = $this->split($path);
-        array_unshift($this->paths[$collection], Fsio::rtrim($path));
+        array_unshift($this->paths[$collection], rtrim($path, DIRECTORY_SEPARATOR));
         $this->found = [];
         $this->compiled = [];
     }
@@ -74,7 +74,7 @@ class TemplateLocator
     public function appendPath(string $path) : void
     {
         list ($collection, $path) = $this->split($path);
-        $this->paths[$collection][] = Fsio::rtrim($path);
+        $this->paths[$collection][] = rtrim($path, DIRECTORY_SEPARATOR);
         $this->found = [];
         $this->compiled = [];
     }
@@ -85,7 +85,7 @@ class TemplateLocator
 
         foreach ($paths as $path) {
             list ($collection, $path) = $this->split($path);
-            $this->paths[$collection][] = Fsio::rtrim($path);
+            $this->paths[$collection][] = rtrim($path, DIRECTORY_SEPARATOR);
         }
 
         $this->found = [];
