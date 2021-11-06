@@ -86,7 +86,10 @@ class Fsio
 
     static public function ltrim(string $path)
     {
-        if (PHP_OS_FAMILY === 'Windows') {
+        if (
+            PHP_OS_FAMILY === 'Windows'
+            && substr($path, 1, 1) === ':'
+        ) {
             $path = substr($path, 2);
         }
 
