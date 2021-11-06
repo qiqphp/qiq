@@ -24,12 +24,12 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 
     protected function assertReadable(string $file)
     {
-        $this->assertTrue(Fsio::isReadable($file));
+        $this->assertTrue(is_readable($file));
     }
 
     protected function assertNotReadable(string $file)
     {
-        $this->assertFalse(Fsio::isReadable($file));
+        $this->assertFalse(is_readable($file));
     }
 
     protected function sourceFile(string $name)
