@@ -20,7 +20,9 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
 
         $this->assertTrue($this->templateLocator->has('index'));
         $actual = $this->templateLocator->get('index');
-        $this->assertSame(__DIR__ . '/templates/index.php', $actual);
+
+        $expect = str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/templates/index.php');
+        $this->assertSame($expect, $actual);
 
         $this->assertFalse($this->templateLocator->has('no-such-template'));
         $this->expectException(Exception\TemplateNotFound::CLASS);
@@ -35,7 +37,11 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
 
         // set the paths
-        $expect = ['__DEFAULT__' => ['/foo', '/bar', '/baz']];
+        $expect = ['__DEFAULT__' => [
+            DIRECTORY_SEPARATOR . 'foo',
+            DIRECTORY_SEPARATOR . 'bar',
+            DIRECTORY_SEPARATOR . 'baz',
+        ]];
         $this->templateLocator->setPaths(['/foo', '/bar', '/baz']);
         $actual = $this->templateLocator->getPaths();
         $this->assertSame($expect, $actual);
@@ -47,7 +53,11 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $this->templateLocator->prependPath('/bar');
         $this->templateLocator->prependPath('/baz');
 
-        $expect = ['__DEFAULT__' => ['/baz', '/bar', '/foo']];
+        $expect = ['__DEFAULT__' => [
+            DIRECTORY_SEPARATOR . 'baz',
+            DIRECTORY_SEPARATOR . 'bar',
+            DIRECTORY_SEPARATOR . 'foo',
+        ]];
         $actual = $this->templateLocator->getPaths();
         $this->assertSame($expect, $actual);
     }
@@ -58,18 +68,24 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $this->templateLocator->appendPath('/bar');
         $this->templateLocator->appendPath('/baz');
 
-        $expect = ['__DEFAULT__' => ['/foo', '/bar', '/baz']];
+        $expect = ['__DEFAULT__' => [
+            DIRECTORY_SEPARATOR . 'foo',
+            DIRECTORY_SEPARATOR . 'bar',
+            DIRECTORY_SEPARATOR . 'baz',
+        ]];
         $actual = $this->templateLocator->getPaths();
         $this->assertSame($expect, $actual);
     }
 
     public function testFindFallbacks()
     {
-        $dir = __DIR__ . '/templates/';
+        $dir = __DIR__ . DIRECTORY_SEPARATOR
+            . 'templates' . DIRECTORY_SEPARATOR;
 
         $templateLocator = $this->newTemplateLocator([
             $dir . 'foo',
         ]);
+
         $this->assertOutput('foo', $templateLocator->get('test'));
 
         $templateLocator = $this->newTemplateLocator([
@@ -99,9 +115,9 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $dir = __DIR__ . '/templates';
 
         $this->templateLocator->setPaths([
-            "foo:$dir/foo",
-            "bar:$dir/bar",
-            "baz:$dir/baz",
+            "foo:{$dir}/foo",
+            "bar:{$dir}/bar",
+            "baz:{$dir}/baz",
         ]);
 
         $this->assertOutput('foo', $this->templateLocator->get('foo:test'));

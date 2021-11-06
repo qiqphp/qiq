@@ -28,6 +28,7 @@ class TemplateLocator
 
         $key = $name;
         list($collection, $name) = $this->split($name);
+        $name = str_replace('/', DIRECTORY_SEPARATOR, $name);
 
         foreach ($this->paths[$collection] as $path) {
             $file = $path . DIRECTORY_SEPARATOR . $name . $this->extension;
@@ -64,7 +65,7 @@ class TemplateLocator
     public function prependPath(string $path) : void
     {
         list ($collection, $path) = $this->split($path);
-        array_unshift($this->paths[$collection], rtrim($path, DIRECTORY_SEPARATOR));
+        array_unshift($this->paths[$collection], $this->fixPath($path));
         $this->found = [];
         $this->compiled = [];
     }
@@ -72,7 +73,7 @@ class TemplateLocator
     public function appendPath(string $path) : void
     {
         list ($collection, $path) = $this->split($path);
-        $this->paths[$collection][] = rtrim($path, DIRECTORY_SEPARATOR);
+        $this->paths[$collection][] = $this->fixPath($path);
         $this->found = [];
         $this->compiled = [];
     }
@@ -83,7 +84,7 @@ class TemplateLocator
 
         foreach ($paths as $path) {
             list ($collection, $path) = $this->split($path);
-            $this->paths[$collection][] = rtrim($path, DIRECTORY_SEPARATOR);
+            $this->paths[$collection][] = $this->fixPath($path);
         }
 
         $this->found = [];
@@ -114,9 +115,16 @@ class TemplateLocator
         return $this->compiled[$name];
     }
 
+    protected function fixPath(string $path) : string
+    {
+        $path = str_replace('/', DIRECTORY_SEPARATOR, $path);
+        return rtrim($path, DIRECTORY_SEPARATOR);
+    }
+
     protected function split(string $spec) : array
     {
-        $pos = strpos($spec, ':');
+        $offset = (PHP_OS_FAMILY === 'Windows') ? 2 : 0;
+        $pos = strpos($spec, ':', $offset);
 
         if (! $pos) {
             // not present, or at character zero

@@ -15,9 +15,11 @@ class QiqCompiler implements Compiler
 
     public function __invoke(string $source) : string
     {
-        $cached = $this->cachePath
-            . DIRECTORY_SEPARATOR
-            . ltrim($source, DIRECTORY_SEPARATOR);
+        $append = (PHP_OS_FAMILY === 'Windows')
+            ? substr($source, 2)
+            : $source;
+
+        $cached = $this->cachePath . $append;
 
         if (! $this->isCompiled($source, $cached)) {
             $text = (string) file_get_contents($source);
