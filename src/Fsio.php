@@ -34,6 +34,10 @@ class Fsio
 
     static public function rrmdir($path)
     {
+        if (! static::isDir($path)) {
+            return;
+        }
+
         $files = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator(
                 static::osdirsep($path),
