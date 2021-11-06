@@ -1,6 +1,8 @@
 <?php
 namespace Qiq\Compiler;
 
+use Qiq\Fsio;
+
 class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 {
     protected QiqCompiler $compiler;
@@ -9,8 +11,8 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp() : void
     {
-        $this->sourceDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'templates';
-        $this->cachePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'cache';
+        $this->sourceDir = Fsio::concat(dirname(__DIR__), 'templates');
+        $this->cachePath = Fsio::concat(dirname(__DIR__), 'cache');
         $this->compiler = new QiqCompiler($this->cachePath);
         $this->compiler->clear();
     }
@@ -22,25 +24,33 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 
     protected function assertReadable(string $file)
     {
-        $this->assertTrue(is_readable($file));
+        $this->assertTrue(Fsio::isReadable($file));
     }
 
     protected function assertNotReadable(string $file)
     {
-        $this->assertFalse(is_readable($file));
+        $this->assertFalse(Fsio::isReadable($file));
     }
 
     protected function sourceFile(string $name)
     {
-        return $this->sourceDir . DIRECTORY_SEPARATOR . $name . '.php';
+        return Fsio::osdirsep(
+            Fsio::concat(
+                $this->sourceDir,
+                "{$name}.php"
+            )
+        );
     }
 
     protected function cachedFile(string $name)
     {
-        return $this->cachePath
-            . $this->sourceDir
-            . DIRECTORY_SEPARATOR
-            . "{$name}.php";
+        return Fsio::osdirsep(
+            Fsio::concat(
+                $this->cachePath,
+                $this->sourceDir,
+                "{$name}.php"
+            )
+        );
     }
 
     public function test()

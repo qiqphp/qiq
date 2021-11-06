@@ -3,6 +3,7 @@ namespace Qiq;
 
 use Qiq\Compiler\Compiler;
 use Qiq\Compiler\QiqCompiler;
+use Qiq\Fsio;
 
 class TemplateLocator
 {
@@ -30,8 +31,8 @@ class TemplateLocator
         list($collection, $name) = $this->split($name);
 
         foreach ($this->paths[$collection] as $path) {
-            $file = $path . DIRECTORY_SEPARATOR . $name . $this->extension;
-            if (is_readable($file)) {
+            $file = Fsio::concat($path, "{$name}{$this->extension}");
+            if (Fsio::isReadable($file)) {
                 $this->found[$key] = $file;
                 return true;
             }
@@ -64,7 +65,7 @@ class TemplateLocator
     public function prependPath(string $path) : void
     {
         list ($collection, $path) = $this->split($path);
-        array_unshift($this->paths[$collection], rtrim($path, DIRECTORY_SEPARATOR));
+        array_unshift($this->paths[$collection], Fsio::rtrim($path));
         $this->found = [];
         $this->compiled = [];
     }
@@ -72,7 +73,7 @@ class TemplateLocator
     public function appendPath(string $path) : void
     {
         list ($collection, $path) = $this->split($path);
-        $this->paths[$collection][] = rtrim($path, DIRECTORY_SEPARATOR);
+        $this->paths[$collection][] = Fsio::rtrim($path);
         $this->found = [];
         $this->compiled = [];
     }
@@ -83,7 +84,7 @@ class TemplateLocator
 
         foreach ($paths as $path) {
             list ($collection, $path) = $this->split($path);
-            $this->paths[$collection][] = rtrim($path, DIRECTORY_SEPARATOR);
+            $this->paths[$collection][] = Fsio::rtrim($path);
         }
 
         $this->found = [];

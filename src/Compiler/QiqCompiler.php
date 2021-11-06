@@ -4,25 +4,29 @@ namespace Qiq\Compiler;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Qiq\Fsio;
 
 class QiqCompiler implements Compiler
 {
     public function __construct(protected ?string $cachePath = null)
     {
-        $this->cachePath ??= rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR)
-            . DIRECTORY_SEPARATOR . 'qiq';
+        $this->cachePath ??= Fsio::concat(
+            Fsio::rtrim(sys_get_temp_dir()),
+            'qiq'
+        );
     }
 
     public function __invoke(string $source) : string
     {
-        $cached = $this->cachePath
-            . DIRECTORY_SEPARATOR
-            . ltrim($source, DIRECTORY_SEPARATOR);
+        $cached = Fsio::concat(
+            $this->cachePath,
+            Fsio::ltrim($source)
+        );
 
         if (! $this->isCompiled($source, $cached)) {
-            $text = (string) file_get_contents($source);
+            $text = (string) Fsio::fileGetContents($source);
             $code = $this->compile($text);
-            file_put_contents($cached, $code);
+            Fsio::filePutContents($cached, $code);
         }
 
         return $cached;
@@ -30,37 +34,23 @@ class QiqCompiler implements Compiler
 
     public function clear() : void
     {
-        $files = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator(
-                (string) $this->cachePath,
-                FilesystemIterator::SKIP_DOTS
-            ),
-            RecursiveIteratorIterator::CHILD_FIRST
-        );
-
-        foreach ($files as $file) {
-            if ($file->isDir()) {
-                rmdir($file->getPathname());
-            } else {
-                unlink($file->getPathname());
-            }
-        }
+        Fsio::rrmdir($this->cachePath);
     }
 
     protected function isCompiled(string $source, string $cached) : bool
     {
         $dir = dirname($cached);
 
-        if (! is_dir($dir)) {
-            mkdir($dir, 0777, true);
+        if (! Fsio::isDir($dir)) {
+            Fsio::mkdir($dir, 0777, true);
             return false;
         }
 
-        if (! is_readable($cached)) {
+        if (! Fsio::isReadable($cached)) {
             return false;
         }
 
-        if (filemtime($cached) < filemtime($source)) {
+        if (Fsio::filemtime($cached) < Fsio::filemtime($source)) {
             return false;
         }
 
