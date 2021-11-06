@@ -23,7 +23,7 @@ class Fsio
 
     static public function isReadable($path) : bool
     {
-        return is_readable(static::osdirsep($path));
+        return file_exists(static::osdirsep($path));
     }
 
     static public function isDir($path)
