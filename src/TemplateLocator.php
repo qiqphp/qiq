@@ -2,7 +2,6 @@
 namespace Qiq;
 
 use Qiq\Compiler\Compiler;
-use Qiq\Compiler\QiqCompiler;
 
 class TemplateLocator
 {

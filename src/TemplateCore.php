@@ -1,7 +1,6 @@
 <?php
 namespace Qiq;
 
-use Qiq\Compiler\Compiler;
 use stdClass;
 
 abstract class TemplateCore
