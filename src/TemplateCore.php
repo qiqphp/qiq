@@ -110,6 +110,11 @@ abstract class TemplateCore
         return $this->templateLocator;
     }
 
+    public function hasTemplate(string $name) : bool
+    {
+        return $this->templateLocator->has($name);
+    }
+
     protected function getTemplate(string $name) : string
     {
         return $this->templateLocator->get($name);
