@@ -88,4 +88,12 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 
         unlink($this->sourceDir . '/mtime.php');
     }
+
+    public function testClear_noSuchDirectory()
+    {
+        $dir = dirname(__DIR__) . '/nonesuch';
+        $compiler = new QiqCompiler($dir);
+        $compiler->clear();
+        $this->assertFalse(is_dir($dir));
+    }
 }

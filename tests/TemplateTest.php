@@ -109,4 +109,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->expectException(ParseError::CLASS);
         $actual = ($this->template)();
     }
+
+    public function testHasTemplate()
+    {
+        $this->assertTrue($this->template->hasTemplate('master'));
+        $this->assertFalse($this->template->hasTemplate('nonesuch'));
+    }
 }
