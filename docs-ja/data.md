@@ -1,6 +1,6 @@
 # テンプレートデータ
 
-Templateにデータコレクションを割り当てるには、`setData()`メソッドを使用して、配列または`stdClass`オブジェクトのいずれかを渡します。
+`setData()`メソッドに配列または`stdClass`オブジェクトを渡してTemplateにデータコレクションをアサインします。
 
 ```php
 $tpl->setData([
@@ -23,7 +23,7 @@ $tpl->setData([
 
 `setData()`メソッドは、Templateオブジェクトの既存のデータをすべて上書きします。
 
-一方、`addData()`メソッドは、任意の`iterable`を既存のTemplateデータにマージします。
+一方、`addData()`メソッドは、任意の`iterable`データを既存のTemplateデータにマージします。
 
 ```php
 $tpl->addData([

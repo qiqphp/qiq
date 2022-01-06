@@ -461,7 +461,7 @@ PHPのテンプレートコードで、ヘルパーを`$this`のメソッドと�
 
 ## Label Tag
 
-A helper for `<label>` tags.
+`<label>`タグ用のヘルパーです。
 
 ```qiq
 {{= label (
