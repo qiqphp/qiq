@@ -8,7 +8,7 @@
         "partials.md",
         "layouts.md",
         "sections.md",
-        "helpers/_bookdown.ja.json",
+        "helpers/_bookdown.json",
         "compiler.md"
     ]
 }
