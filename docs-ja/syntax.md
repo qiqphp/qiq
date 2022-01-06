@@ -60,7 +60,7 @@ Qiqは、開始タグが認識可能なエスケープ文字で始まらない�
 ## 制御構造
 
 すべての制御構造は、PHPと全く同じように記述されます。
-可能な場合は、[制御構造に関する別の構文](alternative control structure syntax)を使って、`{{ ... }}`Qiqタグの中に記述します。
+可能な場合は、[制御構造に関する別の構文](https://www.php.net/control-structures.alternative-syntax)を使って、`{{ ... }}`Qiqタグの中に記述します。
 
 例えば、このQiqコードは
 
