@@ -1,0 +1,14 @@
+{
+    "title": "1.x",
+    "content": [
+        "intro.md",
+        "syntax.md",
+        "data.md",
+        "locator.md",
+        "partials.md",
+        "layouts.md",
+        "sections.md",
+        "helpers/_bookdown.ja.json",
+        "compiler.md"
+    ]
+}
