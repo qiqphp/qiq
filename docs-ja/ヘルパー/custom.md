@@ -41,7 +41,7 @@ $helperLocator->set(
 
 HelperLocatorにすでにEscapeのインスタンスがある状態でHelperクラスを構築する必要があることに注意してください。
 
-## Use The Helper
+## ヘルパーを使用する
 
 このヘルパーは、Qiqコードとしてテンプレートで使用することができます。
 
