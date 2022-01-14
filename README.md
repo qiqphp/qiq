@@ -6,6 +6,10 @@ This package provides a PHP 8.0 implementation of the
 using PHP itself as the templating language, along with an optional `{{ ... }}`
 syntax for concise escaping and helper use.
 
+## Documentation
+
+Read the docs at <https://qiqphp.com>.
+
 ## Background
 
 I don't like compiled templates or specialized template languages. Smarty, Twig,
