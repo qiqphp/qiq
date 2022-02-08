@@ -3,7 +3,7 @@ namespace Qiq;
 
 class HelperLocator
 {
-    static public function new(Escape $escape = null): self
+    static public function new(Escape $escape = null): static
     {
         $escape ??= new Escape('utf-8');
 
