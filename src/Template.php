@@ -5,6 +5,11 @@ use Qiq\Compiler\QiqCompiler;
 use Throwable;
 
 /**
+ * @method string h(string $raw)
+ * @method string a(string $raw)
+ * @method string u(string $raw)
+ * @method string c(string $raw)
+ * @method string j(string $raw)
  * @method string ol(array $items, array $attr)
  * @method string passwordField(array $attr)
  * @method string weekField(array $attr)
