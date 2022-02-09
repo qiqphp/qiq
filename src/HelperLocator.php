@@ -59,7 +59,7 @@ class HelperLocator
 
         $helper_factories = array_merge($default, $factories);
 
-        return new self($helper_factories);
+        return new static($helper_factories);
     }
 
     protected array $factories = [];
