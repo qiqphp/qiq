@@ -51,10 +51,10 @@ class HelperLocator
             return true;
         }
 
-        $mabeyHelper = 'Qiq\Helper\\' . $name;
-        if (class_exists($mabeyHelper)) {
+        $maybeHelper = 'Qiq\Helper\\' . $name;
+        if (class_exists($maybeHelper)) {
             if (! isset($this->factories[$name])) {
-                $this->factories[$name] = fn () => new $mabeyHelper($this->escape);
+                $this->factories[$name] = fn () => new $maybeHelper($this->escape);
             }
 
             return true;
