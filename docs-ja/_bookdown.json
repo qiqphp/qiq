@@ -1,0 +1,14 @@
+{
+    "title": "1.x Doc",
+    "content": [
+        "intro.md",
+        "syntax.md",
+        "data.md",
+        "locator.md",
+        "partials.md",
+        "layouts.md",
+        "sections.md",
+        "helpers/_bookdown.json",
+        "compiler.md"
+    ]
+}
