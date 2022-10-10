@@ -122,6 +122,10 @@ class TemplateLocator
 
     protected function split(string $spec) : array
     {
+        if (strpos($spec, '..') !== false) {
+            throw new Exception\TemplateNotFound("Double-dots not allowed in template specifications: $spec");
+        }
+
         $offset = (PHP_OS_FAMILY === 'Windows') ? 2 : 0;
         $pos = strpos($spec, ':', $offset);
 

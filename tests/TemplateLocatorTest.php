@@ -29,6 +29,13 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $this->templateLocator->get('no-such-template');
     }
 
+    public function testDoubleDots()
+    {
+        $this->expectException(Exception\TemplateNotFound::CLASS);
+        $this->expectExceptionMessage("Double-dots not allowed in template specifications");
+        $this->templateLocator->get('foo/../bar');
+    }
+
     public function testSetAndGetPaths()
     {
         // should be no paths yet
