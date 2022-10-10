@@ -3,11 +3,11 @@ namespace Qiq;
 
 class HelperLocator
 {
-    static public function new(Escape $escape = null) : self
+    static public function new(Escape $escape = null, array $factories = []) : static
     {
         $escape ??= new Escape('utf-8');
 
-        return new self([
+        $default = [
             'a'                     => function () use ($escape) { return new Helper\EscapeAttr($escape); },
             'anchor'                => function () use ($escape) { return new Helper\Anchor($escape); },
             'base'                  => function () use ($escape) { return new Helper\Base($escape); },
@@ -55,7 +55,11 @@ class HelperLocator
             'ul'                    => function () use ($escape) { return new Helper\Ul($escape); },
             'urlField'              => function () use ($escape) { return new Helper\UrlField($escape); },
             'weekField'             => function () use ($escape) { return new Helper\WeekField($escape); },
-        ]);
+        ];
+
+        $helper_factories = array_merge($default, $factories);
+
+        return new static($helper_factories);
     }
 
     protected array $factories = [];
