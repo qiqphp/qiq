@@ -79,7 +79,7 @@ abstract class TemplateCore
         return $this->data;
     }
 
-    public function getHelperLocator() : object
+    public function getHelperLocator() : HelperLocator
     {
         return $this->helperLocator;
     }
