@@ -1,6 +1,7 @@
 <?php
 namespace Qiq;
 
+use Qiq\Compiler\Compiler;
 use Qiq\Compiler\QiqCompiler;
 use Throwable;
 
@@ -10,13 +11,15 @@ class Template extends TemplateCore
         string|array $paths = [],
         string $extension = '.php',
         string $encoding = 'utf-8',
-        string $cachePath = null
-    ) : self
+        string $cachePath = null,
+        HelperLocator $helperLocator = null,
+        Compiler $compiler = null,
+    ) : static
     {
-        $helperLocator = HelperLocator::new(new Escape($encoding));
-        $compiler = new QiqCompiler($cachePath);
+        $helperLocator ??= HelperLocator::new(new Escape($encoding));
+        $compiler ??= new QiqCompiler($cachePath);
 
-        return new self(
+        return new static(
             new TemplateLocator((array) $paths, $extension, $compiler),
             $helperLocator
         );
