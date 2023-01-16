@@ -155,15 +155,22 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
     public function testHelper() : void
     {
         $qiq = '{{= textField(["name" => "street", "value" => $street]) }}';
-        $php = '<?php \\Qiq\\Indent::set(\'\') ?><?= $this->textField(["name" => "street", "value" => $street]) ?>';
+        $php = '<?= $this->textField(["name" => "street", "value" => $street]) ?>';
         $this->assertPhp($php, $qiq);
 
         $qiq = '{{= textField([' . PHP_EOL . '    "name" => "street", "value" => $street' . PHP_EOL . ']) }}';
-        $php = '<?php \\Qiq\\Indent::set(\'\') ?><?= $this->textField([' . PHP_EOL . '    "name" => "street", "value" => $street' . PHP_EOL . ']) ?>';
+        $php = '<?= $this->textField([' . PHP_EOL . '    "name" => "street", "value" => $street' . PHP_EOL . ']) ?>';
         $this->assertPhp($php, $qiq);
 
         $qiq = '{{= helper()}}';
-        $php = '<?php \\Qiq\\Indent::set(\'\') ?><?= $this->helper() ?>';
+        $php = '<?= $this->helper() ?>';
+        $this->assertPhp($php, $qiq);
+    }
+
+   public function testIndenting() : void
+   {
+       $qiq = "\n" . '    {{= textField(["name" => "street", "value" => $street]) }}';
+       $php = "\n" . '    <?php \Qiq\Indent::set("\n    ") ?><?= $this->textField(["name" => "street", "value" => $street]) ?>';
         $this->assertPhp($php, $qiq);
     }
 }

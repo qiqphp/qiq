@@ -3,6 +3,12 @@ namespace Qiq\Compiler;
 
 class QiqToken
 {
+    protected const INDENT = [
+        "\n" => '\n',
+        "\r" => '\r',
+        "\t" => '\t',
+    ];
+
     protected const KNOWN = [
         '__DIR__',
         '__FILE__',
@@ -82,9 +88,8 @@ class QiqToken
         ) {
             // alphabetic or underscore, but not defined and not known.
             // treat as a helper. set indent so helper can use it if needed.
-            $space = strrchr($this->leadingSpaceOuter, PHP_EOL) or '';
-            $indent = "<?php \\Qiq\\Indent::set('$space') ?>";
             $code = "\$this->{$code}";
+            $indent = $this->indent($this->leadingSpaceOuter);
         }
 
         return $this->leadingSpaceOuter
@@ -94,6 +99,19 @@ class QiqToken
             . $this->closing
             . $this->tailingSpaceOuter;
     }
+
+    protected function indent(string $space) : string
+    {
+        $space = strrchr($space, PHP_EOL);
+
+        if ($space === false) {
+            return '';
+        }
+
+        $space = strtr($space, self::INDENT);
+        return "<?php \\Qiq\\Indent::set(\"$space\") ?>";
+    }
+
 
     protected function fixEcho() : void
     {
