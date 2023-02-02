@@ -62,10 +62,14 @@ class Select extends Helper
         return $html;
     }
 
+    /**
+     * @param int|string $key
+     * @param null|scalar|array $val
+     */
     protected function option(mixed $key, mixed $val, mixed $selected) : string
     {
         if (is_array($val)) {
-            return $this->optgroup($key, $val, $selected);
+            return $this->optgroup((string) $key, $val, $selected);
         }
 
         $attr = [];
@@ -77,7 +81,7 @@ class Select extends Helper
             : $attr['value'] == $selected;
 
         $attr = $this->escape->a($attr);
-        $label = $this->escape->h($val);
+        $label = $this->escape->h((string) $val);
 
         return Indent::get() . "<option {$attr}>{$label}</option>" . PHP_EOL;
     }

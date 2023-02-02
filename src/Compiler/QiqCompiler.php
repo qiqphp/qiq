@@ -4,6 +4,7 @@ namespace Qiq\Compiler;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use SplFileInfo;
 
 class QiqCompiler implements Compiler
 {
@@ -46,6 +47,7 @@ class QiqCompiler implements Compiler
             RecursiveIteratorIterator::CHILD_FIRST
         );
 
+        /** @var SplFileInfo $file */
         foreach ($files as $file) {
             if ($file->isDir()) {
                 rmdir($file->getPathname());

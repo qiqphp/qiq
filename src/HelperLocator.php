@@ -73,7 +73,9 @@ class HelperLocator
 
     public function __call(string $name, array $args) : mixed
     {
-        return $this->get($name)(...$args);
+        /** @var callable */
+        $callable = $this->get($name);
+        return $callable(...$args);
     }
 
     public function set(string $name, mixed /* callable */ $callable) : void
