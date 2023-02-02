@@ -169,8 +169,9 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
 
    public function testIndenting() : void
    {
-       $qiq = "\n" . '    {{= textField(["name" => "street", "value" => $street]) }}';
-       $php = "\n" . '    <?php \Qiq\Indent::set("\n    ") ?><?= $this->textField(["name" => "street", "value" => $street]) ?>';
+        $set = PHP_OS_FAMILY === 'Windows' ? '\r\n' : '\n';
+        $qiq = PHP_EOL . '    {{= textField(["name" => "street", "value" => $street]) }}';
+        $php = PHP_EOL . '    <?php \Qiq\Indent::set("' . $set . '    ") ?><?= $this->textField(["name" => "street", "value" => $street]) ?>';
         $this->assertPhp($php, $qiq);
     }
 }
