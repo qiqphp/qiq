@@ -11,6 +11,8 @@ abstract class TemplateCore
 
     private ?string $layout = null;
 
+    private array $renderStack = [];
+
     private array $sections = [];
 
     private array $sectionStack = [];
@@ -26,6 +28,11 @@ abstract class TemplateCore
 
     public function __invoke() : string
     {
+        $this->content = '';
+        $this->renderStack = [];
+        $this->sections = [];
+        $this->sectionStack = [];
+
         $view = $this->getView();
         $this->content = ($view === null) ? '' : $this->render($view);
         $layout = $this->getLayout();
@@ -175,4 +182,50 @@ abstract class TemplateCore
     }
 
     abstract protected function render(string $__NAME__, array $__VARS__ = []) : string;
+
+    protected function pushRenderStack(string $name) : string
+    {
+        $prefix = empty($this->renderStack)
+            ? ''
+            : dirname(end($this->renderStack));
+
+        $orig = $name;
+        $name = $this->resolveDots($name, $prefix);
+
+        if (strpos($name, '..') !== false) {
+            throw new Exception\TemplateNotFound(
+                PHP_EOL . "Could not resolve dots in template name." .
+                PHP_EOL . "Original name: '{$orig}'" .
+                PHP_EOL . "Resolved into: '{$name}'" .
+                PHP_EOL . "Probably too many '../' in the original name."
+            );
+        }
+
+        array_push($this->renderStack, $name);
+        return $name;
+    }
+
+    protected function resolveDots(string $name, string $prefix) : string
+    {
+        $name = ltrim(trim($name), '/');
+
+        if (substr($name, 0, 2) === './') {
+            $name = substr($name, 2);
+            return $this->resolveDots($name, $prefix);
+        }
+
+        if ($prefix && substr($name, 0, 3) === '../') {
+            $name = substr($name, 3);
+            $prefix = dirname($prefix);
+            $prefix = $prefix === '.' ? '' : $prefix;
+            return $this->resolveDots($name, $prefix);
+        }
+
+        return $prefix ? ($prefix . '/' . $name) : $name;
+    }
+
+    protected function popRenderStack() : void
+    {
+        array_pop($this->renderStack);
+    }
 }

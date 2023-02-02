@@ -1,0 +1,1 @@
+foo<?= $this->render('./foo/bar') ?><?= $this->render('./dib') ?>

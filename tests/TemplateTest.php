@@ -115,4 +115,25 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->template->hasTemplate('master'));
         $this->assertFalse($this->template->hasTemplate('nonesuch'));
     }
+
+    public function testResolveDots() : void
+    {
+        $this->template->setView('rel/foo');
+        $actual = ($this->template)();
+        $this->assertSame('foobarbazdibdib', $actual);
+    }
+
+    public function testResolveDotsFailure() : void
+    {
+        $this->template->setView('rel/foo/broken');
+        $this->expectException(Exception\TemplateNotFound::class);
+        $this->expectExceptionMessage(<<<EOT
+            Could not resolve dots in template name.
+            Original name: '../../../zim'
+            Resolved into: '../zim'
+            Probably too many '../' in the original name.
+            EOT
+        );
+        ($this->template)();
+    }
 }
