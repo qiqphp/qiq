@@ -189,20 +189,19 @@ abstract class TemplateCore
             ? ''
             : dirname(end($this->renderStack));
 
-        $orig = $name;
-        $name = $this->resolveDots($name, $prefix);
+        $resolvedName = $this->resolveDots($name, $prefix);
 
-        if (strpos($name, '..') !== false) {
+        if (strpos($resolvedName, '..') !== false) {
             throw new Exception\TemplateNotFound(
                 PHP_EOL . "Could not resolve dots in template name." .
-                PHP_EOL . "Original name: '{$orig}'" .
-                PHP_EOL . "Resolved into: '{$name}'" .
+                PHP_EOL . "Original name: '{$name}'" .
+                PHP_EOL . "Resolved into: '{$resolvedName}'" .
                 PHP_EOL . "Probably too many '../' in the original name."
             );
         }
 
-        array_push($this->renderStack, $name);
-        return $name;
+        array_push($this->renderStack, $resolvedName);
+        return $resolvedName;
     }
 
     protected function resolveDots(string $name, string $prefix) : string
