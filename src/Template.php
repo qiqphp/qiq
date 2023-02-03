@@ -31,9 +31,9 @@ class Template extends TemplateCore
             $__OBLEVEL__ = ob_get_level();
             ob_start();
             extract($__VARS__, EXTR_SKIP);
-            $__NAME__ = $this->pushRenderStack($__NAME__);
+            $__NAME__ = $this->getRenderStack()->push($__NAME__);
             require $this->getTemplate($__NAME__);
-            $this->popRenderStack();
+            $this->getRenderStack()->pop();
             return (string) ob_get_clean();
         } catch (Throwable $e) {
             while (ob_get_level() > $__OBLEVEL__) {

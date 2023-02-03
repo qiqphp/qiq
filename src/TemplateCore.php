@@ -11,7 +11,7 @@ abstract class TemplateCore
 
     private ?string $layout = null;
 
-    private array $renderStack = [];
+    private RenderStack $renderStack;
 
     private array $sections = [];
 
@@ -24,12 +24,13 @@ abstract class TemplateCore
         private HelperLocator $helperLocator
     ) {
         $this->data = new stdClass();
+        $this->renderStack = new RenderStack();
     }
 
     public function __invoke() : string
     {
         $this->content = '';
-        $this->renderStack = [];
+        $this->renderStack->reset();
         $this->sections = [];
         $this->sectionStack = [];
 
@@ -121,6 +122,11 @@ abstract class TemplateCore
         return $this->templateLocator->has($name);
     }
 
+    protected function getRenderStack() : RenderStack
+    {
+        return $this->renderStack;
+    }
+
     protected function getTemplate(string $name) : string
     {
         return $this->templateLocator->get($name);
@@ -182,49 +188,4 @@ abstract class TemplateCore
     }
 
     abstract protected function render(string $__NAME__, array $__VARS__ = []) : string;
-
-    protected function pushRenderStack(string $name) : string
-    {
-        $prefix = empty($this->renderStack)
-            ? ''
-            : dirname(end($this->renderStack));
-
-        $resolvedName = $this->resolveDots($name, $prefix);
-
-        if (strpos($resolvedName, '..') !== false) {
-            throw new Exception\TemplateNotFound(
-                PHP_EOL . "Could not resolve dots in template name." .
-                PHP_EOL . "Original name: '{$name}'" .
-                PHP_EOL . "Resolved into: '{$resolvedName}'" .
-                PHP_EOL . "Probably too many '../' in the original name."
-            );
-        }
-
-        array_push($this->renderStack, $resolvedName);
-        return $resolvedName;
-    }
-
-    protected function resolveDots(string $name, string $prefix) : string
-    {
-        $name = ltrim(trim($name), '/');
-
-        if (str_starts_with($name, './')) {
-            $name = substr($name, 2);
-            return $this->resolveDots($name, $prefix);
-        }
-
-        if ($prefix && str_starts_with($name, '../')) {
-            $name = substr($name, 3);
-            $prefix = dirname($prefix);
-            $prefix = $prefix === '.' ? '' : $prefix;
-            return $this->resolveDots($name, $prefix);
-        }
-
-        return $prefix ? ($prefix . '/' . $name) : $name;
-    }
-
-    protected function popRenderStack() : void
-    {
-        array_pop($this->renderStack);
-    }
 }
