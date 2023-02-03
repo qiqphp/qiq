@@ -214,7 +214,7 @@ abstract class TemplateCore
             return $this->resolveDots($name, $prefix);
         }
 
-        if ($prefix && substr($name, 0, 3) === '../') {
+        if ($prefix && str_starts_with($name, '../')) {
             $name = substr($name, 3);
             $prefix = dirname($prefix);
             $prefix = $prefix === '.' ? '' : $prefix;
