@@ -209,7 +209,7 @@ abstract class TemplateCore
     {
         $name = ltrim(trim($name), '/');
 
-        if (substr($name, 0, 2) === './') {
+        if (str_starts_with($name, './')) {
             $name = substr($name, 2);
             return $this->resolveDots($name, $prefix);
         }
