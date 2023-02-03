@@ -116,14 +116,14 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($this->template->hasTemplate('nonesuch'));
     }
 
-    public function testResolveDots() : void
+    public function testRelative() : void
     {
         $this->template->setView('rel/foo');
         $actual = ($this->template)();
         $this->assertSame('foobarbazdibdib', $actual);
     }
 
-    public function testResolveDotsFailure() : void
+    public function testRelativeFailure() : void
     {
         $this->template->setView('rel/foo/broken');
         $this->expectException(Exception\TemplateNotFound::class);
