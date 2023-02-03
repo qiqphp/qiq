@@ -1,6 +1,6 @@
 # テンプレートロケーター
 
-Qiqは、名前付きテンプレートを任意の数のディレクトリパスから検索します。`Template::new()`に`paths`の配列を渡すことができます。
+Qiqは、名前付きテンプレートを任意の数のディレクトリパスから検索します。`Template::new()`に`paths`配列を渡します。
 
 ```php
 $tpl = Template::new(
@@ -39,12 +39,39 @@ $tpl->getTemplateLocator()->appendPath('/lower/precedence/templates');
 
 ### サブディレクトリ
 
-サブディレクトリにあるテンプレートをレンダリングするには、テンプレート名にサブディレクトリを使用します。
+任意の場所からテンプレートをレンダリングするには、テンプレート名への絶対パスを使用します。
 
 ```php
 // renders the "foo/bar/baz.php" template
 $output = $tpl('foo/bar/baz');
 ```
+このほか、テテンプレート内でテンプレート名を相対パスで参照することもできます。
+同じディレクトリにあるテンプレートを示すには `./` を、現在のディレクトリの上のディレクトリを示すには`../`を使用します。
+
+以下のようなテンプレートファイル構造がある場合 ...
+
+```
+foo.php
+foo/
+    bar.php
+    bar/
+        baz.php
+        dib.php
+```
+
+... `foo/bar/baz.php`テンプレートファイルから他のファイルを参照するには以下のようになります。
+
+```php
+// refers to "foo/bar/dib.php"
+echo $this->render('./dib');
+
+// refers to "foo/bar.php"
+echo $this->render('../bar');
+
+// refers to "foo.php"
+echo $this->render('../../foo');
+```
+
 
 ### ファイル名の拡張子
 

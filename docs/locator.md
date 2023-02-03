@@ -41,12 +41,40 @@ $tpl->getTemplateLocator()->appendPath('/lower/precedence/templates');
 
 ### Subdirectories
 
-To render a template from a subdirectory, use the subdirectory in the
-template name:
+To render a template from any location, use the absolute path to the template
+name:
 
 ```php
 // renders the "foo/bar/baz.php" template
 $output = $tpl('foo/bar/baz');
+```
+
+Alternatively, while inside a template, you may refer to template names by
+relative path. Use `./` to indicate a template in the same directory, or
+`../` to indicate the directory above the current one.
+
+Given a template file structure like the following ...
+
+```
+foo.php
+foo/
+    bar.php
+    bar/
+        baz.php
+        dib.php
+```
+
+... while inside the `foo/bar/baz.php` template file:
+
+```php
+// refers to "foo/bar/dib.php"
+echo $this->render('./dib');
+
+// refers to "foo/bar.php"
+echo $this->render('../bar');
+
+// refers to "foo.php"
+echo $this->render('../../foo');
 ```
 
 ### File Name Extension

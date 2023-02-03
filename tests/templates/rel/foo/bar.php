@@ -1,0 +1,1 @@
+bar<?= $this->render('./baz') ?>

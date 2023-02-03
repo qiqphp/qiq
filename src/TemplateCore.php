@@ -11,6 +11,8 @@ abstract class TemplateCore
 
     private ?string $layout = null;
 
+    private RenderStack $renderStack;
+
     private array $sections = [];
 
     private array $sectionStack = [];
@@ -22,10 +24,16 @@ abstract class TemplateCore
         private HelperLocator $helperLocator
     ) {
         $this->data = new stdClass();
+        $this->renderStack = new RenderStack();
     }
 
     public function __invoke() : string
     {
+        $this->content = '';
+        $this->renderStack->reset();
+        $this->sections = [];
+        $this->sectionStack = [];
+
         $view = $this->getView();
         $this->content = ($view === null) ? '' : $this->render($view);
         $layout = $this->getLayout();
@@ -112,6 +120,11 @@ abstract class TemplateCore
     public function hasTemplate(string $name) : bool
     {
         return $this->templateLocator->has($name);
+    }
+
+    protected function getRenderStack() : RenderStack
+    {
+        return $this->renderStack;
     }
 
     protected function getTemplate(string $name) : string
