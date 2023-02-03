@@ -7,7 +7,7 @@ use Throwable;
 
 class Template extends TemplateCore
 {
-    static public function new(
+    public static function new(
         string|array $paths = [],
         string $extension = '.php',
         string $encoding = 'utf-8',

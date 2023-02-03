@@ -38,7 +38,7 @@ class QiqToken
         'while',
     ];
 
-    static public function new(string $part) : ?self
+    public static function new(string $part) : ?self
     {
         $result = preg_match(
             '/(\s*){{(\s*)([a-z=~]\s+|\s*)(\W|\w+)(.*?)(\s*)}}(\s*)/msi',

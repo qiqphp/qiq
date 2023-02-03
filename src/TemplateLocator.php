@@ -46,9 +46,10 @@ class TemplateLocator
             return $this->compile($name);
         }
 
-        list ($collection, $name) = $this->split($name);
+        list($collection, $name) = $this->split($name);
 
-        throw new Exception\TemplateNotFound(PHP_EOL
+        throw new Exception\TemplateNotFound(
+            PHP_EOL
             . "Template: $name" . PHP_EOL
             . "Extension: {$this->extension}" . PHP_EOL
             . "Collection: " . ($collection === '' ? '(default)' : $collection) . PHP_EOL
@@ -63,7 +64,7 @@ class TemplateLocator
 
     public function prependPath(string $path) : void
     {
-        list ($collection, $path) = $this->split($path);
+        list($collection, $path) = $this->split($path);
         array_unshift($this->paths[$collection], $this->fixPath($path));
         $this->found = [];
         $this->compiled = [];
@@ -71,7 +72,7 @@ class TemplateLocator
 
     public function appendPath(string $path) : void
     {
-        list ($collection, $path) = $this->split($path);
+        list($collection, $path) = $this->split($path);
         $this->paths[$collection][] = $this->fixPath($path);
         $this->found = [];
         $this->compiled = [];
@@ -82,7 +83,7 @@ class TemplateLocator
         $this->paths = [];
 
         foreach ($paths as $path) {
-            list ($collection, $path) = $this->split($path);
+            list($collection, $path) = $this->split($path);
             $this->paths[$collection][] = $this->fixPath($path);
         }
 
