@@ -7,9 +7,7 @@ class RenderStack
 
     public function push(string $name) : string
     {
-        $resolved = str_starts_with($name, '.')
-            ? $this->relative($name, $this->dirname(end($this->names)))
-            : $name;
+        $resolved = $this->resolve($name);
 
         if (strpos($resolved, '..') !== false) {
             throw new Exception\TemplateNotFound(
@@ -32,6 +30,13 @@ class RenderStack
     public function reset() : void
     {
         $this->names = [];
+    }
+
+    public function resolve(string $name) : string
+    {
+        return str_starts_with($name, '.')
+            ? $this->relative($name, $this->dirname(end($this->names)))
+            : $name;
     }
 
     protected function relative(string $name, string $dirname) : string

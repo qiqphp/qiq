@@ -8,6 +8,8 @@
         "partials.md",
         "layouts.md",
         "sections.md",
+        "blocks.md",
+        "inheritance.md",
         "helpers/_bookdown.json",
         "compiler.md"
     ]
