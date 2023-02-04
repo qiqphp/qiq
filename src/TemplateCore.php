@@ -5,9 +5,13 @@ use stdClass;
 
 abstract class TemplateCore
 {
+    private Blocks $blocks;
+
     private string $content = '';
 
     private stdClass $data;
+
+    private ?string $extends = null;
 
     private ?string $layout = null;
 
@@ -24,11 +28,13 @@ abstract class TemplateCore
         private HelperLocator $helperLocator
     ) {
         $this->data = new stdClass();
+        $this->blocks = new Blocks();
         $this->renderStack = new RenderStack();
     }
 
     public function __invoke() : string
     {
+        $this->blocks->reset();
         $this->content = '';
         $this->renderStack->reset();
         $this->sections = [];
@@ -36,13 +42,26 @@ abstract class TemplateCore
 
         $view = $this->getView();
         $this->content = ($view === null) ? '' : $this->render($view);
+
+        while ($parentView = $this->getExtends()) {
+            $this->extends(null);
+            $this->content = $this->render($parentView);
+        }
+
         $layout = $this->getLayout();
 
         if ($layout === null) {
             return $this->content;
         }
 
-        return $this->render($layout);
+        $output = $this->render($layout);
+
+        while ($parentLayout = $this->getExtends()) {
+            $this->extends(null);
+            $output = $this->render($parentLayout);
+        }
+
+        return $output;
     }
 
     public function __get(string $key) : mixed
@@ -110,6 +129,18 @@ abstract class TemplateCore
     public function getView() : ?string
     {
         return $this->view;
+    }
+
+    public function extends(?string $extends) : void
+    {
+        $this->extends = $extends !== null
+            ? $this->renderStack->resolve($extends)
+            : null;
+    }
+
+    public function getExtends() : ?string
+    {
+        return $this->extends;
     }
 
     public function getTemplateLocator() : TemplateLocator
@@ -185,6 +216,26 @@ abstract class TemplateCore
                 $this->sections[$name] = $buffer;
                 return;
         }
+    }
+
+    protected function setBlock(string $name) : void
+    {
+        $this->blocks->set($name);
+    }
+
+    protected function parentBlock() : void
+    {
+        $this->blocks->parent();
+    }
+
+    protected function endBlock() : void
+    {
+        $this->blocks->end();
+    }
+
+    protected function getBlock() : string
+    {
+        return $this->blocks->get();
     }
 
     abstract protected function render(string $__NAME__, array $__VARS__ = []) : string;

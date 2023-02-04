@@ -136,4 +136,26 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         );
         ($this->template)();
     }
+
+    public function testExtends()
+    {
+        $this->template->setView('ext/view-3');
+        $this->template->setLayout('ext/layout-3');
+        $expect = <<<EOT
+            Layout 1 Content
+            View 1 Content
+
+            Foo 3a View
+            Foo 1 Layout
+            Foo 2 Layout
+            Foo 3 Layout
+            Foo 1 View
+            Foo 2 View
+            Foo 3b View
+
+
+            EOT;
+        $actual = ($this->template)();
+        $this->assertSame($expect, $actual);
+    }
 }
