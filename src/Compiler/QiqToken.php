@@ -41,7 +41,7 @@ class QiqToken
     public static function new(string $part) : ?self
     {
         $result = preg_match(
-            '/(\s*){{(\s*)([a-z=~]\s+|\s*)(\W|\w+)(.*?)(\s*)}}(\s*)/msi',
+            '/(\s*){{(\s*)([a-z=~]\s+|\s*)(\W|\w+)(.*?)(\s*)(~\s*)?}}(\s*)/msi',
             $part,
             $matches,
         );
@@ -57,7 +57,8 @@ class QiqToken
             firstWord: $matches[4] ?? '',
             remainder: $matches[5] ?? '',
             tailingSpaceInner: empty($matches[6]) ? ' ' : $matches[6],
-            tailingSpaceOuter: $matches[7] ?? '',
+            tailingSpaceOuter: $matches[8] ?? '',
+            tailingTagChar: empty($matches[7]) ? '' : trim($matches[7]),
         );
     }
 
@@ -71,6 +72,7 @@ class QiqToken
         protected string $remainder,
         protected string $tailingSpaceInner,
         protected string $tailingSpaceOuter,
+        protected string $tailingTagChar = '',
     ) {
         $this->fixEcho();
     }
@@ -193,6 +195,7 @@ class QiqToken
     {
         if (
             substr($this->tailingSpaceOuter, 0, strlen(PHP_EOL)) === PHP_EOL
+            && $this->tailingTagChar !== '~'
         ) {
             $this->closing .= '<?= PHP_EOL ?>';
         }
