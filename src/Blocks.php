@@ -19,14 +19,14 @@ class Blocks
      * The stack of block names; the last one is the current block being
      * buffered.
      *
-     * @var array<int, string>
+     * @var string[]
      */
     protected array $names = [];
 
     /**
      * The series of buffered block parts to be concatenated by getBlock().
      *
-     * @var array<string, array<int, array<string, string>>>
+     * @var array<string, array>
      */
     protected array $parts = [];
 
@@ -47,7 +47,7 @@ class Blocks
 
     public function parent() : void
     {
-        $name = end($this->names);
+        $name = (string) end($this->names);
         $count = $this->count[$name];
         $buffer = (string) ob_get_clean();
         $this->parts[$name][$count][] = [self::CONCAT_BUFFER, $buffer];
@@ -57,7 +57,7 @@ class Blocks
 
     public function get() : string
     {
-        $name = end($this->names);
+        $name = (string) end($this->names);
         $this->end();
 
         // although templates are executed childmost-up, blocks are processed
@@ -78,7 +78,7 @@ class Blocks
             }
         }
 
-        return end($level);
+        return (string) end($level);
     }
 
     public function reset() : void
