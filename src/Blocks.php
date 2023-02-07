@@ -60,9 +60,9 @@ class Blocks
         $name = (string) end($this->names);
         $this->end();
 
-        // although templates are executed childmost-up, blocks are processed
-        // parentmost-down. this allows overrides and parent block
-        // placeholders to work as expected.
+        // although templates are executed childmost-up, blocks
+        // are processed parentmost-down. this allows overrides
+        // and parentBlock() calls to work as expected.
         $parts = array_reverse($this->parts[$name]);
         $level = [];
 
