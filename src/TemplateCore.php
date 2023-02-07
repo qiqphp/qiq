@@ -43,8 +43,8 @@ abstract class TemplateCore
         $view = $this->getView();
         $this->content = ($view === null) ? '' : $this->render($view);
 
-        while ($parentView = $this->getExtends()) {
-            $this->extends(null);
+        while ($parentView = $this->extends) {
+            $this->extends = null;
             $this->content = $this->render($parentView);
         }
 
@@ -56,8 +56,8 @@ abstract class TemplateCore
 
         $output = $this->render($layout);
 
-        while ($parentLayout = $this->getExtends()) {
-            $this->extends(null);
+        while ($parentLayout = $this->extends) {
+            $this->extends = null;
             $output = $this->render($parentLayout);
         }
 
@@ -131,16 +131,9 @@ abstract class TemplateCore
         return $this->view;
     }
 
-    public function extends(?string $extends) : void
+    public function extends(string $extends) : void
     {
-        $this->extends = $extends !== null
-            ? $this->renderStack->resolve($extends)
-            : null;
-    }
-
-    public function getExtends() : ?string
-    {
-        return $this->extends;
+        $this->extends = $this->renderStack->resolve($extends);
     }
 
     public function getTemplateLocator() : TemplateLocator
