@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Qiq;
 
 use Laminas\Escaper\Escaper;
@@ -7,15 +9,15 @@ class Escape
 {
     protected Escaper $escaper;
 
-    public function __construct(string $encoding = 'utf-8')
+    public function __construct(mixed $encoding = 'utf-8')
     {
         $this->escaper = new Escaper($encoding);
     }
 
-    public function a(string|array $raw) : string
+    public function a(mixed $raw) : string
     {
-        if (is_string($raw)) {
-            return $this->escaper->escapeHtmlAttr($raw);
+        if (! is_array($raw)) {
+            return $this->escaper->escapeHtmlAttr((string) $raw);
         }
 
         $esc = '';
@@ -41,7 +43,7 @@ class Escape
             } else {
                 // full; because the it is quoted, we can use html ecaping
                 $esc .= $this->escaper->escapeHtmlAttr($key) . '="'
-                      . $this->escaper->escapeHtml($val) . '"';
+                      . $this->escaper->escapeHtml((string) $val) . '"';
             }
 
             // space separator
@@ -52,23 +54,23 @@ class Escape
         return rtrim($esc);
     }
 
-    public function c(string $raw) : string
+    public function c(mixed $raw) : string
     {
-        return $this->escaper->escapeCss($raw);
+        return $this->escaper->escapeCss((string) $raw);
     }
 
-    public function h(string $raw) : string
+    public function h(mixed $raw) : string
     {
-        return $this->escaper->escapeHtml($raw);
+        return $this->escaper->escapeHtml((string) $raw);
     }
 
-    public function j(string $raw) : string
+    public function j(mixed $raw) : string
     {
-        return $this->escaper->escapeJs($raw);
+        return $this->escaper->escapeJs((string) $raw);
     }
 
-    public function u(string $raw) : string
+    public function u(mixed $raw) : string
     {
-        return $this->escaper->escapeUrl($raw);
+        return $this->escaper->escapeUrl((string) $raw);
     }
 }

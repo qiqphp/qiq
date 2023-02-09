@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Qiq;
 
 class EscapeTest extends \PHPUnit\Framework\TestCase

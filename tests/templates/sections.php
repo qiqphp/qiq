@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 echo ($this->hasSection('main') ? 'true' : 'false') . PHP_EOL;
 
 $this->setSection('main');
