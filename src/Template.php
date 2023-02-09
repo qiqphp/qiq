@@ -7,7 +7,7 @@ use Qiq\Compiler\Compiler;
 use Qiq\Compiler\QiqCompiler;
 use Throwable;
 
-class Template extends TemplateCore
+class Template extends Kernel
 {
     public static function new(
         string|array $paths = [],

@@ -5,7 +5,7 @@ namespace Qiq;
 
 use stdClass;
 
-abstract class TemplateCore
+abstract class Kernel
 {
     private Blocks $blocks;
 
