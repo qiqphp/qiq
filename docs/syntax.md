@@ -222,7 +222,7 @@ with the closing tag. This Qiq code ...
 <?= $this->h($foo) ?>
 ```
 
-A tilde with the closing tag has no effect on non-echoing Quq code.
+A tilde with the closing tag has no effect on non-echoing Qiq code.
 
 ### Indenting
 
