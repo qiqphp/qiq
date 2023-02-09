@@ -7,7 +7,7 @@ class Catalog
 {
     protected array $paths = [];
 
-    protected array $found = [];
+    protected array $source = [];
 
     protected array $compiled = [];
 
@@ -21,8 +21,13 @@ class Catalog
 
     public function has(string $name) : bool
     {
-        if (isset($this->found[$name])) {
-            return true;
+        return $this->source($name) !== null;
+    }
+
+    protected function source(string $name) : ?string
+    {
+        if (isset($this->source[$name])) {
+            return $this->source[$name];
         }
 
         $key = $name;
@@ -32,17 +37,19 @@ class Catalog
         foreach ($this->paths[$collection] as $path) {
             $file = $path . DIRECTORY_SEPARATOR . $name . $this->extension;
             if (is_readable($file)) {
-                $this->found[$key] = $file;
-                return true;
+                $this->source[$key] = $file;
+                return $file;
             }
         }
 
-        return false;
+        return null;
     }
 
     public function get(string $name) : string
     {
-        if ($this->has($name)) {
+        $source = $this->source($name);
+
+        if ($source !== null) {
             return $this->compile($name);
         }
 
@@ -66,7 +73,7 @@ class Catalog
     {
         list($collection, $path) = $this->split($path);
         array_unshift($this->paths[$collection], $this->fixPath($path));
-        $this->found = [];
+        $this->source = [];
         $this->compiled = [];
     }
 
@@ -74,7 +81,7 @@ class Catalog
     {
         list($collection, $path) = $this->split($path);
         $this->paths[$collection][] = $this->fixPath($path);
-        $this->found = [];
+        $this->source = [];
         $this->compiled = [];
     }
 
@@ -87,19 +94,19 @@ class Catalog
             $this->paths[$collection][] = $this->fixPath($path);
         }
 
-        $this->found = [];
+        $this->source = [];
         $this->compiled = [];
     }
 
     public function setExtension(string $extension) : void
     {
         $this->extension = $extension;
-        $this->found = [];
+        $this->source = [];
     }
 
     public function clear() : void
     {
-        $this->found = [];
+        $this->source = [];
         $this->compiled = [];
         $this->compiler->clear();
     }
@@ -108,7 +115,7 @@ class Catalog
     {
         if (! isset($this->compiled[$name])) {
             $this->compiled[$name] = ($this->compiler)(
-                $this->found[$name]
+                $this->source[$name]
             );
         }
 
