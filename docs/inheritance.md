@@ -8,23 +8,25 @@ Here is an example of extending a template. First, a "parent" template, composed
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{{ setBlock ('head_title') }}{{= getBlock () }}
-{{ setBlock ('head_meta') }}{{= getBlock () }}
-{{ setBlock ('head_links') }}{{= getBlock () }}
+{{ setBlock ('head_title') }}{{= getBlock () ~}}
+{{ setBlock ('head_meta') }}{{= getBlock () ~}}
+{{ setBlock ('head_links') }}{{= getBlock () ~}}
 {{ setBlock ('head_styles') }}
     <link rel="stylesheet" href="/theme/basic.css" type="text/css" media="screen" />
-{{= getBlock () }}
-{{ setBlock ('head_scripts') }}{{= getBlock () }}
+{{= getBlock () ~}}
+{{ setBlock ('head_scripts') }}{{= getBlock () ~}}
 </head>
 <body>
-{{ setBlock ('body_header') }}{{= getBlock () }}
-{{ setBlock ('body_content') }}{{= getBlock () }}
-{{ setBlock ('body_footer') }}{{= getBlock () }}
+{{ setBlock ('body_header') }}{{= getBlock () ~}}
+{{ setBlock ('body_content') }}{{= getBlock () ~}}
+{{ setBlock ('body_footer') }}{{= getBlock () ~}}
 </body>
 </html>
 ```
 
-The above code defines a series of blocks via `setBlock()`, then displays the *final* block contents via `getBlock()`.  Any content between `setBlock()` and `getBlock()` is used as the default content for that block; the final block contents will be determined by any overrides in the child templates.
+The above code defines a series of blocks via `setBlock()`, then displays the *final* block contents via `getBlock()`. (Note the use of the closing tag `~}}` to consume the newline after the tag, which condenses blank lines in the output.)
+
+Any content between `setBlock()` and `getBlock()` is used as the default content for that block; the final block contents will be determined by any overrides in the child templates.
 
 Next, a "child" template that extends the "parent" template; note how it `extends()` the "parent" template, and overrides or modifieds content from the parent blocks:
 
@@ -43,7 +45,7 @@ Next, a "child" template that extends the "parent" template; note how it `extend
 {{ endBlock () }}
 
 {{ setBlock ('head_styles') }}
-    {{ parentBlock () }}
+{{ parentBlock () }}
     <link rel="stylesheet" href="/theme/custom.css" type="text/css" media="screen" />
 {{ endBlock () }}
 

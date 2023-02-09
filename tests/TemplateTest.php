@@ -158,4 +158,30 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $actual = ($this->template)();
         $this->assertSame($expect, $actual);
     }
+
+    public function testInheritanceDocExample()
+    {
+        $this->template->setView('ext/child');
+        $expect = <<<EOT
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <title>
+                    My Extended Page
+                </title>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link rel="stylesheet" href="/theme/basic.css" type="text/css" media="screen" />
+                <link rel="stylesheet" href="/theme/custom.css" type="text/css" media="screen" />
+            </head>
+            <body>
+                <p>The main content for my extended page.</p>
+            </body>
+            </html>
+
+            EOT;
+
+        $actual = ($this->template)();
+        $this->assertSame($expect, $actual);
+    }
 }
