@@ -174,4 +174,32 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
         $php = PHP_EOL . '    <?php \Qiq\Indent::set("' . $set . '    ") ?><?= $this->textField(["name" => "street", "value" => $street]) ?>';
         $this->assertPhp($php, $qiq);
     }
+
+    public function testNewlineControl() : void
+    {
+        // echoing, honor trailing newline
+        $qiq = '{{= $noop }}' . PHP_EOL;
+        $php = '<?= $noop ?><?= PHP_EOL ?>' . PHP_EOL;
+        $this->assertPhp($php, $qiq);
+
+        // echoing, consume trailing newline
+        $qiq = '{{= $noop ~}}' . PHP_EOL;
+        $php = '<?= $noop ?>' . PHP_EOL;
+        $this->assertPhp($php, $qiq);
+
+        // non-echoing, consume trailing newline
+        $qiq = '{{ $noop }}' . PHP_EOL;
+        $php = '<?php $noop ?>' . PHP_EOL;
+        $this->assertPhp($php, $qiq);
+
+        // non-echoing, consume trailing newline
+        $qiq = '{{ $noop ~}}' . PHP_EOL;
+        $php = '<?php $noop ?>' . PHP_EOL;
+        $this->assertPhp($php, $qiq);
+
+        // non-echoing, add leading newline
+        $qiq = '{{~ $noop }}' . PHP_EOL;
+        $php = '<?= PHP_EOL ?><?php $noop ?>' . PHP_EOL;
+        $this->assertPhp($php, $qiq);
+    }
 }
