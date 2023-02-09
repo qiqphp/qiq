@@ -38,10 +38,6 @@ abstract class Kernel
 
     private RenderStack $renderStack;
 
-    private array $sections = [];
-
-    private array $sectionStack = [];
-
     private ?string $view = null;
 
     public function __construct(
@@ -58,8 +54,6 @@ abstract class Kernel
         $this->blocks->reset();
         $this->content = '';
         $this->renderStack->reset();
-        $this->sections = [];
-        $this->sectionStack = [];
 
         $view = $this->getView();
         $this->content = ($view === null) ? '' : $this->render($view);
@@ -180,56 +174,6 @@ abstract class Kernel
     protected function getContent() : string
     {
         return $this->content;
-    }
-
-    protected function hasSection(string $name) : bool
-    {
-        return isset($this->sections[$name]);
-    }
-
-    protected function getSection(string $name) : ?string
-    {
-        return $this->sections[$name] ?? null;
-    }
-
-    protected function setSection(string $name) : void
-    {
-        $this->sectionStack[] = [__FUNCTION__, $name];
-        ob_start();
-    }
-
-    protected function appendSection(string $name) : void
-    {
-        $this->sectionStack[] = [__FUNCTION__, $name];
-        ob_start();
-    }
-
-    protected function prependSection(string $name) : void
-    {
-        $this->sectionStack[] = [__FUNCTION__, $name];
-        ob_start();
-    }
-
-    protected function endSection() : void
-    {
-        list($func, $name) = array_pop($this->sectionStack);
-        $buffer = (string) ob_get_clean();
-
-        if (! $this->hasSection($name)) {
-            $this->sections[$name] = '';
-        }
-
-        switch ($func) {
-            case 'appendSection':
-                $this->sections[$name] .= $buffer;
-                return;
-            case 'prependSection':
-                $this->sections[$name] = $buffer . $this->sections[$name];
-                return;
-            default:
-                $this->sections[$name] = $buffer;
-                return;
-        }
     }
 
     protected function setBlock(string $name) : void

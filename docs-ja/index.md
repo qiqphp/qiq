@@ -4,6 +4,5 @@
 - [ロケータ](./locator.md)
 - [パーシャル](./partials.md)
 - [レイアウト](./layouts.md)
-- [セクション](./sections.md)
 - [ヘルパー](./helpers/index.md)
 - [コンパイラ](./compiler.md)

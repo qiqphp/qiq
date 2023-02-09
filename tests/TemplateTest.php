@@ -95,16 +95,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testSections()
-    {
-        $this->template->setView('sections');
-        $actual = ($this->template)();
-        $expect = 'false' . PHP_EOL
-            . 'true' . PHP_EOL
-            . 'bazfoobar';
-        $this->assertSame($expect, $actual);
-    }
-
     public function testException()
     {
         $this->template->setView('exception');

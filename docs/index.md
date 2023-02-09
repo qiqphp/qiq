@@ -4,7 +4,6 @@
 - [Locator](./locator.md)
 - [Partials](./partials.md)
 - [Layouts](./layouts.md)
-- [Sections](./sections.md)
 - [Inheritance](./inheritance.md)
 - [Helpers](./helpers/index.md)
 - [Compiler](./compiler.md)

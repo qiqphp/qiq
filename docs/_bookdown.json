@@ -7,7 +7,6 @@
         "locator.md",
         "partials.md",
         "layouts.md",
-        "sections.md",
         "helpers/_bookdown.json",
         "compiler.md"
     ]
