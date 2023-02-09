@@ -209,6 +209,21 @@ with the opening tag. This Qiq code ...
 This is especially useful with looping output code, where you want to honor
 newlines at the very beginning and very end of the loop.
 
+Echoing Qiq can be made to consume a single trailing newline by using a tilde
+with the closing tag. This Qiq code ...
+
+```qiq
+{{h $foo ~}}
+```
+
+... compiles to this PHP code:
+
+```html+php
+<?= $this->h($foo) ?>
+```
+
+A tilde with the closing tag has no effect on non-echoing Qiq code.
+
 ### Indenting
 
 Echoing Qiq tags will automatically set the current indent for helpers based on
