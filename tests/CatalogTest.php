@@ -3,46 +3,46 @@ declare(strict_types=1);
 
 namespace Qiq;
 
-class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
+class CatalogTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp() : void
     {
-        $this->templateLocator = $this->newTemplateLocator();
-        $this->templateLocator->clear();
+        $this->catalog = $this->newCatalog();
+        $this->catalog->clear();
     }
 
-    protected function newTemplateLocator(array $paths = [])
+    protected function newCatalog(array $paths = [])
     {
-        return new TemplateLocator($paths, '.php', new Compiler\FakeCompiler());
+        return new Catalog($paths, '.php', new Compiler\FakeCompiler());
     }
 
     public function testHasGet()
     {
-        $this->templateLocator->setPaths([__DIR__ . '/templates']);
+        $this->catalog->setPaths([__DIR__ . '/templates']);
 
-        $this->assertTrue($this->templateLocator->has('index'));
-        $actual = $this->templateLocator->get('index');
+        $this->assertTrue($this->catalog->has('index'));
+        $actual = $this->catalog->get('index');
 
         $expect = str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/templates/index.php');
         $this->assertSame($expect, $actual);
 
-        $this->assertFalse($this->templateLocator->has('no-such-template'));
+        $this->assertFalse($this->catalog->has('no-such-template'));
         $this->expectException(Exception\TemplateNotFound::CLASS);
-        $this->templateLocator->get('no-such-template');
+        $this->catalog->get('no-such-template');
     }
 
     public function testDoubleDots()
     {
         $this->expectException(Exception\TemplateNotFound::CLASS);
         $this->expectExceptionMessage("Double-dots not allowed in template specifications");
-        $this->templateLocator->get('foo/../bar');
+        $this->catalog->get('foo/../bar');
     }
 
     public function testSetAndGetPaths()
     {
         // should be no paths yet
         $expect = [];
-        $actual = $this->templateLocator->getPaths();
+        $actual = $this->catalog->getPaths();
         $this->assertSame($expect, $actual);
 
         // set the paths
@@ -51,38 +51,38 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
             DIRECTORY_SEPARATOR . 'bar',
             DIRECTORY_SEPARATOR . 'baz',
         ]];
-        $this->templateLocator->setPaths(['/foo', '/bar', '/baz']);
-        $actual = $this->templateLocator->getPaths();
+        $this->catalog->setPaths(['/foo', '/bar', '/baz']);
+        $actual = $this->catalog->getPaths();
         $this->assertSame($expect, $actual);
     }
 
     public function testPrependPath()
     {
-        $this->templateLocator->prependPath('/foo');
-        $this->templateLocator->prependPath('/bar');
-        $this->templateLocator->prependPath('/baz');
+        $this->catalog->prependPath('/foo');
+        $this->catalog->prependPath('/bar');
+        $this->catalog->prependPath('/baz');
 
         $expect = ['__DEFAULT__' => [
             DIRECTORY_SEPARATOR . 'baz',
             DIRECTORY_SEPARATOR . 'bar',
             DIRECTORY_SEPARATOR . 'foo',
         ]];
-        $actual = $this->templateLocator->getPaths();
+        $actual = $this->catalog->getPaths();
         $this->assertSame($expect, $actual);
     }
 
     public function testAppendPath()
     {
-        $this->templateLocator->appendPath('/foo');
-        $this->templateLocator->appendPath('/bar');
-        $this->templateLocator->appendPath('/baz');
+        $this->catalog->appendPath('/foo');
+        $this->catalog->appendPath('/bar');
+        $this->catalog->appendPath('/baz');
 
         $expect = ['__DEFAULT__' => [
             DIRECTORY_SEPARATOR . 'foo',
             DIRECTORY_SEPARATOR . 'bar',
             DIRECTORY_SEPARATOR . 'baz',
         ]];
-        $actual = $this->templateLocator->getPaths();
+        $actual = $this->catalog->getPaths();
         $this->assertSame($expect, $actual);
     }
 
@@ -91,47 +91,47 @@ class TemplateLocatorTest extends \PHPUnit\Framework\TestCase
         $dir = __DIR__ . DIRECTORY_SEPARATOR
             . 'templates' . DIRECTORY_SEPARATOR;
 
-        $templateLocator = $this->newTemplateLocator([
+        $catalog = $this->newCatalog([
             $dir . 'foo',
         ]);
 
-        $this->assertOutput('foo', $templateLocator->get('test'));
+        $this->assertOutput('foo', $catalog->get('test'));
 
-        $templateLocator = $this->newTemplateLocator([
+        $catalog = $this->newCatalog([
             $dir . 'bar',
             $dir . 'foo',
         ]);
-        $this->assertOutput('bar', $templateLocator->get('test'));
+        $this->assertOutput('bar', $catalog->get('test'));
 
-        $templateLocator = $this->newTemplateLocator([
+        $catalog = $this->newCatalog([
             $dir . 'baz',
             $dir . 'bar',
             $dir . 'foo',
         ]);
-        $this->assertOutput('baz', $templateLocator->get('test'));
+        $this->assertOutput('baz', $catalog->get('test'));
 
         // get it again for code coverage
-        $this->assertOutput('baz', $templateLocator->get('test'));
+        $this->assertOutput('baz', $catalog->get('test'));
 
         // look for a file that doesn't exist
-        $templateLocator->setExtension('.phtml');
+        $catalog->setExtension('.phtml');
         $this->expectException(Exception\TemplateNotFound::CLASS);
-        $templateLocator->get('test');
+        $catalog->get('test');
     }
 
     public function testCollections()
     {
         $dir = __DIR__ . '/templates';
 
-        $this->templateLocator->setPaths([
+        $this->catalog->setPaths([
             "foo:{$dir}/foo",
             "bar:{$dir}/bar",
             "baz:{$dir}/baz",
         ]);
 
-        $this->assertOutput('foo', $this->templateLocator->get('foo:test'));
-        $this->assertOutput('bar', $this->templateLocator->get('bar:test'));
-        $this->assertOutput('baz', $this->templateLocator->get('baz:test'));
+        $this->assertOutput('foo', $this->catalog->get('foo:test'));
+        $this->assertOutput('bar', $this->catalog->get('bar:test'));
+        $this->assertOutput('baz', $this->catalog->get('baz:test'));
     }
 
     protected function assertOutput(string $expect, string $file) : void

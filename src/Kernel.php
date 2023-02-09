@@ -21,7 +21,7 @@ abstract class Kernel
         $compiler ??= new QiqCompiler($cachePath);
 
         return new static(
-            new TemplateLocator((array) $paths, $extension, $compiler),
+            new Catalog((array) $paths, $extension, $compiler),
             $helperLocator
         );
     }
@@ -41,7 +41,7 @@ abstract class Kernel
     private ?string $view = null;
 
     public function __construct(
-        private TemplateLocator $templateLocator,
+        private Catalog $catalog,
         private HelperLocator $helperLocator
     ) {
         $this->data = new stdClass();
@@ -151,14 +151,14 @@ abstract class Kernel
         $this->extends = $this->renderStack->resolve($extends);
     }
 
-    public function getTemplateLocator() : TemplateLocator
+    public function getCatalog() : Catalog
     {
-        return $this->templateLocator;
+        return $this->catalog;
     }
 
     public function hasTemplate(string $name) : bool
     {
-        return $this->templateLocator->has($name);
+        return $this->catalog->has($name);
     }
 
     protected function getRenderStack() : RenderStack
@@ -168,7 +168,7 @@ abstract class Kernel
 
     protected function getTemplate(string $name) : string
     {
-        return $this->templateLocator->get($name);
+        return $this->catalog->get($name);
     }
 
     protected function getContent() : string

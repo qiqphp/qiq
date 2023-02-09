@@ -1,7 +1,7 @@
 - [Introduction](./intro.md)
 - [Syntax](./syntax.md)
 - [Data](./data.md)
-- [Locator](./locator.md)
+- [Catalog](./catalog.md)
 - [Partials](./partials.md)
 - [Layouts](./layouts.md)
 - [Inheritance](./inheritance.md)

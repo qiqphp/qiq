@@ -1,7 +1,7 @@
 - [入門](./intro.md)
 - [構文](./syntax.md)
 - [データ](./data.md)
-- [ロケータ](./locator.md)
+- [ロケータ](./catalog.md)
 - [パーシャル](./partials.md)
 - [レイアウト](./layouts.md)
 - [ヘルパー](./helpers/index.md)

@@ -28,8 +28,8 @@ QiqCompilerは、コンパイルされたテンプレートをソース・テン
 
 ## キャッシュのクリア
 
-キャッシュをクリアするには、Templateの中に入ってTemplateLocatorを取得し、その`clear()`メソッドを呼び出します。
+キャッシュをクリアするには、Templateの中に入ってCatalogを取得し、その`clear()`メソッドを呼び出します。
 
 ```php
-$tpl->getTemplateLocator()->clear();
+$tpl->getCatalog()->clear();
 ```

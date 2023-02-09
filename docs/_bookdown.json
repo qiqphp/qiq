@@ -4,7 +4,7 @@
         "intro.md",
         "syntax.md",
         "data.md",
-        "locator.md",
+        "catalog.md",
         "partials.md",
         "layouts.md",
         "helpers/_bookdown.json",

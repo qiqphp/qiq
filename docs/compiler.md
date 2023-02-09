@@ -43,9 +43,9 @@ the cache path will help you find the original template.
 
 ## Cache Clearing
 
-To clear the cache, reach into the _Template_ to get the _TemplateLocator_,
+To clear the cache, reach into the _Template_ to get the _Catalog_,
 and call its `clear()` method.
 
 ```php
-$tpl->getTemplateLocator()->clear();
+$tpl->getCatalog()->clear();
 ```

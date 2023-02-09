@@ -11,16 +11,16 @@ $tpl = Template::new(
 );
 ```
 
-あるいは、TemplateLocatorに直接指示することもできます。
+あるいは、Catalogに直接指示することもできます。
 
 ```php
-$tpl->getTempLatelocator()->setPaths([
+$tpl->getCatalog()->setPaths([
     '/path/to/custom/templates',
     '/path/to/default/templates',
 ]);
 ```
 
-TemplateLocatorは、最初のディレクトリパスから最後のディレクトリパスまで、指定されたテンプレートを検索します。
+Catalogは、最初のディレクトリパスから最後のディレクトリパスまで、指定されたテンプレートを検索します。
 
 ```php
 /*
@@ -30,11 +30,11 @@ and then second for: /path/to/default/templates/foo.php
 $output = $tpl('foo');
 ```
 
-もし必要なら、Templateのインスタンス化の後でパスを変更し、TemplateLocatorにディレクトリパスを追加または前置することができます。
+もし必要なら、Templateのインスタンス化の後でパスを変更し、Catalogにディレクトリパスを追加または前置することができます。
 
 ```php
-$tpl->getTemplateLocator()->prependPath('/higher/precedence/templates');
-$tpl->getTemplateLocator()->appendPath('/lower/precedence/templates');
+$tpl->getCatalog()->prependPath('/higher/precedence/templates');
+$tpl->getCatalog()->appendPath('/lower/precedence/templates');
 ```
 
 ### サブディレクトリ
@@ -75,11 +75,11 @@ echo $this->render('../../foo');
 
 ### ファイル名の拡張子
 
-デフォルトでは、TemplateLocatorはテンプレートファイル名に`.php`を自動で付加します。もしテンプレートファイルの拡張子が違う場合は、`setExtension()`メソッドで変更します。
+デフォルトでは、Catalogはテンプレートファイル名に`.php`を自動で付加します。もしテンプレートファイルの拡張子が違う場合は、`setExtension()`メソッドで変更します。
 
 ```php
-$templateLocator = $tpl->getTempLatelocator();
-$templateLocator->setExtension('.phtml');
+$catalog = $tpl->getCatalog();
+$catalog->setExtension('.phtml');
 ```
 
 あるいは、Template作成時に設定することもできます。

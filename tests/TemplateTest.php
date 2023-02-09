@@ -21,8 +21,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             };
         });
 
-        $templateLocator = $this->template->getTemplateLocator();
-        $templateLocator->setPaths([__DIR__ . '/templates']);
+        $catalog = $this->template->getCatalog();
+        $catalog->setPaths([__DIR__ . '/templates']);
     }
 
     public function testStaticNew()
@@ -47,7 +47,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testGetters()
     {
-        $this->assertInstanceOf(TemplateLocator::CLASS, $this->template->getTemplateLocator());
+        $this->assertInstanceOf(Catalog::CLASS, $this->template->getCatalog());
         $this->assertInstanceOf(HelperLocator::CLASS, $this->template->getHelperLocator());
     }
 

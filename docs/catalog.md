@@ -11,16 +11,16 @@ $tpl = Template::new(
     ],
 );
 ```
-... or you can tell the _TemplateLocator_ directly:
+... or you can tell the _Catalog_ directly:
 
 ```php
-$tpl->getTempLatelocator()->setPaths([
+$tpl->getCatalog()->setPaths([
     '/path/to/custom/templates',
     '/path/to/default/templates',
 ]);
 ```
 
-The _TemplateLocator_ will search for the named template from the first
+The _Catalog_ will search for the named template from the first
 directory path to the last.
 
 ```php
@@ -32,11 +32,11 @@ $output = $tpl('foo');
 ```
 
 If you like, you can modify the paths after the _Template_ instantiation to
-append or prepend a directory path to the _TemplateLocator_:
+append or prepend a directory path to the _Catalog_:
 
 ```php
-$tpl->getTemplateLocator()->prependPath('/higher/precedence/templates');
-$tpl->getTemplateLocator()->appendPath('/lower/precedence/templates');
+$tpl->getCatalog()->prependPath('/higher/precedence/templates');
+$tpl->getCatalog()->appendPath('/lower/precedence/templates');
 ```
 
 ### Subdirectories
@@ -79,13 +79,13 @@ echo $this->render('../../foo');
 
 ### File Name Extension
 
-By default, the _TemplateLocator_ will auto-append `.php` to template file
+By default, the _Catalog_ will auto-append `.php` to template file
 names. If the template files end with a different extension, change it using the
 `setExtension()` method:
 
 ```php
-$templateLocator = $tpl->getTempLatelocator();
-$templateLocator->setExtension('.phtml');
+$catalog = $tpl->getCatalog();
+$catalog->setExtension('.phtml');
 ```
 
 Or, you can set it at _Template_ creation time:
