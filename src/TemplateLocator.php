@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Qiq;
 
-use Qiq\Compiler\Compiler;
-
 class TemplateLocator
 {
     protected array $paths = [];
