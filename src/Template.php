@@ -3,30 +3,10 @@ declare(strict_types=1);
 
 namespace Qiq;
 
-use Qiq\Compiler\Compiler;
-use Qiq\Compiler\QiqCompiler;
 use Throwable;
 
 class Template extends Kernel
 {
-    public static function new(
-        string|array $paths = [],
-        string $extension = '.php',
-        string $encoding = 'utf-8',
-        string $cachePath = null,
-        HelperLocator $helperLocator = null,
-        Compiler $compiler = null,
-    ) : static
-    {
-        $helperLocator ??= HelperLocator::new(new Escape($encoding));
-        $compiler ??= new QiqCompiler($cachePath);
-
-        return new static(
-            new TemplateLocator((array) $paths, $extension, $compiler),
-            $helperLocator
-        );
-    }
-
     public function render(string $__NAME__, array $__VARS__ = []) : string
     {
         try {
