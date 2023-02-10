@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Qiq;
+namespace Qiq\Helper;
 
 use Laminas\Escaper\Escaper;
 

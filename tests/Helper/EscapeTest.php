@@ -1,17 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Qiq;
+namespace Qiq\Helper;
 
-class EscapeTest extends \PHPUnit\Framework\TestCase
+class EscapeTest extends HtmlHelperTest
 {
-    protected $escape;
-
-    protected function setUp() : void
-    {
-        $this->escape = new Escape();
-    }
-
     public function testAttr_string()
     {
         $chars = [
@@ -51,13 +44,13 @@ class EscapeTest extends \PHPUnit\Framework\TestCase
         foreach ($chars as $key => $val) {
             $this->assertEquals(
                 $val,
-                $this->escape->a($key),
+                $this->helpers->a($key),
                 'Failed to escape: ' . $key
             );
         }
 
         $expect = 'foo="bar baz dib"';
-        $actual = $this->escape->a([
+        $actual = $this->helpers->a([
             'foo' => [
                 'bar',
                 'baz',
@@ -101,7 +94,7 @@ class EscapeTest extends \PHPUnit\Framework\TestCase
         foreach ($chars as $key => $val) {
             $this->assertEquals(
                 $val,
-                $this->escape->c($key),
+                $this->helpers->c($key),
                 'Failed to escape: ' . $key
             );
         }
@@ -120,7 +113,7 @@ class EscapeTest extends \PHPUnit\Framework\TestCase
         foreach ($chars as $key => $val) {
             $this->assertEquals(
                 $val,
-                $this->escape->h($key),
+                $this->helpers->h($key),
                 'Failed to escape: ' . $key
             );
         }
@@ -160,7 +153,7 @@ class EscapeTest extends \PHPUnit\Framework\TestCase
         foreach ($chars as $key => $val) {
             $this->assertEquals(
                 $val,
-                $this->escape->j($key),
+                $this->helpers->j($key),
                 'Failed to escape: ' . $key
             );
         }
@@ -170,7 +163,7 @@ class EscapeTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertSame(
             'http%3A%2F%2Fuser%3Apass%40example.net%2Fpath%2F%3Fqstr%23hash',
-            $this->escape->u('http://user:pass@example.net/path/?qstr#hash')
+            $this->helpers->u('http://user:pass@example.net/path/?qstr#hash')
         );
     }
 }

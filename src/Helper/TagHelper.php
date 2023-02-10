@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Qiq\Helper;
 
-use Qiq\Escape;
-
 abstract class TagHelper
 {
     public function __construct(protected Escape $escape)
