@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class TextareaTest extends HelperTest
+class TextareaTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
-        $actual = $this->helper([
+        $actual = $this->helpers->textarea([
             'name' => 'field',
             'value' => "the quick & brown fox",
         ]);

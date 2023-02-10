@@ -1,14 +1,12 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class ImageTest extends HelperTest
+class ImageTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
         $src = '/images/example.gif';
-        $actual = $this->helper($src);
+        $actual = $this->helpers->image($src);
         $expect = '<img src="/images/example.gif" alt="example.gif" />';
         $this->assertSame($actual, $expect);
     }

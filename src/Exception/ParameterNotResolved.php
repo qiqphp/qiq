@@ -5,6 +5,6 @@ namespace Qiq\Exception;
 
 use Qiq\Exception;
 
-class HelperNotFound extends Exception
+class ParameterNotResolved extends Exception
 {
 }

@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class FormTest extends HelperTest
+class FormTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
-        $actual = $this->helper([
+        $actual = $this->helpers->form([
             'method' => 'post',
             'action' => 'http://example.com/',
         ]);

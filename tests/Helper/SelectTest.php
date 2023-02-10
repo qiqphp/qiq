@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class SelectTest extends HelperTest
+class SelectTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
-        $actual = $this->helper([
+        $actual = $this->helpers->select([
             'name' => 'field_name',
             'value' => 'opt5',
             'placeholder' => 'Pick One',
@@ -48,9 +46,9 @@ class SelectTest extends HelperTest
         $this->assertSame($expect, $actual);
     }
 
-    public function testMultiple()
+    public function testMultiple() : void
     {
-        $actual = $this->helper([
+        $actual = $this->helpers->select([
             'name' => 'field_name',
             'value' => ['opt2', 'opt5', 'opt8'],
             'multiple' => true,

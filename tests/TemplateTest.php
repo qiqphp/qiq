@@ -11,18 +11,9 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp() : void
     {
-        $this->template = Template::new();
-
-        $helperLocator = $this->template->getHelperLocator();
-
-        $helperLocator->set('hello', function() {
-            return function ($name) {
-                return "Hello {$name}!";
-            };
-        });
-
-        $catalog = $this->template->getCatalog();
-        $catalog->setPaths([__DIR__ . '/templates']);
+        $this->template = Template::new(
+            paths: __DIR__ . '/templates',
+        );
     }
 
     public function testStaticNew()
@@ -41,14 +32,14 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         unset($this->template->foo);
         $this->assertFalse(isset($this->template->foo));
 
-        $actual = $this->template->hello('Helper');
-        $this->assertSame('Hello Helper!', $actual);
+        $actual = $this->template->h('foo & bar');
+        $this->assertSame('foo &amp; bar', $actual);
     }
 
     public function testGetters()
     {
         $this->assertInstanceOf(Catalog::CLASS, $this->template->getCatalog());
-        $this->assertInstanceOf(HelperLocator::CLASS, $this->template->getHelperLocator());
+        $this->assertInstanceOf(Helpers::CLASS, $this->template->getHelpers());
     }
 
     public function testSetAddAndGetData()

@@ -1,1 +1,1 @@
-<?= $this->hello($this->name); ?>
+Hello <?= $this->name ?>!

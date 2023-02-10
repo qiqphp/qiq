@@ -1,14 +1,12 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class BaseTest extends HelperTest
+class BaseTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
         $href = '/path/to/base';
-        $actual = $this->helper($href);
+        $actual = $this->helpers->base($href);
         $expect = '<base href="/path/to/base" />';
         $this->assertSame($expect, $actual);
     }

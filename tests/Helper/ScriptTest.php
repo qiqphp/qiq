@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class ScriptTest extends HelperTest
+class ScriptTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
-        $actual = $this->helper('script.js');
+        $actual = $this->helpers->script('script.js');
         $expect = '<script src="script.js" type="text/javascript"></script>';
         $this->assertSame($expect, $actual);
     }

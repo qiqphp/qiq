@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class ItemsTest extends HelperTest
+class ItemsTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
-        $actual = $this->helper([
+        $actual = $this->helpers->items([
             '>foo',
             '>bar',
             '>baz',

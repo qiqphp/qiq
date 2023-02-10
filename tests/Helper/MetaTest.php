@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class MetaTest extends HelperTest
+class MetaTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
-        $actual = $this->helper(['charset' => 'utf-8']);
+        $actual = $this->helpers->meta(['charset' => 'utf-8']);
         $expect = '<meta charset="utf-8" />';
         $this->assertSame($expect, $actual);
     }

@@ -4,25 +4,28 @@ declare(strict_types=1);
 namespace Qiq;
 
 use Qiq\Compiler\QiqCompiler;
+use Qiq\Helper\HtmlHelpers;
 use stdClass;
 
 abstract class Kernel
 {
+    /**
+     * @param string|string[] $paths
+     */
     public static function new(
         string|array $paths = [],
         string $extension = '.php',
-        string $encoding = 'utf-8',
-        string $cachePath = null,
-        HelperLocator $helperLocator = null,
+        Helpers $helpers = null,
         Compiler $compiler = null,
     ) : static
     {
-        $helperLocator ??= HelperLocator::new(new Escape($encoding));
-
         return new static(
-            new Catalog((array) $paths, $extension),
-            $compiler ??= new QiqCompiler($cachePath),
-            $helperLocator
+            new Catalog(
+                (array) $paths,
+                $extension,
+            ),
+            $compiler ?? new QiqCompiler(),
+            $helpers ?? new HtmlHelpers(),
         );
     }
 
@@ -43,7 +46,7 @@ abstract class Kernel
     public function __construct(
         private Catalog $catalog,
         private Compiler $compiler,
-        private HelperLocator $helperLocator
+        private Helpers $helpers
     ) {
         $this->data = new stdClass();
         $this->blocks = new Blocks();
@@ -102,7 +105,7 @@ abstract class Kernel
 
     public function __call(string $name, array $args) : mixed
     {
-        return $this->helperLocator->$name(...$args);
+        return $this->helpers->$name(...$args);
     }
 
     public function setData(array|stdClass $data) : void
@@ -122,9 +125,9 @@ abstract class Kernel
         return $this->data;
     }
 
-    public function getHelperLocator() : HelperLocator
+    public function getHelpers() : Helpers
     {
-        return $this->helperLocator;
+        return $this->helpers;
     }
 
     public function setLayout(?string $layout) : void

@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class RadioFieldTest extends HelperTest
+class RadioFieldTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
-        $actual = $this->helper([
+        $actual = $this->helpers->radioField([
             'name' => 'foo',
             'value' => 'no',
             '_default' => '',

@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class MetaNameTest extends HelperTest
+class MetaNameTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
-        $actual = $this->helper('foo', 'bar');
+        $actual = $this->helpers->metaName('foo', 'bar');
         $expect = '<meta name="foo" content="bar" />';
         $this->assertSame($expect, $actual);
     }

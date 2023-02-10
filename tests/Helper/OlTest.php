@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class OlTest extends HelperTest
+class OlTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
-        $actual = $this->helper(
+        $actual = $this->helpers->ol(
             [
                 '>foo',
                 '>bar',
@@ -28,7 +26,7 @@ class OlTest extends HelperTest
 
         $this->assertSame($expect, $actual);
 
-        $actual = $this->helper([]);
+        $actual = $this->helpers->ol([]);
         $expect = '';
         $this->assertSame($expect, $actual);
     }

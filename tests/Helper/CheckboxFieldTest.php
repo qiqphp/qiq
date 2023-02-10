@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class CheckboxFieldTest extends HelperTest
+class CheckboxFieldTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
-        $actual = $this->helper([
+        $actual = $this->helpers->checkboxField([
             'name' => 'foo',
             'value' => ['yes', 'no'],
             '_default' => '',
@@ -26,9 +24,9 @@ class CheckboxFieldTest extends HelperTest
         $this->assertSame($expect, $actual);
     }
 
-    public function testSingleOption()
+    public function testSingleOption() : void
     {
-        $actual = $this->helper([
+        $actual = $this->helpers->checkboxField([
             'name' => 'foo',
             'value' => '1',
             '_default' => '0',
@@ -43,9 +41,9 @@ class CheckboxFieldTest extends HelperTest
         $this->assertSame($expect, $actual);
     }
 
-    public function testScalarChecked()
+    public function testScalarChecked() : void
     {
-        $actual = $this->helper([
+        $actual = $this->helpers->checkboxField([
             'name' => 'foo',
             'value' => 'no',
             '_options' => [

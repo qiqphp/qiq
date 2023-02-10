@@ -1,17 +1,15 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class LabelTest extends HelperTest
+class LabelTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
         $attr = [
             'for' => 'bar',
             'class' => 'zim'
         ];
-        $actual = $this->helper('Foo', $attr);
+        $actual = $this->helpers->label('Foo', $attr);
         $expect = '<label for="bar" class="zim">Foo</label>';
         $this->assertSame($actual, $expect);
     }

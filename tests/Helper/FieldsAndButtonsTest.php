@@ -1,20 +1,13 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-use Qiq\Escape;
+use Qiq\Indent;
 
-class InputFieldTest extends HelperTest
+class FieldsAndButtonsTest extends HtmlHelperTest
 {
-    protected function newHelper()
+    public function testInputField() : void
     {
-        return new InputField(new Escape());
-    }
-
-    public function testInputField()
-    {
-        $actual = $this->helper([
+        $actual = $this->helpers->inputField([
             'type' => 'fake',
             'name' => 'fake-name',
             'value' => 'fake-value',
@@ -28,10 +21,9 @@ class InputFieldTest extends HelperTest
     /**
      * @dataProvider provideTypes
      */
-    public function testTypes(string $class, string $type)
+    public function testTypes(string $method, string $type) : void
     {
-        $input = new $class(new Escape());
-        $actual = $input([
+        $actual = $this->helpers->$method([
             'name' => 'fake-name',
             'value' => 'fake-value',
         ]);
@@ -39,31 +31,35 @@ class InputFieldTest extends HelperTest
         $this->assertSame($expect, $actual);
     }
 
-    public function provideTypes()
+    /**
+     * @return mixed[]
+     */
+    public function provideTypes() : array
     {
         return [
-            [CheckboxField::CLASS, 'checkbox'],
-            [ColorField::CLASS, 'color'],
-            [DateField::CLASS, 'date'],
-            [DatetimeField::CLASS, 'datetime'],
-            [DatetimeLocalField::CLASS, 'datetime-local'],
-            [EmailField::CLASS, 'email'],
-            [FileField::CLASS, 'file'],
-            [HiddenField::CLASS, 'hidden'],
-            [ImageButton::CLASS, 'image'],
-            [MonthField::CLASS, 'month'],
-            [NumberField::CLASS, 'number'],
-            [PasswordField::CLASS, 'password'],
-            [RadioField::CLASS, 'radio'],
-            [RangeField::CLASS, 'range'],
-            [ResetButton::CLASS, 'reset'],
-            [SearchField::CLASS, 'search'],
-            [SubmitButton::CLASS, 'submit'],
-            [TelField::CLASS, 'tel'],
-            [TextField::CLASS, 'text'],
-            [TimeField::CLASS, 'time'],
-            [UrlField::CLASS, 'url'],
-            [WeekField::CLASS, 'week'],
+            ['button', 'button'],
+            ['checkboxField', 'checkbox'],
+            ['colorField', 'color'],
+            ['dateField', 'date'],
+            ['datetimeField', 'datetime'],
+            ['datetimeLocalField', 'datetime-local'],
+            ['emailField', 'email'],
+            ['fileField', 'file'],
+            ['hiddenField', 'hidden'],
+            ['imageButton', 'image'],
+            ['monthField', 'month'],
+            ['numberField', 'number'],
+            ['passwordField', 'password'],
+            ['radioField', 'radio'],
+            ['rangeField', 'range'],
+            ['resetButton', 'reset'],
+            ['searchField', 'search'],
+            ['submitButton', 'submit'],
+            ['telField', 'tel'],
+            ['textField', 'text'],
+            ['timeField', 'time'],
+            ['urlField', 'url'],
+            ['weekField', 'week'],
         ];
     }
 }

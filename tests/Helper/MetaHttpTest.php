@@ -1,13 +1,11 @@
 <?php
-declare(strict_types=1);
-
 namespace Qiq\Helper;
 
-class MetaHttpTest extends HelperTest
+class MetaHttpTest extends HtmlHelperTest
 {
-    public function test()
+    public function test() : void
     {
-        $actual = $this->helper('Location', '/redirect/to/here/');
+        $actual = $this->helpers->metaHttp('Location', '/redirect/to/here/');
         $expect = '<meta http-equiv="Location" content="/redirect/to/here/" />';
         $this->assertSame($expect, $actual);
     }
