@@ -118,7 +118,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testRelativeFailure() : void
     {
         $this->template->setView('rel/foo/broken');
-        $this->expectException(Exception\TemplateNotFound::class);
+        $this->expectException(Exception\FileNotFound::class);
         $this->expectExceptionMessage(<<<EOT
             Could not resolve dots in template name.
             Original name: '../../../zim'

@@ -33,13 +33,13 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
 
         $this->assertFalse($this->catalog->has('no-such-template'));
-        $this->expectException(Exception\TemplateNotFound::CLASS);
+        $this->expectException(Exception\FileNotFound::CLASS);
         $this->catalog->getCompiled($this->compiler, 'no-such-template');
     }
 
     public function testDoubleDots()
     {
-        $this->expectException(Exception\TemplateNotFound::CLASS);
+        $this->expectException(Exception\FileNotFound::CLASS);
         $this->expectExceptionMessage("Double-dots not allowed in template specifications");
         $this->catalog->getCompiled($this->compiler, 'foo/../bar');
     }
@@ -121,7 +121,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
 
         // look for a file that doesn't exist
         $catalog->setExtension('.phtml');
-        $this->expectException(Exception\TemplateNotFound::CLASS);
+        $this->expectException(Exception\FileNotFound::CLASS);
         $catalog->getCompiled($this->compiler, 'test');
     }
 

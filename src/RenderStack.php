@@ -12,7 +12,7 @@ class RenderStack
         $resolved = $this->resolve($name);
 
         if (strpos($resolved, '..') !== false) {
-            throw new Exception\TemplateNotFound(
+            throw new Exception\FileNotFound(
                 PHP_EOL . "Could not resolve dots in template name." .
                 PHP_EOL . "Original name: '{$name}'" .
                 PHP_EOL . "Resolved into: '{$resolved}'" .

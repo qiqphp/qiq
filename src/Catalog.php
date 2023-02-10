@@ -60,7 +60,7 @@ class Catalog
         if ($source === null) {
             list($collection, $name) = $this->split($name);
 
-            throw new Exception\TemplateNotFound(
+            throw new Exception\FileNotFound(
                 PHP_EOL
                 . "Template: $name" . PHP_EOL
                 . "Extension: {$this->extension}" . PHP_EOL
@@ -157,7 +157,7 @@ class Catalog
     protected function split(string $spec) : array
     {
         if (strpos($spec, '..') !== false) {
-            throw new Exception\TemplateNotFound("Double-dots not allowed in template specifications: $spec");
+            throw new Exception\FileNotFound("Double-dots not allowed in template specifications: $spec");
         }
 
         $offset = (PHP_OS_FAMILY === 'Windows') ? 2 : 0;
