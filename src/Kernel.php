@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Qiq;
 
 use Qiq\Compiler\QiqCompiler;
-use Qiq\Helper\HtmlHelpers;
+use Qiq\Helper\Html\HtmlHelpers;
 use stdClass;
 
 abstract class Kernel

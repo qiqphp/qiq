@@ -2,8 +2,8 @@
 namespace Qiq;
 
 use Qiq\Exception;
-use Qiq\Helper\FakeBroken;
-use Qiq\Helper\FakeHello;
+use Qiq\Helper\Html\FakeBroken;
+use Qiq\Helper\Html\FakeHello;
 
 class ContainerTest extends \PHPUnit\Framework\TestCase
 {
@@ -39,7 +39,7 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
     {
         $container = new Container();
         $this->expectException(Exception\ParameterNotResolved::class);
-        $this->expectExceptionMessage("Cannot create argument for 'Qiq\Helper\FakeBroken::\$object' of type 'SplFileObject|stdClass");
+        $this->expectExceptionMessage("Cannot create argument for 'Qiq\Helper\Html\FakeBroken::\$object' of type 'SplFileObject|stdClass");
         $container->get(FakeBroken::class);
     }
 }
