@@ -14,7 +14,7 @@ class Template extends Kernel
             ob_start();
             extract($__VARS__, EXTR_SKIP);
             $__NAME__ = $this->getRenderStack()->push($__NAME__);
-            require $this->getTemplate($__NAME__);
+            require $this->getCompiled($__NAME__);
             $this->getRenderStack()->pop();
             return (string) ob_get_clean();
         } catch (Throwable $e) {

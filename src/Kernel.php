@@ -18,10 +18,10 @@ abstract class Kernel
     ) : static
     {
         $helperLocator ??= HelperLocator::new(new Escape($encoding));
-        $compiler ??= new QiqCompiler($cachePath);
 
         return new static(
-            new Catalog((array) $paths, $extension, $compiler),
+            new Catalog((array) $paths, $extension),
+            $compiler ??= new QiqCompiler($cachePath),
             $helperLocator
         );
     }
@@ -42,6 +42,7 @@ abstract class Kernel
 
     public function __construct(
         private Catalog $catalog,
+        private Compiler $compiler,
         private HelperLocator $helperLocator
     ) {
         $this->data = new stdClass();
@@ -166,9 +167,9 @@ abstract class Kernel
         return $this->renderStack;
     }
 
-    protected function getTemplate(string $name) : string
+    protected function getCompiled(string $name) : string
     {
-        return $this->catalog->get($name);
+        return $this->catalog->getCompiled($this->compiler, $name);
     }
 
     protected function getContent() : string

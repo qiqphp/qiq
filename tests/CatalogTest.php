@@ -3,17 +3,22 @@ declare(strict_types=1);
 
 namespace Qiq;
 
+use Qiq\Compiler\QiqCompiler;
+
 class CatalogTest extends \PHPUnit\Framework\TestCase
 {
     protected function setUp() : void
     {
+        $this->cachePath = __DIR__ . DIRECTORY_SEPARATOR . 'cache';
+        $this->compiler = new QiqCompiler($this->cachePath);
+        $this->compiler->clear();
+
         $this->catalog = $this->newCatalog();
-        $this->catalog->clear();
     }
 
     protected function newCatalog(array $paths = [])
     {
-        return new Catalog($paths, '.php', new Compiler\FakeCompiler());
+        return new Catalog($paths, '.php');
     }
 
     public function testHasGet()
@@ -21,21 +26,22 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->catalog->setPaths([__DIR__ . '/templates']);
 
         $this->assertTrue($this->catalog->has('index'));
-        $actual = $this->catalog->get('index');
+        $actual = $this->catalog->getCompiled($this->compiler, 'index');
 
-        $expect = str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/templates/index.php');
+        $expect = $this->cachePath
+            . str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/templates/index.php');
         $this->assertSame($expect, $actual);
 
         $this->assertFalse($this->catalog->has('no-such-template'));
         $this->expectException(Exception\TemplateNotFound::CLASS);
-        $this->catalog->get('no-such-template');
+        $this->catalog->getCompiled($this->compiler, 'no-such-template');
     }
 
     public function testDoubleDots()
     {
         $this->expectException(Exception\TemplateNotFound::CLASS);
         $this->expectExceptionMessage("Double-dots not allowed in template specifications");
-        $this->catalog->get('foo/../bar');
+        $this->catalog->getCompiled($this->compiler, 'foo/../bar');
     }
 
     public function testSetAndGetPaths()
@@ -95,28 +101,28 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
             $dir . 'foo',
         ]);
 
-        $this->assertOutput('foo', $catalog->get('test'));
+        $this->assertOutput('foo', $catalog->getCompiled($this->compiler, 'test'));
 
         $catalog = $this->newCatalog([
             $dir . 'bar',
             $dir . 'foo',
         ]);
-        $this->assertOutput('bar', $catalog->get('test'));
+        $this->assertOutput('bar', $catalog->getCompiled($this->compiler, 'test'));
 
         $catalog = $this->newCatalog([
             $dir . 'baz',
             $dir . 'bar',
             $dir . 'foo',
         ]);
-        $this->assertOutput('baz', $catalog->get('test'));
+        $this->assertOutput('baz', $catalog->getCompiled($this->compiler, 'test'));
 
         // get it again for code coverage
-        $this->assertOutput('baz', $catalog->get('test'));
+        $this->assertOutput('baz', $catalog->getCompiled($this->compiler, 'test'));
 
         // look for a file that doesn't exist
         $catalog->setExtension('.phtml');
         $this->expectException(Exception\TemplateNotFound::CLASS);
-        $catalog->get('test');
+        $catalog->getCompiled($this->compiler, 'test');
     }
 
     public function testCollections()
@@ -129,9 +135,9 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
             "baz:{$dir}/baz",
         ]);
 
-        $this->assertOutput('foo', $this->catalog->get('foo:test'));
-        $this->assertOutput('bar', $this->catalog->get('bar:test'));
-        $this->assertOutput('baz', $this->catalog->get('baz:test'));
+        $this->assertOutput('foo', $this->catalog->getCompiled($this->compiler, 'foo:test'));
+        $this->assertOutput('bar', $this->catalog->getCompiled($this->compiler, 'bar:test'));
+        $this->assertOutput('baz', $this->catalog->getCompiled($this->compiler, 'baz:test'));
     }
 
     protected function assertOutput(string $expect, string $file) : void

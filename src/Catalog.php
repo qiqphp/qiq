@@ -14,7 +14,6 @@ class Catalog
     public function __construct(
         array $paths,
         protected string $extension,
-        protected Compiler $compiler
     ) {
         $this->setPaths($paths);
     }
@@ -45,23 +44,28 @@ class Catalog
         return null;
     }
 
-    public function get(string $name) : string
+    public function getCompiled(Compiler $compiler, string $name) : string
     {
-        $source = $this->source($name);
-
-        if ($source !== null) {
-            return $this->compile($name);
+        if (isset($this->compiled[$name])) {
+            return $this->compiled[$name];
         }
 
-        list($collection, $name) = $this->split($name);
+        $source = $this->source($name);
 
-        throw new Exception\TemplateNotFound(
-            PHP_EOL
-            . "Template: $name" . PHP_EOL
-            . "Extension: {$this->extension}" . PHP_EOL
-            . "Collection: " . ($collection === '' ? '(default)' : $collection) . PHP_EOL
-            . "Paths: " . print_r($this->paths[$collection], true)
-        );
+        if ($source === null) {
+            list($collection, $name) = $this->split($name);
+
+            throw new Exception\TemplateNotFound(
+                PHP_EOL
+                . "Template: $name" . PHP_EOL
+                . "Extension: {$this->extension}" . PHP_EOL
+                . "Collection: " . ($collection === '' ? '(default)' : $collection) . PHP_EOL
+                . "Paths: " . print_r($this->paths[$collection], true)
+            );
+        }
+
+        $this->compiled[$name] = $compiler($source);
+        return $this->compiled[$name];
     }
 
     public function getPaths() : array
@@ -102,6 +106,7 @@ class Catalog
     {
         $this->extension = $extension;
         $this->source = [];
+        $this->compiled = [];
     }
 
     public function clear() : void
@@ -109,17 +114,6 @@ class Catalog
         $this->source = [];
         $this->compiled = [];
         $this->compiler->clear();
-    }
-
-    protected function compile(string $name) : string
-    {
-        if (! isset($this->compiled[$name])) {
-            $this->compiled[$name] = ($this->compiler)(
-                $this->source[$name]
-            );
-        }
-
-        return $this->compiled[$name];
     }
 
     protected function fixPath(string $path) : string
