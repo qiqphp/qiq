@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Qiq\Helper;
 
-class Form extends Helper
+class Form extends TagHelper
 {
     public function __invoke(array $attr = []) : string
     {

@@ -5,7 +5,7 @@ namespace Qiq\Helper;
 
 use Qiq\Indent;
 
-class Items extends Helper
+class Items extends TagHelper
 {
     public function __invoke(array $items) : string
     {

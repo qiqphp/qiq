@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Qiq\Helper;
 
-class Label extends Helper
+class Label extends TagHelper
 {
     public function __invoke(string $text, array $attr = []) : string
     {

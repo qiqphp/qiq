@@ -16,7 +16,7 @@ namespace My\Helper;
 
 use Qiq\Helper;
 
-class Rot13 extends Helper
+class Rot13 extends TagHelper
 {
     public function __invoke(string $str) : string
     {

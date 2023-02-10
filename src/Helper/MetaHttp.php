@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Qiq\Helper;
 
-class MetaHttp extends Helper
+class MetaHttp extends TagHelper
 {
     public function __invoke(string $equiv, string $content) : string
     {

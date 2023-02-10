@@ -5,7 +5,7 @@ namespace Qiq\Helper;
 
 use Qiq\Escape;
 
-abstract class Helper
+abstract class TagHelper
 {
     public function __construct(protected Escape $escape)
     {

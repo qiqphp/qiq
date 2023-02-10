@@ -5,7 +5,7 @@ namespace Qiq\Helper;
 
 use Qiq\Indent;
 
-class Select extends Helper
+class Select extends TagHelper
 {
     public function __invoke(array $attr) : string
     {

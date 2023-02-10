@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Qiq\Helper;
 
-class Image extends Helper
+class Image extends TagHelper
 {
     public function __invoke(string $src, array $attr = []) : string
     {

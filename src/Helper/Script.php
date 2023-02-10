@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Qiq\Helper;
 
-class Script extends Helper
+class Script extends TagHelper
 {
     public function __invoke(string $src, array $attr = []) : string
     {

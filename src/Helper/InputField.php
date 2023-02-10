@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Qiq\Helper;
 
-class InputField extends Helper
+class InputField extends TagHelper
 {
     protected string $type = '';
 
