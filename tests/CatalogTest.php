@@ -140,6 +140,19 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->assertOutput('baz', $this->catalog->getCompiled($this->compiler, 'baz:test'));
     }
 
+    public function testRecompile() : void
+    {
+        $this->catalog->setPaths([__DIR__ . '/templates']);
+        $actual = $this->catalog->recompile($this->compiler);
+
+        foreach ($actual as $file) {
+            $this->assertTrue(str_starts_with($file, $this->cachePath));
+        }
+
+        // the count will change as number of templates changes
+        $this->assertCount(21, $actual);
+    }
+
     protected function assertOutput(string $expect, string $file) : void
     {
         ob_start();

@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 namespace Qiq;
 
+use FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use SplFileInfo;
+
 class Catalog
 {
     protected array $paths = [];
@@ -109,11 +114,38 @@ class Catalog
         $this->compiled = [];
     }
 
-    public function clear() : void
+    /**
+     * @return string[]
+     */
+    public function recompile(Compiler $compiler) : array
     {
         $this->source = [];
         $this->compiled = [];
-        $this->compiler->clear();
+        $compiler->clear();
+
+        $compiled = [];
+
+        foreach ($this->paths as $collection => $paths) {
+            foreach ($paths as $path) {
+                $files = new RecursiveIteratorIterator(
+                    new RecursiveDirectoryIterator(
+                        $path,
+                        FilesystemIterator::SKIP_DOTS
+                    ),
+                    RecursiveIteratorIterator::CHILD_FIRST
+                );
+
+                /** @var SplFileInfo $file */
+                foreach ($files as $file) {
+                    $source = $file->getPathname();
+                    if (str_ends_with($source, $this->extension)) {
+                        $compiled[] = $compiler($source);
+                    }
+                }
+            }
+        }
+
+        return $compiled;
     }
 
     protected function fixPath(string $path) : string
