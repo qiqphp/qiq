@@ -113,7 +113,7 @@ class QiqToken
         }
 
         $space = strtr($space, self::INDENT);
-        return "<?php \\Qiq\\Indent::set(\"$space\") ?>";
+        return "<?php \$this->setIndent(\"$space\") ?>";
     }
 
 

@@ -32,10 +32,10 @@ class Select extends TagHelper
         }
 
         $html = $this->openTag('select', $attr) . PHP_EOL;
-        Indent::level(+1);
+        $this->indent->level(+1);
 
         if ($placeholder !== null) {
-            $html .= Indent::get() . $this->fullTag(
+            $html .= $this->indent->get() . $this->fullTag(
                 'option',
                 [
                     'value' => $default,
@@ -48,9 +48,9 @@ class Select extends TagHelper
 
         $html .= $this->options($options, $selected);
 
-        Indent::level(-1);
+        $this->indent->level(-1);
 
-        return $html . Indent::get() . '</select>';
+        return $html . $this->indent->get() . '</select>';
     }
 
     protected function options(array $options, mixed $selected) : string
@@ -85,19 +85,19 @@ class Select extends TagHelper
         $attr = $this->escape->a($attr);
         $label = $this->escape->h((string) $val);
 
-        return Indent::get() . "<option {$attr}>{$label}</option>" . PHP_EOL;
+        return $this->indent->get() . "<option {$attr}>{$label}</option>" . PHP_EOL;
     }
 
     public function optgroup(string $label, array $options, mixed $selected) : string
     {
         $attr = $this->escape->a(['label' => $label]);
 
-        Indent::level(+1);
+        $this->indent->level(+1);
         $group = $this->options($options, $selected);
-        Indent::level(-1);
+        $this->indent->level(-1);
 
-        return Indent::get() . "<optgroup $attr>" . PHP_EOL
+        return $this->indent->get() . "<optgroup $attr>" . PHP_EOL
             . $group
-            . Indent::get() . "</optgroup>" . PHP_EOL;
+            . $this->indent->get() . "</optgroup>" . PHP_EOL;
     }
 }

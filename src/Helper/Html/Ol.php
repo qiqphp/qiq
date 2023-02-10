@@ -9,9 +9,9 @@ class Ol extends Items
 {
     public function __invoke(array $items, array $attr = []) : string
     {
-        Indent::level(+1);
+        $this->indent->level(+1);
         $list = $this->items($items);
-        Indent::level(-1);
+        $this->indent->level(-1);
 
         if ($list === '') {
             return '';
@@ -19,6 +19,6 @@ class Ol extends Items
 
         return $this->openTag('ol', $attr) . PHP_EOL
             . $list
-            . Indent::get() . '</ol>';
+            . $this->indent->get() . '</ol>';
     }
 }

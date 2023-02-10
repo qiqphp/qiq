@@ -3,10 +3,14 @@ declare(strict_types=1);
 
 namespace Qiq\Helper\Html;
 
+use Qiq\Indent;
+
 abstract class TagHelper
 {
-    public function __construct(protected Escape $escape)
-    {
+    public function __construct(
+        protected Escape $escape,
+        protected Indent $indent,
+    ) {
     }
 
     protected function openTag(string $tag, array $attr) : string

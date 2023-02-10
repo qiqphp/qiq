@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Qiq;
 
 use ParseError;
+use Qiq\Compiler\QiqCompiler;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {
@@ -13,6 +14,9 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     {
         $this->template = Template::new(
             paths: __DIR__ . '/templates',
+            compiler: new Compiler\QiqCompiler(
+                __DIR__ . DIRECTORY_SEPARATOR . 'cache'
+            )
         );
     }
 

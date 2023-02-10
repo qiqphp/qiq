@@ -17,7 +17,7 @@ class Items extends TagHelper
         $html = '';
 
         foreach ($items as $item) {
-            $html .= Indent::get() . $this->fullTag('li', [], $item) . PHP_EOL;
+            $html .= $this->indent->get() . $this->fullTag('li', [], $item) . PHP_EOL;
         }
 
         return $html;

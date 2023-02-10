@@ -108,6 +108,11 @@ abstract class Kernel
         return $this->helpers->$name(...$args);
     }
 
+    public function setIndent(string $base) : void
+    {
+        $this->helpers->setIndent($base);
+    }
+
     public function setData(array|stdClass $data) : void
     {
         $this->data = (object) $data;

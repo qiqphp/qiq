@@ -24,4 +24,9 @@ class Helpers
         /** @var T of object */
         return $this->container->get($class);
     }
+
+    public function setIndent(string $base) : void
+    {
+        $this->get(Indent::class)->set($base);
+    }
 }

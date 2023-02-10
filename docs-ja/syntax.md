@@ -217,6 +217,6 @@ Qiqタグが出力されると、Qiqタグを開く前の先行するホワイ�
 
 ```qiq
 <ul>
-    <?php \Qiq\Indent::set('    ') ?><?= $this->items(['foo', 'bar', 'baz']) ?>
+    <?php $this->setIndent('    ') ?><?= $this->items(['foo', 'bar', 'baz']) ?>
 </ul>
 ```

@@ -56,7 +56,7 @@ class CheckboxField extends InputField
             'value' => $default,
         ];
 
-        return Indent::get() . $this->voidTag('input', $attr) . PHP_EOL;
+        return $this->indent->get() . $this->voidTag('input', $attr) . PHP_EOL;
     }
 
     protected function checkbox(
@@ -76,6 +76,6 @@ class CheckboxField extends InputField
         $attr['value'] = $value;
         $attr = $this->escape->a($attr);
         $label = $this->escape->h($label);
-        return Indent::get() . "<label><input {$attr} />{$label}</label>" . PHP_EOL;
+        return $this->indent->get() . "<label><input {$attr} />{$label}</label>" . PHP_EOL;
     }
 }

@@ -241,6 +241,6 @@ This Qiq code ...
 
 ```qiq
 <ul>
-    <?php \Qiq\Indent::set('    ') ?><?= $this->items(['foo', 'bar', 'baz']) ?>
+    <?php $this->setIndent('    ') ?><?= $this->items(['foo', 'bar', 'baz']) ?>
 </ul>
 ```
