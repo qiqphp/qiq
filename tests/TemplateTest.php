@@ -97,12 +97,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $actual = ($this->template)();
     }
 
-    public function testHasTemplate()
-    {
-        $this->assertTrue($this->template->hasTemplate('master'));
-        $this->assertFalse($this->template->hasTemplate('nonesuch'));
-    }
-
     public function testRelative() : void
     {
         $this->template->setView('rel/foo');

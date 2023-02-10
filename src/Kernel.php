@@ -7,7 +7,7 @@ use Qiq\Compiler\QiqCompiler;
 use Qiq\Helper\Html\HtmlHelpers;
 use stdClass;
 
-abstract class Kernel
+abstract class Kernel implements Engine
 {
     /**
      * @param string|string[] $paths
@@ -108,6 +108,31 @@ abstract class Kernel
         return $this->helpers->$name(...$args);
     }
 
+    public function getBlocks() : Blocks
+    {
+        return $this->blocks;
+    }
+
+    public function getCatalog() : Catalog
+    {
+        return $this->catalog;
+    }
+
+    public function getCompiler() : Compiler
+    {
+        return $this->compiler;
+    }
+
+    public function getHelpers() : Helpers
+    {
+        return $this->helpers;
+    }
+
+    public function getRenderStack() : RenderStack
+    {
+        return $this->renderStack;
+    }
+
     public function setIndent(string $base) : void
     {
         $this->helpers->setIndent($base);
@@ -128,11 +153,6 @@ abstract class Kernel
     public function getData() : stdClass
     {
         return $this->data;
-    }
-
-    public function getHelpers() : Helpers
-    {
-        return $this->helpers;
     }
 
     public function setLayout(?string $layout) : void
@@ -160,50 +180,35 @@ abstract class Kernel
         $this->extends = $this->renderStack->resolve($extends);
     }
 
-    public function getCatalog() : Catalog
-    {
-        return $this->catalog;
-    }
-
-    public function hasTemplate(string $name) : bool
-    {
-        return $this->catalog->has($name);
-    }
-
-    protected function getRenderStack() : RenderStack
-    {
-        return $this->renderStack;
-    }
-
-    protected function getCompiled(string $name) : string
+    public function getCompiled(string $name) : string
     {
         return $this->catalog->getCompiled($this->compiler, $name);
     }
 
-    protected function getContent() : string
+    public function getContent() : string
     {
         return $this->content;
     }
 
-    protected function setBlock(string $name) : void
+    public function setBlock(string $name) : void
     {
         $this->blocks->set($name);
     }
 
-    protected function parentBlock() : void
+    public function parentBlock() : void
     {
         $this->blocks->parent();
     }
 
-    protected function endBlock() : void
+    public function endBlock() : void
     {
         $this->blocks->end();
     }
 
-    protected function getBlock() : string
+    public function getBlock() : string
     {
         return $this->blocks->get();
     }
 
-    abstract protected function render(string $__NAME__, array $__VARS__ = []) : string;
+    abstract public function render(string $__NAME__, array $__VARS__ = []) : string;
 }
