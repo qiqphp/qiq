@@ -7,12 +7,14 @@ use Throwable;
 
 class Template extends Kernel
 {
-    public function render(string $__NAME__, array $__VARS__ = []) : string
+    public function render(string $__NAME__, array $__LOCAL__ = []) : string
     {
         try {
             $__OBLEVEL__ = ob_get_level();
             ob_start();
-            extract($__VARS__, EXTR_SKIP);
+            $__SHARED__ =& $this->refData();
+            extract($__LOCAL__, EXTR_SKIP);
+            extract($__SHARED__, EXTR_SKIP|EXTR_REFS);
             $__NAME__ = $this->getRenderStack()->push($__NAME__);
             require $this->getCompiled($__NAME__);
             $this->getRenderStack()->pop();

@@ -33,7 +33,7 @@ abstract class Kernel implements Engine
 
     private string $content = '';
 
-    private stdClass $data;
+    private array $data = [];
 
     private ?string $extends = null;
 
@@ -48,7 +48,6 @@ abstract class Kernel implements Engine
         private Compiler $compiler,
         private Helpers $helpers
     ) {
-        $this->data = new stdClass();
         $this->blocks = new Blocks();
         $this->renderStack = new RenderStack();
     }
@@ -81,26 +80,6 @@ abstract class Kernel implements Engine
         }
 
         return $output;
-    }
-
-    public function __get(string $key) : mixed
-    {
-        return $this->data->$key;
-    }
-
-    public function __set(string $key, mixed $val) : void
-    {
-        $this->data->$key = $val;
-    }
-
-    public function __isset(string $key) : bool
-    {
-        return isset($this->data->$key);
-    }
-
-    public function __unset(string $key) : void
-    {
-        unset($this->data->$key);
     }
 
     public function __call(string $name, array $args) : mixed
@@ -140,17 +119,22 @@ abstract class Kernel implements Engine
 
     public function setData(array|stdClass $data) : void
     {
-        $this->data = (object) $data;
+        $this->data = (array) $data;
     }
 
     public function addData(iterable $data) : void
     {
         foreach ($data as $key => $val) {
-            $this->data->$key = $val;
+            $this->data[$key] = $val;
         }
     }
 
-    public function getData() : stdClass
+    public function getData() : array
+    {
+        return $this->data;
+    }
+
+    public function &refData() : array
     {
         return $this->data;
     }
@@ -210,5 +194,5 @@ abstract class Kernel implements Engine
         return $this->blocks->get();
     }
 
-    abstract public function render(string $__NAME__, array $__VARS__ = []) : string;
+    abstract public function render(string $__NAME__, array $__LOCAL__ = []) : string;
 }

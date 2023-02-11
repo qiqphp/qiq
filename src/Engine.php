@@ -13,7 +13,9 @@ interface Engine
 
     public function addData(iterable $data) : void;
 
-    public function getData() : stdClass;
+    public function getData() : array;
+
+    public function &refData() : array;
 
     public function setLayout(?string $layout) : void;
 
@@ -35,5 +37,5 @@ interface Engine
 
     public function getBlock() : string;
 
-    public function render(string $__NAME__, array $__VARS__ = []) : string;
+    public function render(string $__NAME__, array $__LOCAL__ = []) : string;
 }

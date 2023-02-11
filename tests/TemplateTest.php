@@ -25,17 +25,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf(Template::CLASS, Template::new());
     }
 
-    public function testMagicMethods()
+    public function test__call()
     {
-        $this->assertFalse(isset($this->template->foo));
-
-        $this->template->foo = 'bar';
-        $this->assertTrue(isset($this->template->foo));
-        $this->assertSame('bar', $this->template->foo);
-
-        unset($this->template->foo);
-        $this->assertFalse(isset($this->template->foo));
-
         $actual = $this->template->h('foo & bar');
         $this->assertSame('foo &amp; bar', $actual);
     }
@@ -48,17 +39,13 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testSetAddAndGetData()
     {
-        $data = ['foo' => 'bar'];
-        $this->template->setData($data);
-        $this->assertSame('bar', $this->template->foo);
+        $expect = ['foo' => 'bar'];
+        $this->template->setData(['foo' => 'bar']);
+        $this->assertSame($expect, $this->template->getData());
 
-        $data = ['baz' => 'dib'];
-        $this->template->addData($data);
-        $this->assertSame('dib', $this->template->baz);
-
-        $expect = ['foo' => 'bar', 'baz' => 'dib'];
-        $actual = (array) $this->template->getData();
-        $this->assertSame($expect, $actual);
+        $expect['baz'] = 'dib';
+        $this->template->addData(['baz' => 'dib']);
+        $this->assertSame($expect, $this->template->getData());
     }
 
     public function testInvokeOneStep()
@@ -72,11 +59,14 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testInvokeTwoStep()
     {
-        $this->template->setData(['name' => 'Index']);
+        $this->template->setData([
+            'name' => 'Index',
+            'title' => 'Default Title'
+        ]);
         $this->template->setView('index');
         $this->template->setLayout('layout/default');
         $actual = ($this->template)();
-        $expect = "before -- Hello Index! -- after";
+        $expect = "Index Title -- before -- Hello Index! -- after";
         $this->assertSame($expect, $actual);
     }
 
