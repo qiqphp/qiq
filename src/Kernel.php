@@ -33,6 +33,9 @@ abstract class Kernel implements Engine
 
     private string $content = '';
 
+    /**
+     * @var array<string, mixed>
+     */
     private array $data = [];
 
     private ?string $extends = null;
@@ -82,6 +85,9 @@ abstract class Kernel implements Engine
         return $output;
     }
 
+    /**
+     * @param mixed[] $args
+     */
     public function __call(string $name, array $args) : mixed
     {
         return $this->helpers->$name(...$args);
@@ -117,11 +123,13 @@ abstract class Kernel implements Engine
         $this->helpers->setIndent($base);
     }
 
+    /** @inheritdoc */
     public function setData(array|stdClass $data) : void
     {
         $this->data = (array) $data;
     }
 
+    /** @inheritdoc */
     public function addData(iterable $data) : void
     {
         foreach ($data as $key => $val) {
@@ -129,11 +137,13 @@ abstract class Kernel implements Engine
         }
     }
 
+    /** @inheritdoc */
     public function getData() : array
     {
         return $this->data;
     }
 
+    /** @inheritdoc */
     public function &refData() : array
     {
         return $this->data;
@@ -194,5 +204,6 @@ abstract class Kernel implements Engine
         return $this->blocks->get();
     }
 
+    /** @inheritdoc */
     abstract public function render(string $__NAME__, array $__LOCAL__ = []) : string;
 }

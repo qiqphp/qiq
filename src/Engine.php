@@ -9,12 +9,24 @@ interface Engine
 {
     public function setIndent(string $base) : void;
 
+    /**
+     * @param array<string, mixed>|stdClass $data)
+     */
     public function setData(array|stdClass $data) : void;
 
+    /**
+     * @param iterable<string, mixed> $data
+     */
     public function addData(iterable $data) : void;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function getData() : array;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function &refData() : array;
 
     public function setLayout(?string $layout) : void;
@@ -37,5 +49,8 @@ interface Engine
 
     public function getBlock() : string;
 
+    /**
+     * @param array<string, mixed> $__LOCAL__
+     */
     public function render(string $__NAME__, array $__LOCAL__ = []) : string;
 }

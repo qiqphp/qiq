@@ -9,9 +9,13 @@ class RadioField extends InputField
 {
     protected string $type = 'radio';
 
+    /**
+     * @param stringy-attr-deep $attr
+     */
     public function __invoke(array $attr) : string
     {
         if (! isset($attr['_options'])) {
+            /** @var stringy-attr $attr */
             return parent::__invoke($attr);
         }
 
@@ -27,35 +31,54 @@ class RadioField extends InputField
         $options = (array) $attr['_options'];
         unset($attr['_options']);
 
+        /** @var stringy-attr $attr */
+
+        settype($attr['name'], 'string');
+        assert(is_string($attr['name']));
+
         $html = '';
 
         if (array_key_exists('_default', $attr)) {
             $default = $attr['_default'];
             unset($attr['_default']);
-            $html .= $this->default($attr, $default);
+            $html .= $this->default($attr['name'], $default);
         }
 
         $checked = $attr['value'];
 
         foreach ($options as $value => $label) {
-            $html .= $this->radio($attr, $value, $label, $checked);
+            $html .= $this->radio(
+                $attr,
+                (string) $value,
+                (string) $label,
+                $checked
+            );
         }
 
         return ltrim($html);
     }
 
-    protected function default(array $attr, mixed $default) : string
+    protected function default(string $name, mixed $default) : string
     {
+        /** @var stringy-attr */
         $attr = [
             'type' => 'hidden',
-            'name' => $attr['name'],
+            'name' => $name,
             'value' => $default,
         ];
 
         return $this->indent->get() . $this->voidTag('input', $attr) . PHP_EOL;
     }
 
-    protected function radio(array $attr, mixed $value, string $label, mixed $checked) : string
+    /**
+     * @param stringy-attr $attr
+     */
+    protected function radio(
+        array $attr,
+        string $value,
+        string $label,
+        mixed $checked
+    ) : string
     {
         $attr['type'] = 'radio';
         $attr['value'] = $value;

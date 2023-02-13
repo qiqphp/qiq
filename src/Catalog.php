@@ -10,12 +10,24 @@ use SplFileInfo;
 
 class Catalog
 {
+    /**
+     * @var array<string, string[]>
+     */
     protected array $paths = [];
 
+    /**
+     * @var string[]
+     */
     protected array $source = [];
 
+    /**
+     * @var string[]
+     */
     protected array $compiled = [];
 
+    /**
+     * @param string[] $paths
+     */
     public function __construct(
         array $paths,
         protected string $extension,
@@ -73,6 +85,9 @@ class Catalog
         return $this->compiled[$name];
     }
 
+    /**
+     * @return array<string, string[]>
+     */
     public function getPaths() : array
     {
         return $this->paths;
@@ -94,6 +109,9 @@ class Catalog
         $this->compiled = [];
     }
 
+    /**
+     * @param string[] $paths
+     */
     public function setPaths(array $paths) : void
     {
         $this->paths = [];
@@ -154,6 +172,9 @@ class Catalog
         return rtrim($path, DIRECTORY_SEPARATOR);
     }
 
+    /**
+     * @return array{string, string}
+     */
     protected function split(string $spec) : array
     {
         if (strpos($spec, '..') !== false) {

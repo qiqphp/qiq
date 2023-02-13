@@ -5,13 +5,13 @@ namespace Qiq\Compiler;
 
 class QiqTokenTest extends \PHPUnit\Framework\TestCase
 {
-    protected function assertPhp(string $php, string $qiq)
+    protected function assertPhp(string $php, string $qiq) : void
     {
         $token = QiqToken::new($qiq);
         $this->assertSame($php, (string) $token);
     }
 
-    public function testBadToken()
+    public function testBadToken() : void
     {
         $this->assertNull(QiqToken::new('{ not a token }'));
     }
@@ -92,6 +92,9 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
         }
     }
 
+    /**
+     * @return mixed[]
+     */
     public function echoProvider() : array
     {
         return [
@@ -131,6 +134,9 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
         $this->assertPhp($php, $qiq);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function knownProvider() : array
     {
         return [

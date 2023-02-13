@@ -1,3 +1,4 @@
+{{ /** @var Qiq\Engine&Qiq\Helper\Html\HtmlHelpers $this */ }}
 {{ extends ('./view-2') }}
 {{ setBlock ('foo') }}
 Foo 3a View

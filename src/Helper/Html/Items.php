@@ -7,11 +7,17 @@ use Qiq\Indent;
 
 class Items extends TagHelper
 {
+    /**
+     * @param stringy-list $items
+     */
     public function __invoke(array $items) : string
     {
         return $this->items($items);
     }
 
+    /**
+     * @param stringy-list $items
+     */
     protected function items(array $items) : string
     {
         $html = '';

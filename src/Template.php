@@ -7,6 +7,7 @@ use Throwable;
 
 class Template extends Kernel
 {
+    /** @inheritdoc */
     public function render(string $__NAME__, array $__LOCAL__ = []) : string
     {
         try {

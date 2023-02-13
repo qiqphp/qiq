@@ -13,6 +13,9 @@ abstract class TagHelper
     ) {
     }
 
+    /**
+     * @param stringy-attr $attr
+     */
     protected function openTag(string $tag, array $attr) : string
     {
         $tag = $this->escape->a($tag);
@@ -20,7 +23,11 @@ abstract class TagHelper
         return trim("<{$tag} {$attr}") . ">";
     }
 
-    protected function fullTag(string $tag, array $attr, string $text = '') : string
+    /**
+     * @param stringy-attr $attr
+     * @param stringy $text
+     */
+    protected function fullTag(string $tag, array $attr, mixed $text = '') : string
     {
         $raw = $attr['_raw'] ?? false;
         unset($attr['_raw']);
@@ -32,6 +39,9 @@ abstract class TagHelper
         return $this->openTag($tag, $attr) . $text . "</{$tag}>";
     }
 
+    /**
+     * @param stringy-attr $attr
+     */
     protected function voidTag(string $tag, array $attr) : string
     {
         $tag = $this->escape->a($tag);

@@ -43,7 +43,7 @@
         }
     },
     "scripts": {
-        "analyze": "./vendor/bin/phpstan analyze -c phpstan.neon src",
+        "analyze": "./vendor/bin/phpstan analyze -c phpstan.neon",
         "check": "composer cs-fix && composer test && composer analyze",
         "cs-fix": "./vendor/bin/php-cs-fixer fix --config=php-cs-fixer.php",
         "test": "./vendor/bin/phpunit"

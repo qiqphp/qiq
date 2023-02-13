@@ -5,6 +5,9 @@ namespace Qiq;
 
 class RenderStack
 {
+    /**
+     * @var string[]
+     */
     protected array $names = [];
 
     public function push(string $name) : string

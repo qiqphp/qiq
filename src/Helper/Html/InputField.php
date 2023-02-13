@@ -7,6 +7,9 @@ class InputField extends TagHelper
 {
     protected string $type = '';
 
+    /**
+     * @param stringy-attr $attr
+     */
     public function __invoke(array $attr) : string
     {
         $base = array(

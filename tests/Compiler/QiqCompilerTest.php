@@ -5,9 +5,11 @@ namespace Qiq\Compiler;
 
 class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 {
-    protected QiqCompiler $compiler;
+    protected string $sourceDir = '';
 
-    protected string $cacheDir = '';
+    protected string $cachePath = '';
+
+    protected QiqCompiler $compiler;
 
     protected function setUp() : void
     {
@@ -17,29 +19,29 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
         $this->compiler->clear();
     }
 
-    protected function compile(string $name)
+    protected function compile(string $name) : string
     {
         return ($this->compiler)($this->sourceFile($name));
     }
 
-    protected function assertReadable(string $file)
+    protected function assertReadable(string $file) : void
     {
         $this->assertTrue(is_readable($file));
     }
 
-    protected function assertNotReadable(string $file)
+    protected function assertNotReadable(string $file) : void
     {
         $this->assertFalse(is_readable($file));
     }
 
-    protected function sourceFile(string $name)
+    protected function sourceFile(string $name) : string
     {
         return $this->sourceDir . DIRECTORY_SEPARATOR
             . str_replace('/', DIRECTORY_SEPARATOR, $name)
             . '.php';
     }
 
-    protected function cachedFile(string $name)
+    protected function cachedFile(string $name) : string
     {
         $file = $this->cachePath;
 
@@ -52,7 +54,7 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
             . '.php';
     }
 
-    public function test()
+    public function test() : void
     {
         // no target dir, no target file
         $expect = $this->cachedFile('index');
@@ -69,7 +71,7 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
         $this->assertReadable($expect);
     }
 
-    public function testFilemtime()
+    public function testFilemtime() : void
     {
         copy(
             $this->sourceDir . '/index.php',
@@ -91,7 +93,7 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
         unlink($this->sourceDir . '/mtime.php');
     }
 
-    public function testClear_noSuchDirectory()
+    public function testClear_noSuchDirectory() : void
     {
         $dir = dirname(__DIR__) . '/nonesuch';
         $compiler = new QiqCompiler($dir);

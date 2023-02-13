@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace Qiq;
 
-use ParseError;
 use Qiq\Compiler\QiqCompiler;
+use RuntimeException;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {
-    protected $template;
+    protected HtmlTemplate $template;
 
     protected function setUp() : void
     {
-        $this->template = Template::new(
+        $this->template = HtmlTemplate::new(
             paths: __DIR__ . '/templates',
             compiler: new Compiler\QiqCompiler(
                 __DIR__ . DIRECTORY_SEPARATOR . 'cache'
@@ -20,24 +20,24 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function testStaticNew()
+    public function testStaticNew() : void
     {
         $this->assertInstanceOf(Template::CLASS, Template::new());
     }
 
-    public function test__call()
+    public function test__call() : void
     {
         $actual = $this->template->h('foo & bar');
         $this->assertSame('foo &amp; bar', $actual);
     }
 
-    public function testGetters()
+    public function testGetters() : void
     {
         $this->assertInstanceOf(Catalog::CLASS, $this->template->getCatalog());
         $this->assertInstanceOf(Helpers::CLASS, $this->template->getHelpers());
     }
 
-    public function testSetAddAndGetData()
+    public function testSetAddAndGetData() : void
     {
         $expect = ['foo' => 'bar'];
         $this->template->setData(['foo' => 'bar']);
@@ -48,7 +48,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $this->template->getData());
     }
 
-    public function testInvokeOneStep()
+    public function testInvokeOneStep() : void
     {
         $this->template->setData(['name' => 'Index']);
         $this->template->setView('index');
@@ -57,7 +57,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testInvokeTwoStep()
+    public function testInvokeTwoStep() : void
     {
         $this->template->setData([
             'name' => 'Index',
@@ -70,7 +70,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testPartial()
+    public function testPartial() : void
     {
         $this->template->setView('master');
         $actual = ($this->template)();
@@ -80,10 +80,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testException()
+    public function testException() : void
     {
         $this->template->setView('exception');
-        $this->expectException(ParseError::CLASS);
+        $this->expectException(RuntimeException::CLASS);
         $actual = ($this->template)();
     }
 
@@ -108,7 +108,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         ($this->template)();
     }
 
-    public function testExtends()
+    public function testExtends() : void
     {
         $this->template->setView('ext/view-3');
         $this->template->setLayout('ext/layout-3');
@@ -130,7 +130,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testInheritanceDocExample()
+    public function testInheritanceDocExample() : void
     {
         $this->template->setView('ext/child');
         $expect = <<<EOT

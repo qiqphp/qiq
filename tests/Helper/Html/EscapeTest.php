@@ -5,7 +5,7 @@ namespace Qiq\Helper\Html;
 
 class EscapeTest extends HtmlHelperTest
 {
-    public function testAttr_string()
+    public function testAttr_string() : void
     {
         $chars = [
             '\''    => '&#x27;',
@@ -32,11 +32,6 @@ class EscapeTest extends HtmlHelperTest
             "\n"    => '&#x0A;',
             "\t"    => '&#x09;',
             "\0"    => '&#xFFFD;', // should use Unicode replacement char
-            /* Encode chars as named entities where possible */
-            '<'     => '&lt;',
-            '>'     => '&gt;',
-            '&'     => '&amp;',
-            '"'     => '&quot;',
             /* Encode spaces for quoteless attribute protection */
             ' '     => '&#x20;',
         ];
@@ -60,7 +55,7 @@ class EscapeTest extends HtmlHelperTest
         $this->assertSame($expect, $actual);
     }
 
-    public function testCss()
+    public function testCss() : void
     {
         $chars = [
             /* HTML special chars - escape without exception to hex */
@@ -100,7 +95,7 @@ class EscapeTest extends HtmlHelperTest
         }
     }
 
-    public function testHtml()
+    public function testHtml() : void
     {
         $chars = [
             '\''    => '&#039;',
@@ -119,7 +114,7 @@ class EscapeTest extends HtmlHelperTest
         }
     }
 
-    public function testJs()
+    public function testJs() : void
     {
         $chars = [
             /* HTML special chars - escape without exception to hex */
@@ -159,7 +154,7 @@ class EscapeTest extends HtmlHelperTest
         }
     }
 
-    public function testUrl()
+    public function testUrl() : void
     {
         $this->assertSame(
             'http%3A%2F%2Fuser%3Apass%40example.net%2Fpath%2F%3Fqstr%23hash',

@@ -1,7 +1,12 @@
 parameters:
     level: max
-    checkMissingIterableValueType: false
     paths:
         - src
+        - tests
     ignoreErrors:
         - "#Unsafe usage of new static#"
+    typeAliases:
+        stringy: 'null|scalar|\Stringable'
+        stringy-list: 'array<stringy>'
+        stringy-attr: 'array<stringy|stringy-list>'
+        stringy-attr-deep: 'stringy-attr|array<stringy-attr>'

@@ -7,6 +7,12 @@ use Qiq\Compiler\QiqCompiler;
 
 class CatalogTest extends \PHPUnit\Framework\TestCase
 {
+    protected string $cachePath;
+
+    protected QiqCompiler $compiler;
+
+    protected Catalog $catalog;
+
     protected function setUp() : void
     {
         $this->cachePath = __DIR__ . DIRECTORY_SEPARATOR . 'cache';
@@ -16,12 +22,15 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->catalog = $this->newCatalog();
     }
 
-    protected function newCatalog(array $paths = [])
+    /**
+     * @param string[] $paths
+     */
+    protected function newCatalog(array $paths = []) : Catalog
     {
         return new Catalog($paths, '.php');
     }
 
-    public function testHasGet()
+    public function testHasGet() : void
     {
         $this->catalog->setPaths([__DIR__ . '/templates']);
 
@@ -37,14 +46,14 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->catalog->getCompiled($this->compiler, 'no-such-template');
     }
 
-    public function testDoubleDots()
+    public function testDoubleDots() : void
     {
         $this->expectException(Exception\FileNotFound::CLASS);
         $this->expectExceptionMessage("Double-dots not allowed in template specifications");
         $this->catalog->getCompiled($this->compiler, 'foo/../bar');
     }
 
-    public function testSetAndGetPaths()
+    public function testSetAndGetPaths() : void
     {
         // should be no paths yet
         $expect = [];
@@ -62,7 +71,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testPrependPath()
+    public function testPrependPath() : void
     {
         $this->catalog->prependPath('/foo');
         $this->catalog->prependPath('/bar');
@@ -77,7 +86,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testAppendPath()
+    public function testAppendPath() : void
     {
         $this->catalog->appendPath('/foo');
         $this->catalog->appendPath('/bar');
@@ -92,7 +101,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($expect, $actual);
     }
 
-    public function testFindFallbacks()
+    public function testFindFallbacks() : void
     {
         $dir = __DIR__ . DIRECTORY_SEPARATOR
             . 'templates' . DIRECTORY_SEPARATOR;
@@ -125,7 +134,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $catalog->getCompiled($this->compiler, 'test');
     }
 
-    public function testCollections()
+    public function testCollections() : void
     {
         $dir = __DIR__ . '/templates';
 

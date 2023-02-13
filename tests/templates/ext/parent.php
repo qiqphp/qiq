@@ -1,3 +1,4 @@
+{{ /** @var Qiq\Engine&Qiq\Helper\Html\HtmlHelpers $this */ }}
 <!DOCTYPE html>
 <html lang="en">
 <head>

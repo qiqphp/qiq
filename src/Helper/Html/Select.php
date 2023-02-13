@@ -7,25 +7,36 @@ use Qiq\Indent;
 
 class Select extends TagHelper
 {
+    /**
+     * @param stringy-attr-deep $attr
+     */
     public function __invoke(array $attr) : string
     {
         $base = [
             'name' => null,
         ];
 
+        /** @var stringy-attr-deep */
         $attr = array_merge($base, $attr);
 
-        $placeholder = $attr['placeholder'] ?? null;
-        unset($attr['placeholder']);
-
+        /** @var stringy-attr */
         $options = $attr['_options'] ?? [];
         unset($attr['_options']);
+
+        /** @var stringy-attr $attr */
+
+        /** @var stringy $placeholder */
+        $placeholder = $attr['placeholder'] ?? null;
+        unset($attr['placeholder']);
 
         $default = $attr['_default'] ?? '';
         unset($attr['_default']);
 
         $selected = $attr['value'] ?? $default;
         unset($attr['value']);
+
+        settype($attr['name'], 'string');
+        assert(is_string($attr['name']));
 
         if ($attr['multiple'] ?? false) {
             $attr['name'] .= '[]';
@@ -53,6 +64,9 @@ class Select extends TagHelper
         return $html . $this->indent->get() . '</select>';
     }
 
+    /**
+     * @param stringy-attr $options
+     */
     protected function options(array $options, mixed $selected) : string
     {
         $html = '';
@@ -65,13 +79,12 @@ class Select extends TagHelper
     }
 
     /**
-     * @param int|string $key
-     * @param null|scalar|array $val
+     * @param stringy|stringy-attr $val
      */
-    protected function option(mixed $key, mixed $val, mixed $selected) : string
+    protected function option(int|string $key, mixed $val, mixed $selected) : string
     {
         if (is_array($val)) {
-            return $this->optgroup((string) $key, $val, $selected);
+            return $this->optgroup($key, $val, $selected);
         }
 
         $attr = [];
@@ -83,12 +96,15 @@ class Select extends TagHelper
             : $attr['value'] == $selected;
 
         $attr = $this->escape->a($attr);
-        $label = $this->escape->h((string) $val);
+        $label = $this->escape->h($val);
 
         return $this->indent->get() . "<option {$attr}>{$label}</option>" . PHP_EOL;
     }
 
-    public function optgroup(string $label, array $options, mixed $selected) : string
+    /**
+     * @param stringy-attr $options
+     */
+    public function optgroup(int|string $label, array $options, mixed $selected) : string
     {
         $attr = $this->escape->a(['label' => $label]);
 

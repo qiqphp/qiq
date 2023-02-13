@@ -28,7 +28,7 @@ class Blocks
     /**
      * The series of buffered block parts to be concatenated by getBlock().
      *
-     * @var array<string, array>
+     * @var array<string, array<int, array<array{string, string}>>>
      */
     protected array $parts = [];
 

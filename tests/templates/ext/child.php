@@ -1,3 +1,4 @@
+{{ /** @var Qiq\Engine&Qiq\Helper\Html\HtmlHelpers $this */ }}
 {{ extends ('./parent') }}
 
 {{ setBlock ('head_title') }}
