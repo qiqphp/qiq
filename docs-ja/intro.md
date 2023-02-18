@@ -28,7 +28,7 @@ $tpl->setView('hello');
 $tpl->setData([
     'name' => 'World'
 ]);
-echo $tpl->render();
+echo $tpl();
 ```
 
 これだけです。
