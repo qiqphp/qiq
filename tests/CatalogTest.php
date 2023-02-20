@@ -37,8 +37,13 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($this->catalog->has('index'));
         $actual = $this->catalog->getCompiled($this->compiler, 'index');
 
-        $expect = $this->cachePath
-            . str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/templates/index.php');
+        $target = str_replace('/', DIRECTORY_SEPARATOR, __DIR__ . '/templates/index.php');
+
+        if (PHP_OS_FAMILY === 'Windows') {
+            $target= substr($target, 2);
+        }
+
+        $expect = $this->cachePath . $target;
         $this->assertSame($expect, $actual);
 
         $this->assertFalse($this->catalog->has('no-such-template'));
