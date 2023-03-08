@@ -47,6 +47,6 @@ same _Template_ object. This means:
 - All helpers are shared between the view and the layout. This sharing situation
   allows the view to modify data and helpers before the layout is executed.
 
-- All section bodies are shared between the view and the layout. A section that
-  is captured from the view template can therefore be used by the layout
-  template.
+- All section bodies and blocks are shared between the view and the layout. A
+  section or block that is captured from the view template can therefore be
+  used by the layout template.

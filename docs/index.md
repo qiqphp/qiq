@@ -5,6 +5,7 @@
 - [Partials](./partials.md)
 - [Layouts](./layouts.md)
 - [Sections](./sections.md)
+- [Blocks](./blocks.md)
+- [Inheritance](./inheritance.md)
 - [Helpers](./helpers/index.md)
 - [Compiler](./compiler.md)
-- [Debugging](./debugging.md)
