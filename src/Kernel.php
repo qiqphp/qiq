@@ -15,8 +15,8 @@ abstract class Kernel implements Engine
     public static function new(
         string|array $paths = [],
         string $extension = '.php',
+        string $cachePath = null,
         Helpers $helpers = null,
-        Compiler $compiler = null,
     ) : static
     {
         return new static(
@@ -24,7 +24,7 @@ abstract class Kernel implements Engine
                 (array) $paths,
                 $extension,
             ),
-            $compiler ?? new QiqCompiler(),
+            new QiqCompiler($cachePath),
             $helpers ?? new HtmlHelpers(),
         );
     }

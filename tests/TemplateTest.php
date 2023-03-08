@@ -14,9 +14,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     {
         $this->template = HtmlTemplate::new(
             paths: __DIR__ . '/templates',
-            compiler: new Compiler\QiqCompiler(
-                __DIR__ . DIRECTORY_SEPARATOR . 'cache'
-            )
+            cachePath: __DIR__ . DIRECTORY_SEPARATOR . 'cache',
         );
     }
 
