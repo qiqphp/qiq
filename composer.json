@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.0",
         "laminas/laminas-escaper": "^2.0",
         "psr/container": "^2.0"
     },
