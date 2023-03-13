@@ -7,7 +7,7 @@ use Qiq\Compiler;
 
 class FakeCompiler implements Compiler
 {
-    public function __invoke(string $source) : string
+    public function compile(string $source) : string
     {
         return $source;
     }

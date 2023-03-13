@@ -8,10 +8,10 @@ class FakeHello
 {
     public function __construct(
         protected string $suffix = '',
-        protected SplFileObject|stdClass $object = new stdClass()
+        protected null|SplFileObject|stdClass $object = null
     ) {
-
     }
+
     public function __invoke(string $noun) : string
     {
         return "Hello {$noun}" . $this->suffix;

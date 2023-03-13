@@ -5,7 +5,7 @@ namespace Qiq;
 
 interface Compiler
 {
-    public function __invoke(string $source) : string;
+    public function compile(string $source) : string;
 
     public function clear() : void;
 }

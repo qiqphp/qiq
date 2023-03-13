@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Qiq;
 
 use FilesystemIterator;
+use Qiq\Compiler;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileInfo;
@@ -31,6 +32,7 @@ class Catalog
     public function __construct(
         array $paths,
         protected string $extension,
+        protected Compiler $compiler
     ) {
         $this->setPaths($paths);
     }
@@ -61,7 +63,7 @@ class Catalog
         return null;
     }
 
-    public function getCompiled(Compiler $compiler, string $name) : string
+    public function getCompiled(string $name) : string
     {
         if (isset($this->compiled[$name])) {
             return $this->compiled[$name];
@@ -81,7 +83,7 @@ class Catalog
             );
         }
 
-        $this->compiled[$name] = $compiler($source);
+        $this->compiled[$name] = $this->compiler->compile($source);
         return $this->compiled[$name];
     }
 
@@ -135,11 +137,10 @@ class Catalog
     /**
      * @return string[]
      */
-    public function recompile(Compiler $compiler) : array
+    public function compileAll() : array
     {
         $this->source = [];
         $this->compiled = [];
-        $compiler->clear();
 
         $compiled = [];
 
@@ -157,7 +158,7 @@ class Catalog
                 foreach ($files as $file) {
                     $source = $file->getPathname();
                     if (str_ends_with($source, $this->extension)) {
-                        $compiled[] = $compiler($source);
+                        $compiled[] = $this->compiler->compile($source);
                     }
                 }
             }

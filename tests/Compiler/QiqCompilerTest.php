@@ -21,7 +21,7 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
 
     protected function compile(string $name) : string
     {
-        return ($this->compiler)($this->sourceFile($name));
+        return $this->compiler->compile($this->sourceFile($name));
     }
 
     protected function assertReadable(string $file) : void

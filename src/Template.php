@@ -17,7 +17,7 @@ class Template extends Kernel
             extract($__LOCAL__, EXTR_SKIP);
             extract($__SHARED__, EXTR_SKIP|EXTR_REFS);
             $__NAME__ = $this->getRenderStack()->push($__NAME__);
-            require $this->getCompiled($__NAME__);
+            require $this->getCatalog()->getCompiled($__NAME__);
             $this->getRenderStack()->pop();
             return (string) ob_get_clean();
         } catch (Throwable $e) {

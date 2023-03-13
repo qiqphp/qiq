@@ -23,8 +23,8 @@ abstract class Kernel implements Engine
             new Catalog(
                 (array) $paths,
                 $extension,
+                new QiqCompiler($cachePath)
             ),
-            new QiqCompiler($cachePath),
             $helpers ?? new HtmlHelpers(),
         );
     }
@@ -48,7 +48,6 @@ abstract class Kernel implements Engine
 
     public function __construct(
         private Catalog $catalog,
-        private Compiler $compiler,
         private Helpers $helpers
     ) {
         $this->blocks = new Blocks();
@@ -93,19 +92,9 @@ abstract class Kernel implements Engine
         return $this->helpers->$name(...$args);
     }
 
-    public function getBlocks() : Blocks
-    {
-        return $this->blocks;
-    }
-
     public function getCatalog() : Catalog
     {
         return $this->catalog;
-    }
-
-    public function getCompiler() : Compiler
-    {
-        return $this->compiler;
     }
 
     public function getHelpers() : Helpers
@@ -172,11 +161,6 @@ abstract class Kernel implements Engine
     public function extends(string $extends) : void
     {
         $this->extends = $this->renderStack->resolve($extends);
-    }
-
-    public function getCompiled(string $name) : string
-    {
-        return $this->catalog->getCompiled($this->compiler, $name);
     }
 
     public function getContent() : string
