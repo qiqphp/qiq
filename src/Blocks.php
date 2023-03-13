@@ -10,7 +10,7 @@ class Blocks
     protected const CONCAT_PARENT = 'CONCAT_PARENT';
 
     /**
-     * The number of times setBlock() has been called for each block name.
+     * The number of times set() has been called for each block name.
      * This keeps the different series of block parts separated.
      *
      * @var array<string, int>
@@ -26,7 +26,7 @@ class Blocks
     protected array $names = [];
 
     /**
-     * The series of buffered block parts to be concatenated by getBlock().
+     * The series of buffered block parts to be concatenated by get().
      *
      * @var array<string, array<int, array<array{string, string}>>>
      */
@@ -64,7 +64,7 @@ class Blocks
 
         // although templates are executed childmost-up, blocks
         // are processed parentmost-down. this allows overrides
-        // and parentBlock() calls to work as expected.
+        // and parent() calls to work as expected.
         $parts = array_reverse($this->parts[$name]);
         $level = [];
 
