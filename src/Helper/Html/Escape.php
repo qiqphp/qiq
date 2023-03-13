@@ -9,7 +9,7 @@ class Escape
 {
     protected Escaper $escaper;
 
-    public function __construct(string $encoding = 'utf-8')
+    public function __construct(string $encoding = 'UTF-8')
     {
         $this->escaper = new Escaper($encoding);
     }
