@@ -27,9 +27,9 @@ class Rot13 extends TagHelper
 ヘルパークラスができたので、その呼び出し可能なファクトリをHelperLocatorに登録する必要があります。(呼び出し可能なファクトリを登録すると、ヘルパーが呼ばれたときにだけHelperLocatorがヘルパーを遅延ロードするようになります)。登録キーはQiqヘルパー名、あるいはテンプレート内でそのヘルパーに使用する、PHPの`$this`ヘルパーメソッドとなります
 
 ```php
-$tpl = Template::new(...);
+$template = Template::new(...);
 
-$helperLocator = $tpl->getHelperLocator();
+$helperLocator = $template->getHelperLocator();
 
 $helperLocator->set(
     'rotOneThree',

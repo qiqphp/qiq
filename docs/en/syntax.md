@@ -34,7 +34,6 @@ You can echo just about any variable, literal, function, method, expression, or
 constant, including the magic constants `__DIR__`, `__FILE__`, and `__LINE__`.
 
 ```qiq
-{{h $this->foo }}
 {{h $foo }}
 {{h "foo" }}
 {{h 1 + 2 }}
@@ -139,6 +138,15 @@ method. The following Qiq syntax ...
     'value' => $this->street,
 ]) ?>
 ```
+
+If you want Qiq code to treat the opening keyword as a global function, not
+as a template helper method, use a backslash at the start of the function name:
+
+```qiq
+{{= \strtoupper ('foo') }}
+```
+
+Normal PHP code does not require the opening backslash, but it won't hurt.
 
 ## Other PHP Code
 

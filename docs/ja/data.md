@@ -3,7 +3,7 @@
 `setData()`メソッドに配列または`stdClass`オブジェクトを渡してTemplateにデータコレクションをアサインします。
 
 ```php
-$tpl->setData([
+$template->setData([
     'items' => [
         [
             'id' => '1',
@@ -26,7 +26,7 @@ $tpl->setData([
 一方、`addData()`メソッドは、任意の`iterable`データを既存のTemplateデータにマージします。
 
 ```php
-$tpl->addData([
+$template->addData([
     'title' => 'My Items',
 ]);
 ```

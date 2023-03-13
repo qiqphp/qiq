@@ -28,8 +28,8 @@ and for [building forms](./forms.md). You can also create your own
 
 Further, you can call any public or protected _Template_ method from the
 template code. (This is because the template code is executed "inside" the
-_Template_ object.) Among other things, you can set the layout, or render other
- templates, from inside any template:
+_Template_ object.) Among other things, you can set the layout, or render
+other templates, from inside any template:
 
 ```qiq
 {{ setLayout ('seasonal-layout') }}

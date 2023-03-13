@@ -5,7 +5,7 @@
 Qiq is installable via Composer as [qiq/qiq](https://packagist.org/packages/qiq/qiq):
 
 ```
-composer require qiq/qiq ^1.0
+composer require qiq/qiq ^2.0
 ```
 
 ## Getting Started
@@ -13,9 +13,9 @@ composer require qiq/qiq ^1.0
 First, a template file, saved at `/path/to/templates/hello.php`:
 
 ```html+php
-Hello, {{h $this->name }}. That was Qiq!
+Hello, {{h $name }}. That was Qiq!
 
-And this is PHP, <?= $this->h($this->name) ?>.
+And this is PHP, <?= $this->h($name) ?>.
 ```
 
 Next, the presentation code, to generate output using the `hello` template:
@@ -23,12 +23,12 @@ Next, the presentation code, to generate output using the `hello` template:
 ```php
 use Qiq\Template;
 
-$tpl = Template::new('/path/to/templates');
-$tpl->setView('hello');
-$tpl->setData([
+$template = Template::new('/path/to/templates');
+$template->setView('hello');
+$template->setData([
     'name' => 'World'
 ]);
-echo $tpl->render();
+echo $template();
 ```
 
 That's all there is to it.

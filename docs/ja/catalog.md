@@ -3,7 +3,7 @@
 Qiqは、名前付きテンプレートを任意の数のディレクトリパスから検索します。`Template::new()`に`paths`配列を渡します。
 
 ```php
-$tpl = Template::new(
+$template = Template::new(
     paths: [
         '/path/to/custom/templates',
         '/path/to/default/templates',
@@ -14,7 +14,7 @@ $tpl = Template::new(
 あるいは、Catalogに直接指示することもできます。
 
 ```php
-$tpl->getCatalog()->setPaths([
+$template->getCatalog()->setPaths([
     '/path/to/custom/templates',
     '/path/to/default/templates',
 ]);
@@ -27,14 +27,14 @@ Catalogは、最初のディレクトリパスから最後のディレクトリ�
 searches first for:  /path/to/custom/templates/foo.php,
 and then second for: /path/to/default/templates/foo.php
 */
-$output = $tpl('foo');
+$output = $template('foo');
 ```
 
 もし必要なら、Templateのインスタンス化の後でパスを変更し、Catalogにディレクトリパスを追加または前置することができます。
 
 ```php
-$tpl->getCatalog()->prependPath('/higher/precedence/templates');
-$tpl->getCatalog()->appendPath('/lower/precedence/templates');
+$template->getCatalog()->prependPath('/higher/precedence/templates');
+$template->getCatalog()->appendPath('/lower/precedence/templates');
 ```
 
 ### サブディレクトリ
@@ -43,7 +43,7 @@ $tpl->getCatalog()->appendPath('/lower/precedence/templates');
 
 ```php
 // renders the "foo/bar/baz.php" template
-$output = $tpl('foo/bar/baz');
+$output = $template('foo/bar/baz');
 ```
 このほか、テテンプレート内でテンプレート名を相対パスで参照することもできます。
 同じディレクトリにあるテンプレートを示すには `./` を、現在のディレクトリの上のディレクトリを示すには`../`を使用します。
@@ -78,14 +78,14 @@ echo $this->render('../../foo');
 デフォルトでは、Catalogはテンプレートファイル名に`.php`を自動で付加します。もしテンプレートファイルの拡張子が違う場合は、`setExtension()`メソッドで変更します。
 
 ```php
-$catalog = $tpl->getCatalog();
+$catalog = $template->getCatalog();
 $catalog->setExtension('.phtml');
 ```
 
 あるいは、Template作成時に設定することもできます。
 
 ```php
-$tpl = Template::new(
+$template = Template::new(
     extension: '.phtml'
 );
 ```
@@ -97,7 +97,7 @@ $tpl = Template::new(
 ディレクトリパスとコレクションを関連付けるには、パスの前にコレクション名とコロンを付けます。
 
 ```php
-$tpl = new Template(
+$template = new Template(
     paths: [
         'admin:/path/to/admin/templates',
         'email:/path/to/email/templates',
@@ -108,7 +108,7 @@ $tpl = new Template(
 コレクションからテンプレートをレンダリングするには、テンプレート名の前にコレクション名を付けます。
 
 ```php
-$output = $tpl('email:notify/subscribed');
+$output = $template('email:notify/subscribed');
 ```
 
 コレクションパスの設定、追加、およびプリペンドは、接頭辞なしのテンプレートパスの"main"、または"default"コレクションと同じように行うことができます。

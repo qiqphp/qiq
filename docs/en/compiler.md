@@ -26,14 +26,14 @@ The _QiqCompiler_ cache path by default is your
 with `/qiq`, but you can specify any path with Template::new():
 
 ```php
-$tpl = Template::new(
+$template = Template::new(
     cachePath: '/path/to/qiqcache/'
 );
 ```
 
 The _QiqCompiler_ saves the compiled templates in the cache using the full path
-of the source template file. For example, the cache path is `/private/tmp` and
-the source template file is at `/www/site/resources/templates/foo.php`. That
+of the source template file. For example, if the cache path is `/private/tmp` and
+the source template file is at `/www/site/resources/templates/foo.php`, that
 means the compiled template file will be cached at:
 
     /private/tmp/www/site/resources/templates/foo.php
@@ -43,9 +43,9 @@ the cache path will help you find the original template.
 
 ## Cache Clearing
 
-To clear the cache, reach into the _Template_ to get the _Catalog_,
+To clear the cache, reach into the _Template_ to get the _Compiler_,
 and call its `clear()` method.
 
 ```php
-$tpl->getCatalog()->clear();
+$template->getCompiler()->clear();
 ```

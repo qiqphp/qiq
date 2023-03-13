@@ -23,12 +23,12 @@ And this is PHP, <?= $this->h($this->name) ?>.
 ```php
 use Qiq\Template;
 
-$tpl = Template::new('/path/to/templates');
-$tpl->setView('hello');
-$tpl->setData([
+$template = Template::new('/path/to/templates');
+$template->setView('hello');
+$template->setData([
     'name' => 'World'
 ]);
-echo $tpl->render();
+echo $template->render();
 ```
 
 これだけです。

@@ -15,7 +15,7 @@ QiqテンプレートはネイティブPHPを使用していますが、`{{ ... 
 QiqCompilerのキャッシュパスは、デフォルトでは[`sys_get_temp_dir()`](https://php.net/sys_get_temp_dir) ディレクトリに`/qiq`を加えたものですが、`Template::new()`で任意のパスを指定することができます。
 
 ```php
-$tpl = Template::new(
+$template = Template::new(
     cachePath: '/path/to/qiqcache/'
 );
 ```
@@ -31,5 +31,5 @@ QiqCompilerは、コンパイルされたテンプレートをソース・テン
 キャッシュをクリアするには、Templateの中に入ってCatalogを取得し、その`clear()`メソッドを呼び出します。
 
 ```php
-$tpl->getCatalog()->clear();
+$template->getCatalog()->clear();
 ```

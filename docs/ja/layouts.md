@@ -18,9 +18,9 @@
 そして、Templateオブジェクトにビューテンプレートとレイアウトテンプレートを設定し、呼び出すことができます。
 
 ```php
-$tpl->setView('browse');
-$tpl->setLayout('default');
-$output = $tpl();
+$template->setView('browse');
+$template->setLayout('default');
+$output = $template();
 ```
 
 内側のビューテンプレートからの出力は自動的に保持され、Templateオブジェクトの`getContent()`メソッドで利用できるようになります。そして、レイアウトテンプレートは`getContent()`を呼び出して、内側のビューの結果を外側のレイアウトテンプレートに配置します。

@@ -194,7 +194,7 @@ Helper for a `<meta http-equiv>` tag.
 Helper for a `<meta name>` tag.
 
 ```qiq
-{{= metaHttp (
+{{= metaName (
     'author',                       // (string) name attribute
     'Qiq for PHP'                   // (string) content attribute
 ) }}
