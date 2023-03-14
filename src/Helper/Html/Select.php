@@ -8,7 +8,7 @@ use Qiq\Indent;
 class Select extends TagHelper
 {
     /**
-     * @param stringy-attr-deep $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>>|array<array<null|scalar|\Stringable|array<null|scalar|\Stringable>>> $attr
      */
     public function __invoke(array $attr) : string
     {
@@ -16,16 +16,16 @@ class Select extends TagHelper
             'name' => null,
         ];
 
-        /** @var stringy-attr-deep */
+        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>>|array<array<null|scalar|\Stringable|array<null|scalar|\Stringable>>> */
         $attr = array_merge($base, $attr);
 
-        /** @var stringy-attr */
+        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> */
         $options = $attr['_options'] ?? [];
         unset($attr['_options']);
 
-        /** @var stringy-attr $attr */
+        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr */
 
-        /** @var stringy $placeholder */
+        /** @var null|scalar|\Stringable $placeholder */
         $placeholder = $attr['placeholder'] ?? null;
         unset($attr['placeholder']);
 
@@ -65,7 +65,7 @@ class Select extends TagHelper
     }
 
     /**
-     * @param stringy-attr $options
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $options
      */
     protected function options(array $options, mixed $selected) : string
     {
@@ -79,7 +79,7 @@ class Select extends TagHelper
     }
 
     /**
-     * @param stringy|stringy-attr $val
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $val
      */
     protected function option(int|string $key, mixed $val, mixed $selected) : string
     {
@@ -102,7 +102,7 @@ class Select extends TagHelper
     }
 
     /**
-     * @param stringy-attr $options
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $options
      */
     public function optgroup(int|string $label, array $options, mixed $selected) : string
     {

@@ -1,4 +1,4 @@
 <?php /** @var Qiq\Engine&Qiq\Helper\Html\HtmlHelpers $this */ ?>
-<?php /** @var stringy $name */ ?>
-<?php /** @var stringy $title */ ?>
+<?php /** @var string $name */ ?>
+<?php /** @var string $title */ ?>
 Hello <?= $name ?>!<?php $title = 'Index Title'; ?>

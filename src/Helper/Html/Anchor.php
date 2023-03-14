@@ -6,7 +6,7 @@ namespace Qiq\Helper\Html;
 class Anchor extends TagHelper
 {
     /**
-     * @param stringy-attr $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      */
     public function __invoke(string $href, string $text, array $attr = []) : string
     {

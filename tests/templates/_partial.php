@@ -1,3 +1,3 @@
 <?php /** @var Qiq\Engine&Qiq\Helper\Html\HtmlHelpers $this */ ?>
-<?php /** @var stringy $foo */ ?>
+<?php /** @var string $foo */ ?>
 <?= "foo = {$foo}" . PHP_EOL;

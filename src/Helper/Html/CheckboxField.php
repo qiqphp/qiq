@@ -10,12 +10,12 @@ class CheckboxField extends InputField
     protected string $type = 'checkbox';
 
     /**
-     * @param stringy-attr-deep $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>>|array<array<null|scalar|\Stringable|array<null|scalar|\Stringable>>> $attr
      */
     public function __invoke(array $attr) : string
     {
         if (! isset($attr['_options'])) {
-            /** @var stringy-attr $attr */
+            /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr */
             return parent::__invoke($attr);
         }
 
@@ -26,13 +26,13 @@ class CheckboxField extends InputField
             '_options' => [],
         ];
 
-        /** @var stringy-attr-deep */
+        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>>|array<array<null|scalar|\Stringable|array<null|scalar|\Stringable>>> */
         $attr = array_merge($base, $attr);
 
         $options = (array) $attr['_options'];
         unset($attr['_options']);
 
-        /** @var stringy-attr $attr */
+        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr */
         settype($attr['name'], 'string');
         assert(is_string($attr['name']));
 
@@ -64,7 +64,7 @@ class CheckboxField extends InputField
 
     protected function default(string $name, mixed $default) : string
     {
-        /** @var stringy-attr */
+        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> */
         $attr = [
             'type' => 'hidden',
             'name' => $name,
@@ -75,7 +75,7 @@ class CheckboxField extends InputField
     }
 
     /**
-     * @param stringy-attr $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      */
     protected function checkbox(
         array $attr,

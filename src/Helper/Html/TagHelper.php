@@ -14,7 +14,7 @@ abstract class TagHelper
     }
 
     /**
-     * @param stringy-attr $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      */
     protected function openTag(string $tag, array $attr) : string
     {
@@ -24,8 +24,8 @@ abstract class TagHelper
     }
 
     /**
-     * @param stringy-attr $attr
-     * @param stringy $text
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable $text
      */
     protected function fullTag(string $tag, array $attr, mixed $text = '') : string
     {
@@ -40,7 +40,7 @@ abstract class TagHelper
     }
 
     /**
-     * @param stringy-attr $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      */
     protected function voidTag(string $tag, array $attr) : string
     {

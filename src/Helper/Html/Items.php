@@ -8,7 +8,7 @@ use Qiq\Indent;
 class Items extends TagHelper
 {
     /**
-     * @param stringy-list $items
+     * @param array<null|scalar|\Stringable> $items
      */
     public function __invoke(array $items) : string
     {
@@ -16,7 +16,7 @@ class Items extends TagHelper
     }
 
     /**
-     * @param stringy-list $items
+     * @param array<null|scalar|\Stringable> $items
      */
     protected function items(array $items) : string
     {

@@ -15,7 +15,7 @@ class Escape
     }
 
     /**
-     * @param stringy|stringy-attr $raw
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $raw
      */
     public function a(mixed $raw) : string
     {
@@ -57,7 +57,7 @@ class Escape
     }
 
     /**
-     * @param stringy $raw
+     * @param null|scalar|\Stringable $raw
      */
     public function c(mixed $raw) : string
     {
@@ -65,7 +65,7 @@ class Escape
     }
 
     /**
-     * @param stringy $raw
+     * @param null|scalar|\Stringable $raw
      */
     public function h(mixed $raw) : string
     {
@@ -73,7 +73,7 @@ class Escape
     }
 
     /**
-     * @param stringy $raw
+     * @param null|scalar|\Stringable $raw
      */
     public function j(mixed $raw) : string
     {
@@ -81,7 +81,7 @@ class Escape
     }
 
     /**
-     * @param stringy $raw
+     * @param null|scalar|\Stringable $raw
      */
     public function u(mixed $raw) : string
     {

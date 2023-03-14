@@ -10,12 +10,12 @@ class RadioField extends InputField
     protected string $type = 'radio';
 
     /**
-     * @param stringy-attr-deep $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>>|array<array<null|scalar|\Stringable|array<null|scalar|\Stringable>>> $attr
      */
     public function __invoke(array $attr) : string
     {
         if (! isset($attr['_options'])) {
-            /** @var stringy-attr $attr */
+            /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr */
             return parent::__invoke($attr);
         }
 
@@ -31,7 +31,7 @@ class RadioField extends InputField
         $options = (array) $attr['_options'];
         unset($attr['_options']);
 
-        /** @var stringy-attr $attr */
+        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr */
 
         settype($attr['name'], 'string');
         assert(is_string($attr['name']));
@@ -60,7 +60,7 @@ class RadioField extends InputField
 
     protected function default(string $name, mixed $default) : string
     {
-        /** @var stringy-attr */
+        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> */
         $attr = [
             'type' => 'hidden',
             'name' => $name,
@@ -71,7 +71,7 @@ class RadioField extends InputField
     }
 
     /**
-     * @param stringy-attr $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      */
     protected function radio(
         array $attr,

@@ -8,8 +8,8 @@ use Qiq\Indent;
 class Ol extends Items
 {
     /**
-     * @param stringy-list $items
-     * @param stringy-attr $attr
+     * @param array<null|scalar|\Stringable> $items
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      */
     public function __invoke(array $items, array $attr = []) : string
     {

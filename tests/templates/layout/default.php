@@ -1,5 +1,5 @@
 <?php /** @var Qiq\Engine&Qiq\Helper\Html\HtmlHelpers $this */ ?>
-<?php /** @var stringy $title */ ?>
+<?php /** @var string $title */ ?>
 <?= $title
    . " -- before -- "
    . $this->getContent()
