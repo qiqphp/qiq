@@ -16,6 +16,13 @@ class Catalog
      */
     protected array $paths = [];
 
+    protected string $extension;
+
+    /**
+     * @var Compiler
+     */
+    protected Compiler $compiler;
+
     /**
      * @var string[]
      */
@@ -30,11 +37,13 @@ class Catalog
      * @param string[] $paths
      */
     public function __construct(
-        array $paths,
-        protected string $extension,
-        protected Compiler $compiler
+        array $paths = [],
+        string $extension = '.php',
+        Compiler $compiler = null
     ) {
         $this->setPaths($paths);
+        $this->setExtension($extension);
+        $this->compiler = $compiler ?? new Compiler\QiqCompiler();
     }
 
     public function has(string $name) : bool
