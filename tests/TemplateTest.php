@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Qiq;
 
+use Qiq\Compiler\NonCompiler;
 use Qiq\Compiler\QiqCompiler;
 use RuntimeException;
 
@@ -152,5 +153,12 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
         $actual = ($this->template)();
         $this->assertSame($expect, $actual);
+    }
+
+    public function testNonCompiler() : void
+    {
+        $template = Template::new(cachePath: false);
+        $actual = $template->getCatalog()->getCompiler();
+        $this->assertInstanceOf(NonCompiler::class, $actual);
     }
 }

@@ -46,6 +46,11 @@ class Catalog
         $this->compiler = $compiler ?? new Compiler\QiqCompiler();
     }
 
+    public function getCompiler() : Compiler
+    {
+        return $this->compiler;
+    }
+
     public function has(string $name) : bool
     {
         return $this->source($name) !== null;
