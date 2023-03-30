@@ -1,8 +1,6 @@
 <?php
 namespace Qiq\Helper\Html;
 
-use Qiq\Indent;
-
 class FieldsAndButtonsTest extends HtmlHelperTest
 {
     public function testInputField() : void
