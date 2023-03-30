@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Qiq;
 
-use Qiq\Compiler\QiqCompiler;
+use Qiq\Compiler;
 use Qiq\Helper\Html\HtmlHelpers;
 use stdClass;
 
@@ -15,17 +15,23 @@ abstract class Kernel implements Engine
     public static function new(
         string|array $paths = [],
         string $extension = '.php',
-        string $cachePath = null,
+        string|false $cachePath = null,
         Helpers $helpers = null,
     ) : static
     {
+        $compiler = $cachePath === false
+            ? new Compiler\NonCompiler()
+            : new Compiler\QiqCompiler($cachePath);
+
+        $helpers ??= new HtmlHelpers();
+
         return new static(
             new Catalog(
                 (array) $paths,
                 $extension,
-                new QiqCompiler($cachePath)
+                $compiler
             ),
-            $helpers ?? new HtmlHelpers(),
+            $helpers,
         );
     }
 
