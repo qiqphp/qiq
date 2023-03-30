@@ -7,13 +7,14 @@ class FieldsAndButtonsTest extends HtmlHelperTest
 {
     public function testInputField() : void
     {
-        $actual = $this->helpers->inputField([
-            'type' => 'fake',
-            'name' => 'fake-name',
-            'value' => 'fake-value',
-        ]);
+        $actual = $this->helpers->inputField(
+            type: 'fake',
+            name: 'fake-name',
+            value: 'fake-value',
+            foo_bar: 'baz',
+        );
 
-        $expect = '<input type="fake" name="fake-name" value="fake-value" />';
+        $expect = '<input type="fake" name="fake-name" value="fake-value" foo-bar="baz" />';
 
         $this->assertSame($expect, $actual);
     }
@@ -23,11 +24,15 @@ class FieldsAndButtonsTest extends HtmlHelperTest
      */
     public function testTypes(string $method, string $type) : void
     {
-        $actual = $this->helpers->$method([
-            'name' => 'fake-name',
-            'value' => 'fake-value',
-        ]);
-        $expect = '<input type="' . $type . '" name="fake-name" value="fake-value" />';
+        $actual = $this->helpers->$method(
+            name: 'fake-name',
+            value: 'fake-value',
+            attr: [
+                'foo' => 'bar',
+            ],
+            baz_dib: 'gir',
+        );
+        $expect = '<input type="' . $type . '" name="fake-name" value="fake-value" foo="bar" baz-dib="gir" />';
         $this->assertSame($expect, $actual);
     }
 

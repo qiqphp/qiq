@@ -17,12 +17,18 @@ trait HtmlHelperMethods
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function anchor(string $href, string $text, array $attr = []) : string
+    public function anchor(
+        string $href,
+        string $text,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Anchor::class)
-            ->__invoke($href, $text, $attr);
+            ->__invoke($href, $text, $attr, ...$__attr);
     }
 
     public function base(string $href) : string
@@ -33,13 +39,20 @@ trait HtmlHelperMethods
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function button(array $attr) : string
+    public function button(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Button::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
@@ -53,94 +66,182 @@ trait HtmlHelperMethods
     }
 
     /**
-     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>>|array<array<null|scalar|\Stringable|array<null|scalar|\Stringable>>> $attr
+     * @param null|scalar|\Stringable $value
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function checkboxField(array $attr) : string
+    public function checkboxField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(CheckboxField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $value
+     * @param array<null|scalar|\Stringable, null|scalar|\Stringable> $options
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function colorField(array $attr) : string
+    public function checkboxFields(
+        string $name,
+        mixed $value,
+        array $options,
+        mixed $default = null,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
+    {
+        return $this
+            ->get(CheckboxFields::class)
+            ->__invoke(
+                $name,
+                $value,
+                $options,
+                $default,
+                $attr,
+                ...$__attr
+            );
+    }
+
+    /**
+     * @param null|scalar|\Stringable $value
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
+     */
+    public function colorField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(ColorField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function dateField(array $attr) : string
+    public function dateField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(DateField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function datetimeField(array $attr) : string
+    public function datetimeField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(DatetimeField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function datetimeLocalField(array $attr) : string
+    public function datetimeLocalField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(DatetimeLocalField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $terms
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function dl(array $terms, array $attr = []) : string
+    public function dl(
+        array $terms,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Dl::class)
-            ->__invoke($terms, $attr);
+            ->__invoke($terms, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function emailField(array $attr) : string
+    public function emailField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(EmailField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function fileField(array $attr) : string
+    public function fileField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(FileField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function form(array $attr) : string
+    public function form(
+        string $action,
+        string $method = 'post',
+        string $enctype = 'multipart/form-data',
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Form::class)
-            ->__invoke($attr);
+            ->__invoke($action, $method, $enctype, $attr, ...$__attr);
     }
 
     /**
@@ -154,43 +255,70 @@ trait HtmlHelperMethods
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function hiddenField(array $attr) : string
+    public function hiddenField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(HiddenField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function image(string $src, array $attr = []) : string
+    public function image(
+        string $src,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Image::class)
-            ->__invoke($src, $attr);
+            ->__invoke($src, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function imageButton(array $attr) : string
+    public function imageButton(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(ImageButton::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function inputField(array $attr) : string
+    public function inputField(
+        string $type,
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(InputField::class)
-            ->__invoke($attr);
+            ->__invoke($type, $name, $value, $attr, ...$__attr);
     }
 
     /**
@@ -215,42 +343,59 @@ trait HtmlHelperMethods
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function label(string $text, array $attr = []) : string
+    public function label(
+        string $text,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Label::class)
-            ->__invoke($text, $attr);
+            ->__invoke($text, $attr, ...$__attr);
     }
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function link(string $rel, string $href, array $attr = []) : string
+    public function link(
+        string $rel,
+        string $href,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Link::class)
-            ->__invoke($rel, $href, $attr);
+            ->__invoke($rel, $href, $attr, ...$__attr);
     }
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function linkStylesheet(string $href, array $attr = []) : string
+    public function linkStylesheet(
+        string $href,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(LinkStylesheet::class)
-            ->__invoke($href, $attr);
+            ->__invoke($href, $attr, ...$__attr);
     }
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function meta(array $attr) : string
+    public function meta(array $attr = [], mixed ...$__attr) : string
     {
         return $this
             ->get(Meta::class)
-            ->__invoke($attr);
+            ->__invoke($attr, ...$__attr);
     }
 
     public function metaHttp(string $equiv, string $content) : string
@@ -268,154 +413,294 @@ trait HtmlHelperMethods
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function monthField(array $attr) : string
+    public function monthField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(MonthField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function numberField(array $attr) : string
+    public function numberField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(NumberField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
      * @param array<null|scalar|\Stringable> $items
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function ol(array $items, array $attr = []) : string
+    public function ol(
+        array $items,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Ol::class)
-            ->__invoke($items, $attr);
+            ->__invoke($items, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function passwordField(array $attr) : string
+    public function passwordField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(PasswordField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function radioField(array $attr) : string
+    public function radioField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(RadioField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param array<null|scalar|\Stringable, null|scalar|\Stringable> $options
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function rangeField(array $attr) : string
+    public function radioFields(
+        string $name,
+        mixed $value,
+        array $options,
+        mixed $default = null,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
+    {
+        return $this
+            ->get(RadioFields::class)
+            ->__invoke(
+                $name,
+                $value,
+                $options,
+                $default,
+                $attr,
+                ...$__attr
+            );
+    }
+
+    /**
+     * @param null|scalar|\Stringable $value
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
+     */
+    public function rangeField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(RangeField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function resetButton(array $attr) : string
+    public function resetButton(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(ResetButton::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function script(string $src, array $attr = []) : string
+    public function script(
+        string $src,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Script::class)
-            ->__invoke($src, $attr);
+            ->__invoke($src, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function searchField(array $attr) : string
+    public function searchField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(SearchField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
-     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>>|array<array<null|scalar|\Stringable|array<null|scalar|\Stringable>>> $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $options
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function select(array $attr) : string
+    public function select(
+        string $name,
+        mixed $value,
+        array $options,
+        bool $multiple = false,
+        ?string $placeholder = null,
+        mixed $default = null,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Select::class)
-            ->__invoke($attr);
+            ->__invoke(
+                $name,
+                $value,
+                $options,
+                $multiple,
+                $placeholder,
+                $default,
+                $attr,
+                ...$__attr
+            );
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function submitButton(array $attr) : string
+    public function submitButton(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(SubmitButton::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function telField(array $attr) : string
+    public function telField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(TelField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function textarea(array $attr) : string
+    public function textarea(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Textarea::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function textField(array $attr) : string
+    public function textField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(TextField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function timeField(array $attr) : string
+    public function timeField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(TimeField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
@@ -431,31 +716,50 @@ trait HtmlHelperMethods
     /**
      * @param array<null|scalar|\Stringable> $items
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function ul(array $items, array $attr = []) : string
+    public function ul(
+        array $items,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(Ul::class)
-            ->__invoke($items, $attr);
+            ->__invoke($items, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function urlField(array $attr) : string
+    public function urlField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(UrlField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
+     * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function weekField(array $attr) : string
+    public function weekField(
+        string $name,
+        mixed $value,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
         return $this
             ->get(WeekField::class)
-            ->__invoke($attr);
+            ->__invoke($name, $value, $attr, ...$__attr);
     }
 }

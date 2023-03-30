@@ -6,19 +6,28 @@ double-escaping the output.
 
 You can also address the helpers as methods on `$this` in PHP template code.
 
+Finally, many of these helpers accept a trailing variadic list of named
+parameters as HTML tag attributes. This means you can add just about any
+attribute as if it was a parameter on the helper method. Underscores in  the
+parameter name will be converted to dashes; e.g., `foo_bar: 'baz'` will
+become `foo-bar="baz"` in the returned helper output. For attributes that
+cannot double as named parameters, use the `attr` array parameter.
+
 ## Form Tag
 
 Open a form like so:
 
 ```qiq
-{{= form ([                         // (array) attributes
-    'method' => 'post',
-    'action' => '/hello',
-]) }}
+{{= form (
+    action: '/hello',
+    attr: [],                       // (array) key-value attributes
+    id: 'form-id'                   // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
-<form method="post" action="/hello" enctype="multipart/form-data">
+<!-- defaults to method="post" enctype="multipart/form-data" -->
+<form method="post" action="/hello" enctype="multipart/form-data" id="form-id">
 ```
 
 You can close a form just using `</form>`.
@@ -27,35 +36,50 @@ You can close a form just using `</form>`.
 
 ### checkboxField
 
-You can use a `checkboxField` as a generic input field helper, but you will
-have to set the `checked` attribute yourself to mark it as checked or not.
+```qiq
+{{= checkboxField (
+    name: 'flag',
+    value: 'foo',
+    checked: true,
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
+```
 
-Alternatively, if you specify the pseudo-attribute `_options`, greater
-functionality becomes available:
+```html
+<input type="checkbox" name="flag" value="foo" checked />
+```
 
-- The `_options` specify one or more checkboxes as part of the field,
-with their value when checked, and their corresponding label.
+### checkboxFields
 
-- If the `_options` have more than one element, then field name will be
+The `checkboxFields` helper can be used for one or more checkboxes at a time,
+and has greater functionality than the `checkboxField` helper:
+
+- The `options` array specifies one or more checkboxes as part of the
+  field, with each value when checked, and the corresponding label.
+
+- If the `options` have more than one element, then field name will be
   appended automatically with `[]` to make it an array.
 
-- The `value` attribute will be matched against the `_options` and the correct
+- The `value` attribute will be matched against the `options` and the correct
   checkboxes will be `checked` for you.
 
-- The `_default` pseudo-attribute, when present, will produce a hidden input
-field for the value when no checkboxes are checked.
+- The `default` parameter, when non-null, will produce a hidden input field
+  for the value when no checkboxes are checked.
 
 ```qiq
-{{= checkboxField ([                // (array) attributes
-    'name' => 'flags',
-    'value' => 'bar',
-    '_default' => '',
-    '_options' => [
+{{= checkboxFields (
+    name: 'flags',
+    value: 'bar',
+    default: '',
+    options: [
         'foo' => 'Foo Flag',
         'bar' => 'Bar Flag',
         'baz' => 'Baz Flag',
-    ]
-]) }}
+    ],
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -68,10 +92,12 @@ field for the value when no checkboxes are checked.
 ### colorField
 
 ```qiq
-{{= colorField ([                   // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= colorField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -81,10 +107,12 @@ field for the value when no checkboxes are checked.
 ### dateField
 
 ```qiq
-{{= dateField ([                    // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= dateField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -94,10 +122,12 @@ field for the value when no checkboxes are checked.
 ### datetimeField
 
 ```qiq
-{{= datetimeField ([                // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= datetimeField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -107,10 +137,12 @@ field for the value when no checkboxes are checked.
 ### datetimeLocalField
 
 ```qiq
-{{= datetimeLocalField ([           // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= datetimeLocalField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -120,10 +152,12 @@ field for the value when no checkboxes are checked.
 ### emailField
 
 ```qiq
-{{= emailField ([                   // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= emailField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -133,10 +167,12 @@ field for the value when no checkboxes are checked.
 ### fileField
 
 ```qiq
-{{= fileField ([                    // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= fileField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -146,10 +182,12 @@ field for the value when no checkboxes are checked.
 ### hiddenField
 
 ```qiq
-{{= hiddenField ([                  // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= hiddenField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -161,12 +199,13 @@ field for the value when no checkboxes are checked.
 A generic input field; specify the `type` needed.
 
 ```qiq
-{{= inputField ([                  // (array) attributes
-    'type' => 'text',
-    'name' => 'foo',
-    'value' => 'bar',
-    // ...
-]) }}
+{{= inputField (
+    type: 'text',
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -176,10 +215,12 @@ A generic input field; specify the `type` needed.
 ### monthField
 
 ```qiq
-{{= monthField ([                   // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= monthField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -189,11 +230,12 @@ A generic input field; specify the `type` needed.
 ### numberField
 
 ```qiq
-{{= numberField ([                  // (array) attributes
-    'type' => 'number',
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= numberField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -203,10 +245,12 @@ A generic input field; specify the `type` needed.
 ### passwordField
 
 ```qiq
-{{= passwordField ([                // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= passwordField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -215,28 +259,43 @@ A generic input field; specify the `type` needed.
 
 ### radioField
 
-You can use a `radioField` as a generic input field helper, but you will
-have to set the `checked` attribute yourself to mark it as checked or not.
+```qiq
+{{= radioField (
+    name: 'foo',
+    value: 'baz',
+    checked: true,
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
+```
 
-Alternatively, if you specify the pseudo-attribute `_options`, greater
-functionality becomes available:
+```html
+<input type="radio" name="foo" value="baz" checked />
+```
 
-- The `_options` specify one or more radio buttons as part of the field,
-  with their value when checked, and their corresponding label.
+### radioFields
 
-- The `value` attribute will be matched against the `_options` and the correct
-  checkboxes will be `checked` for you.
+The `radioFields` helper has greater functionality than the `radioField`
+helper:
+
+- The `options` parameter specfies one or more radio buttons as part of the
+  field, with their value when checked, and their corresponding label.
+
+- The `value` parameter will be matched against the `options` and the correct
+  radio button will be `checked` for you.
 
 ```qiq
-{{= radioField ([                   // (array) attributes
-    'name' => 'foo',
-    'value' => 'baz',
-    '_options' => [
+{{= radioFields (
+    name: 'foo',
+    value: 'baz',
+    options: [
         'bar' => 'Bar Label',
         'baz' => 'Baz Label,
         'dib' => 'Dib Label',
     ),
-]) }}
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -248,10 +307,12 @@ functionality becomes available:
 ### rangeField
 
 ```qiq
-{{= rangeField ([                   // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= rangeField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -261,10 +322,12 @@ functionality becomes available:
 ### searchField
 
 ```qiq
-{{= searchField ([                  // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= searchField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -273,28 +336,30 @@ functionality becomes available:
 
 ### select
 
-Use the pseudo-attribute `_options` to describe the `<option>` tags.
+Use the `options` parameter to describe the `<option>` tags.
 
-The attribute `placeholder` is honored as a placeholder label when no
-option is selected. The pseudo-attribute `_default` specifies the value of
-the placeholder.
+The `placeholder` parameter is honored as a placeholder label when no option
+is selected. The `default` parameter, when non-null, specifies the value of
+that placeholder.
 
-Using the attribute `'multiple' => true` will set up a multiple select, and
-automatically add `[]` to the name if it is not already there.
+Use `multiple: true` to set up a multiple select; this will automatically add
+`[]` to the name if it is not already there.
 
 ```qiq
-{{= select ([                       // (array) attributes
-    'name' => 'foo',
-    'value' => 'dib',
-    'placeholder' => 'Please pick one',
-    '_default' => '',
-    '_options' => [
+{{= select (
+    name: 'foo',
+    value: 'dib',
+    placeholder: 'Please pick one',
+    default: '',
+    options: [
         'bar' => 'Bar Label',
         'baz' => 'Baz Label',
         'dib' => 'Dib Label',
         'zim' => 'Zim Label',
     ],
-]) }}
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -307,15 +372,15 @@ automatically add `[]` to the name if it is not already there.
 </select>
 ```
 
-The helper also supports option groups. If an `_options` array value is itself
+The helper also supports option groups. If an `options` array value is itself
 an array, the key for that element will be used as an `<optgroup>` label and
 the array of values will be options under that group.
 
 ```qiq
 {{= select ([
-    'name' => 'foo',
-    'value' => 'bar',
-    '_options' => [
+    name: 'foo',
+    value: 'bar',
+    options: => [
         'Group A' => [
             'bar' => 'Bar Label',
             'baz' => 'Baz Label',
@@ -325,7 +390,7 @@ the array of values will be options under that group.
             'zim' => 'Zim Label',
         ],
     ],
-]) }}
+) }}
 ```
 
 ```html
@@ -345,9 +410,11 @@ the array of values will be options under that group.
 
 ```qiq
 {{= telField([                      // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -357,10 +424,12 @@ the array of values will be options under that group.
 ### textField
 
 ```qiq
-{{= textField ([                    // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= textField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -371,9 +440,11 @@ the array of values will be options under that group.
 
 ```qiq
 {{= textarea ([                     // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -383,10 +454,12 @@ the array of values will be options under that group.
 ### timeField
 
 ```qiq
-{{= timeField ([                    // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= timeField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -397,9 +470,11 @@ the array of values will be options under that group.
 
 ```qiq
 {{= urlField ([                      // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -409,10 +484,12 @@ the array of values will be options under that group.
 ### weekField
 
 ```qiq
-{{= weekField ([                    // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= weekField (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -426,10 +503,12 @@ Helpers for various button tags.
 ### button
 
 ```qiq
-{{= button ([                       // (array) atttributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= button (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -439,10 +518,12 @@ Helpers for various button tags.
 ### imageButton
 
 ```qiq
-{{= imageButton ([                  // (array) atttributes
-    'name' => 'foo',
-    'src' => '/images/map.png',
-]) }}
+{{= imageButton (
+    name: 'foo',
+    src: '/images/map.png',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -452,10 +533,12 @@ Helpers for various button tags.
 ### submitButton
 
 ```qiq
-{{= submitButton ([                 // (array) atttributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= submitButton (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -465,10 +548,12 @@ Helpers for various button tags.
 ### resetButton
 
 ```qiq
-{{= resetButton ([                  // (array) attributes
-    'name' => 'foo',
-    'value' => 'bar',
-]) }}
+{{= resetButton (
+    name: 'foo',
+    value: 'bar',
+    attr: [],                       // (array) key-value attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -482,9 +567,8 @@ A helper for `<label>` tags.
 ```qiq
 {{= label (
     'Label For Field',              // (string) label text
-    [                               // (array) optional attributes
-        'for' => 'field'
-    ]
+    attr: [],                       // (array) key-value attributes
+    for: 'field'                    // (...mixed) named parameter attributes
 ) }}
 ```
 

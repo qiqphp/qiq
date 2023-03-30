@@ -6,6 +6,23 @@ double-escaping the output.
 
 You can also address the helpers as methods on `$this` in PHP template code.
 
+Finally, many of these helpers accept a trailing variadic list of named
+parameters as HTML tag attributes. This means you can add just about any
+attribute as if it was a parameter on the helper method. Underscores in  the
+parameter name will be converted to dashes; e.g., `foo_bar: 'baz'` will
+become `foo-bar="baz"` in the returned helper output. For attributes that
+cannot double as named parameters, use the `attr` array parameter; for
+example:
+
+```qiq
+{{= anchor (
+    'http://qiqphp.com',
+    'Qiq Project',
+    attr: [],                       // (array) key-value attributes
+    id: 'qiq-link',                 // (...mixed) named parameter attributes
+) }}
+```
+
 ## anchor
 
 Helper for `<a>` tags.
@@ -14,35 +31,14 @@ Helper for `<a>` tags.
 {{= anchor (
     'http://qiqphp.com',            // (string) href
     'Qiq Project',                  // (string) text
-    [                               // (array) optional attributes
-        'id' => 'qiq-link'
-    ]
+    attr: [],                       // (array) key-value attributes
+    id: 'qiq-link',                 // (...mixed) named parameter attributes
 ) }}
 ```
 
 ```html
 <a href="http://qiqphp.com" id="qiq-link">Qiq for PHP</a>
 ```
-
-To output the anchor text without escaping, use the pseudo-attribute `_raw`:
-
-```qiq
-{{= anchor (
-    'http://qiqphp.com',            // (string) href
-    '<em>qiq Project</em>',         // (string) text
-    [                               // (array) optional attributes
-
-        'id' => 'qiq-link'
-        '_raw' => true
-    ]
-) }}
-```
-
-```html
-<a href="http://qiqphp.com" id="qiq-link"><em>Qiq for PHP</em></a>
-```
-
-(The href and attributes will still be escaped properly.)
 
 ## base
 
@@ -73,9 +69,8 @@ Helper for `<dl>` tags with `<dt>`/`<dd>` items.
         ],
         'baz' => 'Baz Def',
     ],
-    [                               // (array) optional attributes
-        'id' => 'test'
-    ],
+    attr: [],                       // (array) key-value attributes
+    id: 'test'                      // (...mixed) named parameter attributes
 ) }}
 ```
 
@@ -99,9 +94,8 @@ Helper for `<img>` tags.
 ```qiq
 {{= image (
     '/images/hello.jpg',            // (string) image href src
-    [                               // (array) optional attributes
-        'id' => 'image-id'
-    ]
+    attr: [],                       // (array) key-value attributes
+    id: 'image-id'                  // (...mixed) named parameter attributes
 ) }}
 ```
 
@@ -133,14 +127,16 @@ Helper for a series of `<li>` tags.
 Helper for a `<link>` tag.
 
 ```qiq
-{{= link ([                         // (array) attributes
-    'rel' => 'prev',
-    'href' => '/path/to/prev',
-]) }}
+{{= link (
+    rel: 'prev',
+    href: '/path/to/prev',
+    attr: [],                       // (array) key-value attributes
+    id: 'link-id'                   // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
-<link rel="prev" href="/path/to/prev" />
+<link rel="prev" href="/path/to/prev" id="link-id" />
 ```
 
 ## linkStylesheet
@@ -150,13 +146,13 @@ Helper for a `<link>` stylesheet tag.
 ```qiq
 {{= linkStylesheet (
     '/css/print.css',               // (string) the stylesheet href
-    [                               // (array) optional attributes
-        'media' => 'print',
-    ]
+    attr: [],                       // (array) key-value attributes
+    media: 'print'                  // (...mixed) named parameter attributes
 ) }}
 ```
 
 ```html
+<!-- if type is not specified, uses "text/css" -->
 <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
 ```
 
@@ -165,9 +161,10 @@ Helper for a `<link>` stylesheet tag.
 Helper for a `<meta>` tag.
 
 ```qiq
-{{= meta ([                         // (array) attributes
-    'charset' => 'utf-8'
-]) }}
+{{= meta (
+    attr: [],                       // (array) key-value attributes
+    charset: 'utf-8'                // (...mixed) named parameter attributes
+) }}
 ```
 
 ```html
@@ -215,9 +212,8 @@ Helper for `<ol>` tags with `<li>` items.
         'bar',
         'baz'
     ],
-    [                               // (array) optional attributes
-        'id' => 'foo-list'
-    ]
+    attr: [],                       // (array) key-value attributes
+    id: 'foo-list'                  // (...mixed) named parameter attributes
 ) }}
 ```
 
@@ -236,13 +232,13 @@ Helper for a `<script>` tag.
 ```qiq
 {{= script (
     '/js/functions.js',             // (string) src attribute
-    [                               // (array) other attributes
-        'async' => true
-    ]
+    attr: [],                       // (array) key-value attributes
+    async: true                     // (...mixed) named parameter attributes
 ) }}
 ```
 
 ```html
+<!-- if type is not specified, uses "text/javascript" -->
 <script src="/js/functions.js" type="text/javascript" async></script>
 ```
 
@@ -257,9 +253,8 @@ Helper for `<ul>` tags with `<li>` items.
         'bar',
         'baz'
     ],
-    [                               // (array) optional attributes
-        'id' => 'foo-list'
-    ]
+    attr: [],                       // (array) key-value attributes
+    id: 'foo-list'                  // (...mixed) named parameter attributes
 ) }}
 ```
 

@@ -6,15 +6,13 @@ class OlTest extends HtmlHelperTest
     public function test() : void
     {
         $actual = $this->helpers->ol(
-            [
+            id: 'test',
+            items: [
                 '>foo',
                 '>bar',
                 '>baz',
                 '>dib',
             ],
-            [
-                'id' => 'test'
-            ]
         );
 
         $expect = '<ol id="test">' . PHP_EOL

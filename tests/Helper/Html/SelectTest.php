@@ -5,11 +5,11 @@ class SelectTest extends HtmlHelperTest
 {
     public function test() : void
     {
-        $actual = $this->helpers->select([
-            'name' => 'field_name',
-            'value' => 'opt5',
-            'placeholder' => 'Pick One',
-            '_options' => [
+        $actual = $this->helpers->select(
+            name: 'field_name',
+            value: 'opt5',
+            placeholder: 'Pick One',
+            options: [
                 'opt1' => 'Label 1',
                 'opt2' => 'Label 2',
                 'opt3' => 'Label 3',
@@ -24,7 +24,7 @@ class SelectTest extends HtmlHelperTest
                     'opt9' => 'Label 9',
                 ],
             ],
-        ]);
+        );
 
         $expect = '<select name="field_name">' . PHP_EOL
                 . '    <option value="" disabled>Pick One</option>' . PHP_EOL
@@ -48,11 +48,11 @@ class SelectTest extends HtmlHelperTest
 
     public function testMultiple() : void
     {
-        $actual = $this->helpers->select([
-            'name' => 'field_name',
-            'value' => ['opt2', 'opt5', 'opt8'],
-            'multiple' => true,
-            '_options' => [
+        $actual = $this->helpers->select(
+            name: 'field_name',
+            value: ['opt2', 'opt5', 'opt8'],
+            multiple: true,
+            options: [
                 'opt1' => 'Label 1',
                 'opt2' => 'Label 2',
                 'opt3' => 'Label 3',
@@ -67,7 +67,7 @@ class SelectTest extends HtmlHelperTest
                     'opt9' => 'Label 9',
                 ],
             ],
-        ]);
+        );
 
         $expect = '<select name="field_name[]" multiple>' . PHP_EOL
                 . '    <option value="opt1">Label 1</option>' . PHP_EOL

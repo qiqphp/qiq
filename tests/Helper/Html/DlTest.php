@@ -6,7 +6,8 @@ class DlTest extends HtmlHelperTest
     public function test() : void
     {
         $actual = $this->helpers->dl(
-            [
+            id: 'test',
+            terms: [
                 'foo' => 'Foo Def',
                 'bar' => [
                     'Bar Def A',
@@ -14,9 +15,6 @@ class DlTest extends HtmlHelperTest
                     'Bar Def C',
                 ],
                 'baz' => 'Baz Def',
-            ],
-            [
-                'id' => 'test'
             ],
         );
 

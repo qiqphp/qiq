@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace Qiq\Helper\Html;
 
-class Textarea extends TagHelper
+abstract class InputTypeField extends TagHelper
 {
+    protected string $type;
+
     /**
      * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
@@ -17,7 +19,17 @@ class Textarea extends TagHelper
         mixed ...$__attr
     ) : string
     {
-        $attr = array_merge(['name' => $name], $attr);
-        return $this->fullTag('textarea', $attr, $value, $__attr);
+        $base = array(
+            'type' => $this->type,
+            'name' => $name,
+            'value' => $value,
+        );
+
+        unset($attr['type']);
+        unset($attr['name']);
+        unset($attr['value']);
+
+        $attr = array_merge($base, $attr);
+        return $this->voidTag('input', $attr, $__attr);
     }
 }

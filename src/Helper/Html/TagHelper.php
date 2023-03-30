@@ -15,37 +15,62 @@ abstract class TagHelper
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $__attr
      */
-    protected function openTag(string $tag, array $attr) : string
+    protected function openTag(
+        string $tag,
+        array $attr,
+        array $__attr = []
+    ) : string
     {
         $tag = $this->escape->a($tag);
-        $attr = $this->escape->a($attr);
+        $attr = $this->attr($attr, $__attr);
         return trim("<{$tag} {$attr}") . ">";
     }
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $__attr
      * @param null|scalar|\Stringable $text
      */
-    protected function fullTag(string $tag, array $attr, mixed $text = '') : string
+    protected function fullTag(
+        string $tag,
+        array $attr,
+        mixed $text = '',
+        array $__attr = []
+    ) : string
     {
-        $raw = $attr['_raw'] ?? false;
-        unset($attr['_raw']);
-
-        if (! $raw) {
-            $text = $this->escape->h($text);
-        }
-
-        return $this->openTag($tag, $attr) . $text . "</{$tag}>";
+        $text = $this->escape->h($text);
+        return $this->openTag($tag, $attr, $__attr) . $text . "</{$tag}>";
     }
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $__attr
      */
-    protected function voidTag(string $tag, array $attr) : string
+    protected function voidTag(
+        string $tag,
+        array $attr,
+        array $__attr = []
+    ) : string
     {
         $tag = $this->escape->a($tag);
-        $attr = $this->escape->a($attr);
+        $attr = $this->attr($attr, $__attr);
         return trim("<{$tag} {$attr}") . " />";
+    }
+
+    /**
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $__attr
+     */
+    protected function attr(array $attr, array $__attr) : string
+    {
+        foreach ($__attr as $key => $val) {
+            unset($__attr[$key]);
+            $key = str_replace('_', '-', $key);
+            $__attr[$key] = $val;
+        }
+
+        return $this->escape->a(array_merge($attr, $__attr));
     }
 }

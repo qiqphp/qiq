@@ -6,14 +6,12 @@ class UlTest extends HtmlHelperTest
     public function test() : void
     {
         $actual = $this->helpers->ul(
-            [
+            id: 'test',
+            items: [
                 '>foo',
                 '>bar',
                 '>baz',
                 '>dib',
-            ],
-            [
-                'id' => 'test'
             ],
         );
 

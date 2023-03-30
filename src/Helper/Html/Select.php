@@ -8,51 +8,52 @@ use Qiq\Indent;
 class Select extends TagHelper
 {
     /**
-     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>>|array<array<null|scalar|\Stringable|array<null|scalar|\Stringable>>> $attr
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $options
+     * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function __invoke(array $attr) : string
+    public function __invoke(
+        string $name,
+        mixed $value,
+        array $options,
+        bool $multiple = false,
+        ?string $placeholder = null,
+        mixed $default = null,
+        array $attr = [],
+        mixed ...$__attr
+    ) : string
     {
-        $base = [
-            'name' => null,
-        ];
-
-        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>>|array<array<null|scalar|\Stringable|array<null|scalar|\Stringable>>> */
-        $attr = array_merge($base, $attr);
-
-        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> */
-        $options = $attr['_options'] ?? [];
-        unset($attr['_options']);
-
-        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr */
-
-        /** @var null|scalar|\Stringable $placeholder */
-        $placeholder = $attr['placeholder'] ?? null;
-        unset($attr['placeholder']);
-
-        $default = $attr['_default'] ?? '';
-        unset($attr['_default']);
-
-        $selected = $attr['value'] ?? $default;
-        unset($attr['value']);
-
-        settype($attr['name'], 'string');
-        assert(is_string($attr['name']));
-
-        if ($attr['multiple'] ?? false) {
-            $attr['name'] .= '[]';
+        if ($multiple) {
+            $name .= '[]';
         }
 
-        $html = $this->openTag('select', $attr) . PHP_EOL;
+        $base = [
+            'name' => $name,
+            'multiple' => $multiple,
+        ];
+
+        unset($attr['name']);
+        unset($attr['multiple']);
+
+        /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> */
+        $attr = array_merge($base, $attr);
+
+        $html = $this->openTag('select', $attr, $__attr) . PHP_EOL;
         $this->indent->level(+1);
 
+        $selected = $value ?? $default;
+
         if ($placeholder !== null) {
+            /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> */
+            $placeholderAttr = [
+                'value' => $default ?? "",
+                'disabled' => true,
+                'selected' => ($selected == $default)
+            ];
+
             $html .= $this->indent->get() . $this->fullTag(
                 'option',
-                [
-                    'value' => $default,
-                    'disabled' => true,
-                    'selected' => ($selected == $default)
-                ],
+                $placeholderAttr,
                 $placeholder
             ) . PHP_EOL;
         }
@@ -79,7 +80,7 @@ class Select extends TagHelper
     }
 
     /**
-     * @param null|scalar|\Stringable|array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $val
+     * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $val
      */
     protected function option(int|string $key, mixed $val, mixed $selected) : string
     {
