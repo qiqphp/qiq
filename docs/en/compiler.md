@@ -49,3 +49,18 @@ and call its `clear()` method.
 ```php
 $template->getCompiler()->clear();
 ```
+
+## Disabling The Compiler
+
+If you are absolutely certain that you do not want to use Qiq syntax, and
+will use PHP only in your template files, you can create a _Template_ with
+`$cachePath` set to false:
+
+```php
+$template = Template::new(
+    cachePath: false
+);
+```
+
+This will cause the _Template_ to use the _NonCompiler_ implementation, which
+does not compile or cache template files at all.

@@ -241,7 +241,7 @@ This Qiq code ...
 
 ```qiq
 <ul>
-    {{= $this->items(['foo', 'bar', 'baz']) }}
+    {{= items (['foo', 'bar', 'baz']) }}
 </ul>
 ```
 

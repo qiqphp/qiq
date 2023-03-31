@@ -10,8 +10,8 @@
         "blocks.md",
         "inheritance.md",
         "helpers/_bookdown.json",
-        "static-analysis.md",
         "compiler.md",
+        "static-analysis.md",
         "upgrading.md"
     ]
 }

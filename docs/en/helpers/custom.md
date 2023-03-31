@@ -170,7 +170,7 @@ $container = new Container([
 
 $template = Template::new(
     paths: ...,
-    helpers: new CustomHelpers($container))
+    helpers: new CustomHelpers($container)
 );
 ```
 

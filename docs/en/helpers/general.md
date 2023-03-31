@@ -18,9 +18,17 @@ example:
 {{= anchor (
     'http://qiqphp.com',
     'Qiq Project',
-    attr: [],                       // (array) key-value attributes
+    attr: [                         // (array) key-value attributes
+        'xml:lang' => 'en',
+    ],
     id: 'qiq-link',                 // (...mixed) named parameter attributes
 ) }}
+```
+
+The example code will produce this HTML:
+
+```html
+<a href="http://qiqphp.com" xml:lang="en" id="qiq-link">Qiq for PHP</a>
 ```
 
 ## anchor
@@ -153,6 +161,7 @@ Helper for a `<link>` stylesheet tag.
 
 ```html
 <!-- if type is not specified, uses "text/css" -->
+<!-- if media is not specified, uses "screen" -->
 <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
 ```
 
@@ -160,10 +169,20 @@ Helper for a `<link>` stylesheet tag.
 
 Helper for a `<meta>` tag.
 
+For general use:
+
 ```qiq
 {{= meta (
     attr: [],                       // (array) key-value attributes
-    charset: 'utf-8'                // (...mixed) named parameter attributes
+    ...                             // (...mixed) named parameter attributes
+) }}
+```
+
+For `charset`:
+
+```qiq
+{{= meta (
+    charset: 'utf-8'
 ) }}
 ```
 
@@ -171,14 +190,12 @@ Helper for a `<meta>` tag.
 <meta charset="utf-8">
 ```
 
-## metaHttp
-
-Helper for a `<meta http-equiv>` tag.
+For `http-equiv`:
 
 ```qiq
-{{= metaHttp (
-    'Location',                     // (string) http-equiv attribute
-    '/redirect/to/here'             // (string) content attribute
+{{= meta (
+    http_equiv: 'Location',
+    content: '/redirect/to/here'
 ) }}
 ```
 
@@ -186,14 +203,12 @@ Helper for a `<meta http-equiv>` tag.
 <meta http-equiv="Location" content="/redirect/to/here">
 ```
 
-## metaName
-
-Helper for a `<meta name>` tag.
+For `name`:
 
 ```qiq
-{{= metaName (
-    'author',                       // (string) name attribute
-    'Qiq for PHP'                   // (string) content attribute
+{{= meta (
+    name: 'author',
+    content: 'Qiq for PHP'
 ) }}
 ```
 
