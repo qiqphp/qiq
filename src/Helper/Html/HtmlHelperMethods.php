@@ -398,20 +398,6 @@ trait HtmlHelperMethods
             ->__invoke($attr, ...$__attr);
     }
 
-    public function metaHttp(string $equiv, string $content) : string
-    {
-        return $this
-            ->get(MetaHttp::class)
-            ->__invoke($equiv, $content);
-    }
-
-    public function metaName(string $name, string $content) : string
-    {
-        return $this
-            ->get(MetaName::class)
-            ->__invoke($name, $content);
-    }
-
     /**
      * @param null|scalar|\Stringable $value
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
