@@ -1,8 +1,8 @@
 ### Partials
 
-Sometimes you will want to split a single template into multiple pieces. You can
-render these "partial" template pieces using the `render()` method in your main
-template code.
+Sometimes you will want to split a single template file into multiple files.
+You can render these "partial" template pieces using the `render()` method in
+your main template code.
 
 When rendering, you can pass an array of variables to be extracted into the
 local scope of the partial template. (All shared variables assigned to
@@ -23,7 +23,7 @@ Then in a main `browse` template, you can render the partial `list`:
 ```html+php
 <p>My List</p>
 {{= render ('./list', [
-    'items' => 'foo', 'bar', 'baz']
+    'items' => ['foo', 'bar', 'baz']
 ]) }}
 ```
 

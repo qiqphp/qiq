@@ -1,6 +1,6 @@
 # Overview
 
-Helpers are invokable objects that generate HTML for you. You can address them
+Helpers are class methods that generate output for you. You can address them
 as methods on `$this` in PHP template code, or by just the helper name when
 using Qiq syntax.
 
@@ -27,7 +27,7 @@ and for [building forms](./forms.md). You can also create your own
 [custom helpers](./custom.md).
 
 Further, you can call any public or protected _Template_ method from the
-template code. (This is because the template code is executed "inside" the
+template file. (This is because the template file is executed "inside" the
 _Template_ object.) Among other things, you can set the layout, or render
 other templates, from inside any template:
 

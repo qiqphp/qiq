@@ -122,21 +122,21 @@ Any opening keyword Qiq does not recognize is treated as a template helper
 method. The following Qiq syntax ...
 
 ```qiq
-{{= label ("Street Address", ['for' => 'street']) }}
-{{= textField ([
-    'name' => 'street',
-    'value' => $this->street,
-]) }}
+{{= label ("Street Address", for: 'street') }}
+{{= textField (
+    name: 'street',
+    value: $street,
+) }}
 ```
 
 ... is equivalent to this PHP code with Qiq helpers:
 
 ```html+php
-<?= $this->label("Street Address", ['for' => 'street']) ?>
-<?= $this->textField([
-    'name' => 'street',
-    'value' => $this->street,
-]) ?>
+<?= $this->label("Street Address", for: 'street') ?>
+<?= $this->textField(
+    name: 'street',
+    value: $street,
+) ?>
 ```
 
 If you want Qiq code to treat the opening keyword as a global function, not
@@ -154,14 +154,14 @@ Qiq treats all other code inside `{{ ... }}` tags as plain old PHP code. For
 example, this Qiq syntax ...
 
 ```qiq
-{{ $title = "Prefix: " . $this->title . " (Suffix)" }}
+{{ $title = "Prefix: " . $title . " (Suffix)" }}
 <title>{{h $title}}</title>
 ```
 
 ... is equivalent to this PHP code with Qiq helpers:
 
 ```html+php
-<?php $title = "Prefix: " . $this->title . " (Suffix)" ?>
+<?php $title = "Prefix: " . $title . " (Suffix)" ?>
 <title><?= $this->h($title) ?></title>
 ```
 
@@ -184,7 +184,7 @@ Qiq offers intuitive handling of newlines around tags:
 For example, this Qiq code ...
 
 ```qiq
-{{ if ($this->condition): }}
+{{ if ($condition): }}
 {{= "foo" }}
 {{ endif; }}
 ```
@@ -192,7 +192,7 @@ For example, this Qiq code ...
 ... compiles to this PHP code:
 
 ```html+php
-<?php if ($this->condition): ?>
+<?php if ($condition): ?>
 <?= "foo" ?><?= PHP_EOL ?>
 <?php endif ?>
 ```

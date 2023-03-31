@@ -20,13 +20,13 @@ Open a form like so:
 ```qiq
 {{= form (
     action: '/hello',
-    attr: [],                       // (array) key-value attributes
-    id: 'form-id'                   // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    id: 'form-id'           // (...mixed) optional named parameter attributes
 ) }}
 ```
 
 ```html
-<!-- defaults to method="post" enctype="multipart/form-data" -->
+<!-- defaults to method="post" action="" enctype="multipart/form-data" -->
 <form method="post" action="/hello" enctype="multipart/form-data" id="form-id">
 ```
 
@@ -41,8 +41,8 @@ You can close a form just using `</form>`.
     name: 'flag',
     value: 'foo',
     checked: true,
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -77,8 +77,8 @@ and has greater functionality than the `checkboxField` helper:
         'bar' => 'Bar Flag',
         'baz' => 'Baz Flag',
     ],
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -95,8 +95,8 @@ and has greater functionality than the `checkboxField` helper:
 {{= colorField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -110,8 +110,8 @@ and has greater functionality than the `checkboxField` helper:
 {{= dateField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -125,8 +125,8 @@ and has greater functionality than the `checkboxField` helper:
 {{= datetimeField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -140,8 +140,8 @@ and has greater functionality than the `checkboxField` helper:
 {{= datetimeLocalField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -155,8 +155,8 @@ and has greater functionality than the `checkboxField` helper:
 {{= emailField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -170,8 +170,8 @@ and has greater functionality than the `checkboxField` helper:
 {{= fileField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -185,8 +185,8 @@ and has greater functionality than the `checkboxField` helper:
 {{= hiddenField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -203,8 +203,8 @@ A generic input field; specify the `type` needed.
     type: 'text',
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -218,8 +218,8 @@ A generic input field; specify the `type` needed.
 {{= monthField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -233,8 +233,8 @@ A generic input field; specify the `type` needed.
 {{= numberField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -248,8 +248,8 @@ A generic input field; specify the `type` needed.
 {{= passwordField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -264,8 +264,8 @@ A generic input field; specify the `type` needed.
     name: 'foo',
     value: 'baz',
     checked: true,
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -293,8 +293,8 @@ helper:
         'baz' => 'Baz Label,
         'dib' => 'Dib Label',
     ),
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -310,8 +310,8 @@ helper:
 {{= rangeField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -325,8 +325,8 @@ helper:
 {{= searchField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -357,8 +357,8 @@ Use `multiple: true` to set up a multiple select; this will automatically add
         'dib' => 'Dib Label',
         'zim' => 'Zim Label',
     ],
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -377,7 +377,7 @@ an array, the key for that element will be used as an `<optgroup>` label and
 the array of values will be options under that group.
 
 ```qiq
-{{= select ([
+{{= select (
     name: 'foo',
     value: 'bar',
     options: => [
@@ -409,11 +409,11 @@ the array of values will be options under that group.
 ### telField
 
 ```qiq
-{{= telField([                      // (array) attributes
+{{= telField(
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -427,8 +427,8 @@ the array of values will be options under that group.
 {{= textField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -439,11 +439,11 @@ the array of values will be options under that group.
 ### textarea
 
 ```qiq
-{{= textarea ([                     // (array) attributes
+{{= textarea (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -457,8 +457,8 @@ the array of values will be options under that group.
 {{= timeField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -469,11 +469,11 @@ the array of values will be options under that group.
 ### urlField
 
 ```qiq
-{{= urlField ([                      // (array) attributes
+{{= urlField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -487,8 +487,8 @@ the array of values will be options under that group.
 {{= weekField (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -506,8 +506,8 @@ Helpers for various button tags.
 {{= button (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -521,8 +521,8 @@ Helpers for various button tags.
 {{= imageButton (
     name: 'foo',
     src: '/images/map.png',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -536,8 +536,8 @@ Helpers for various button tags.
 {{= submitButton (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -551,8 +551,8 @@ Helpers for various button tags.
 {{= resetButton (
     name: 'foo',
     value: 'bar',
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -566,9 +566,9 @@ A helper for `<label>` tags.
 
 ```qiq
 {{= label (
-    'Label For Field',              // (string) label text
-    attr: [],                       // (array) key-value attributes
-    for: 'field'                    // (...mixed) named parameter attributes
+    'Label For Field',      // (string) label text
+    attr: [],               // (array) optional key-value attributes
+    for: 'field'            // (...mixed) optional named parameter attributes
 ) }}
 ```
 

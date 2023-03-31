@@ -1,8 +1,8 @@
 # Upgrading
 
-## 1.0 to 2.0
+## 1.x to 2.x
 
-Upgrading from Qiq 1.0 to 2.0 is straightforward but may be time consuming.
+Upgrading from Qiq 1.x to 2.x is straightforward but may be time consuming.
 
 ### Assigned Variables
 
@@ -11,7 +11,7 @@ Magic `__get()`, `__set()`, etc. access to assigned variables has been removed.
 This means template files **no longer use `$this->var`** for assigned variables.
 
 Instead, they now use `$var` (without the `$this->` prefix). This is in support
-of[static analysis](./static-analysis.md) in template files.
+of [static analysis](./static-analysis.md) in template files.
 
 If you need to modify the assigned variables directly, use `&refData()` to get
 a reference to the array of assigned data. Modifications to this array will
@@ -40,7 +40,6 @@ been called like this:
   'name' => 'foo',
   'value' => 'foo text',
   'id' => 'foo-id',
-  'bar-baz' => 'dib',
 ]) }}
 ```
 
@@ -52,7 +51,6 @@ by named parameters:
   name: 'foo',
   value: 'foo text',
   id: 'foo-id',
-  baz_baz: 'dib',
 ) }}
 ```
 
@@ -64,7 +62,6 @@ array into named parameters:
   'name' => 'foo',
   'value' => 'foo text',
   'id' => 'foo-id',
-  'bar-baz' => 'dib',
 ]) }}
 ```
 
@@ -116,7 +113,7 @@ at all -- but be aware of these changes nonetheless.
 - The _Compiler_ interface is now defined in the _Qiq_ namespace, not
   the _Qiq\Compiler_ namespace.
 
-- The _Exception_ class is now defined in the _Qiq_namespace, not
+- The _Exception_ class is now defined in the _Qiq_ namespace, not
   the _Qiq\Exception_ namespace.
 
 - The _HelperNotFound_ exception has been renamed to _ObjectNotFound_, and

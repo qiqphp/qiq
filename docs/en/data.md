@@ -45,8 +45,11 @@ You can then use the assigned data as variables within the template file:
 <ul>
     {{ foreach ($items as $id => $name): }}
     <li id="{{a $id}}">{{h $name }}</li>
+    {{ endforeach }}
 </ul>
 ```
+
+## Getting Assigned Variables
 
 If you want to get a copy of all assigned data as an array, use `getData
 ()`. Any changes you make to the copy will be **to the copy** and not to the
@@ -72,8 +75,8 @@ local to that template file only, and changes to them will not be seen
 anywhere else.
 
 When designing template files, be careful not to accidentally overwrite
-assigned variables with local variables. The local values will be shared with
-all other templates, which may not be what you want.
+assigned variables with local variables. The changes to the assigned values
+will be shared with all other templates, which may not be what you want.
 
 Finally, changes to assigned variables via `setData()`, `addData()`, and
 `&refData()` from **inside** a template file **will not** be honored within

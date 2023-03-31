@@ -18,10 +18,10 @@ example:
 {{= anchor (
     'http://qiqphp.com',
     'Qiq Project',
-    attr: [                         // (array) key-value attributes
+    attr: [                 // (array) optional key-value attributes
         'xml:lang' => 'en',
     ],
-    id: 'qiq-link',                 // (...mixed) named parameter attributes
+    id: 'qiq-link',         // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -37,10 +37,10 @@ Helper for `<a>` tags.
 
 ```qiq
 {{= anchor (
-    'http://qiqphp.com',            // (string) href
-    'Qiq Project',                  // (string) text
-    attr: [],                       // (array) key-value attributes
-    id: 'qiq-link',                 // (...mixed) named parameter attributes
+    'http://qiqphp.com',    // (string) href
+    'Qiq Project',          // (string) text
+    attr: [],               // (array) optional key-value attributes
+    id: 'qiq-link',         // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -54,7 +54,7 @@ Helper for `<base>` tags.
 
 ```qiq
 {{= base (
-    '/base'                         // (string) href
+    '/base'                 // (string) href
 ) }}
 ```
 
@@ -68,7 +68,7 @@ Helper for `<dl>` tags with `<dt>`/`<dd>` items.
 
 ```qiq
 {{= dl (
-    [                               // (array) dt keys and dd values
+    [                       // (array) dt keys and dd values
         'foo' => 'Foo Def',
         'bar' => [
             'Bar Def A',
@@ -77,8 +77,8 @@ Helper for `<dl>` tags with `<dt>`/`<dd>` items.
         ],
         'baz' => 'Baz Def',
     ],
-    attr: [],                       // (array) key-value attributes
-    id: 'test'                      // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    id: 'test'              // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -101,9 +101,9 @@ Helper for `<img>` tags.
 
 ```qiq
 {{= image (
-    '/images/hello.jpg',            // (string) image href src
-    attr: [],                       // (array) key-value attributes
-    id: 'image-id'                  // (...mixed) named parameter attributes
+    '/images/hello.jpg',    // (string) image href src
+    attr: [],               // (array) optional key-value attributes
+    id: 'image-id'          // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -117,7 +117,7 @@ Helper for `<img>` tags.
 Helper for a series of `<li>` tags.
 
 ```qiq
-{{= items ([                        // (array) list items
+{{= items ([                // (array) list items
     'foo',
     'bar',
     'baz'
@@ -138,8 +138,8 @@ Helper for a `<link>` tag.
 {{= link (
     rel: 'prev',
     href: '/path/to/prev',
-    attr: [],                       // (array) key-value attributes
-    id: 'link-id'                   // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    id: 'link-id'           // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -153,9 +153,9 @@ Helper for a `<link>` stylesheet tag.
 
 ```qiq
 {{= linkStylesheet (
-    '/css/print.css',               // (string) the stylesheet href
-    attr: [],                       // (array) key-value attributes
-    media: 'print'                  // (...mixed) named parameter attributes
+    '/css/print.css',       // (string) the stylesheet href
+    attr: [],               // (array) optional key-value attributes
+    media: 'print'          // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -173,8 +173,8 @@ For general use:
 
 ```qiq
 {{= meta (
-    attr: [],                       // (array) key-value attributes
-    ...                             // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    ...                     // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -222,13 +222,13 @@ Helper for `<ol>` tags with `<li>` items.
 
 ```qiq
 {{= ol (
-    [                               // (array) list items
+    [                       // (array) list items
         'foo',
         'bar',
         'baz'
     ],
-    attr: [],                       // (array) key-value attributes
-    id: 'foo-list'                  // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    id: 'foo-list'          // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -246,9 +246,9 @@ Helper for a `<script>` tag.
 
 ```qiq
 {{= script (
-    '/js/functions.js',             // (string) src attribute
-    attr: [],                       // (array) key-value attributes
-    async: true                     // (...mixed) named parameter attributes
+    '/js/functions.js',     // (string) src attribute
+    attr: [],               // (array) optional key-value attributes
+    async: true             // (...mixed) optional named parameter attributes
 ) }}
 ```
 
@@ -263,13 +263,13 @@ Helper for `<ul>` tags with `<li>` items.
 
 ```qiq
 {{= ul (
-    [                               // (array) list items
+    [                       // (array) list items
         'foo',
         'bar',
         'baz'
     ],
-    attr: [],                       // (array) key-value attributes
-    id: 'foo-list'                  // (...mixed) named parameter attributes
+    attr: [],               // (array) optional key-value attributes
+    id: 'foo-list'          // (...mixed) optional named parameter attributes
 ) }}
 ```
 

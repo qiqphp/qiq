@@ -41,8 +41,9 @@ layout template.
 The view template and the layout template both execute inside the
 same _Template_ object. This means:
 
-- All data values are shared between the view and the layout. Any data assigned
-  to the view is used as-is by the layout.
+- All variables assigned to the view are shared with the layout.
 
-- All helpers are shared between the view and the layout. This sharing situation
-  allows the view to modify data and helpers before the layout is executed.
+- All helpers are shared between the view and the layout.
+
+This sharing situation allows the view to modify data and helpers before the
+layout is executed.

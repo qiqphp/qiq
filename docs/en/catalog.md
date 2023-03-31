@@ -32,7 +32,7 @@ $output = $template('foo');
 ```
 
 If you like, you can modify the paths after the _Template_ instantiation to
-append or prepend a directory path to the _Catalog_:
+prepend or append a directory path to the _Catalog_:
 
 ```php
 $template->getCatalog()->prependPath('/higher/precedence/templates');
@@ -92,15 +92,15 @@ Or, you can set the extension at _Template_ creation time:
 
 ```php
 $template = Template::new(
-    extension: '.phtml'
+    extension: '.qiq.php'
 );
 ```
 
 ### Collections
 
 Sometimes it may be useful to identify collections of templates, say for
-emails or for admin pages. (Other systems may refer to these as "groups",
-"folders", or "namespaces".)
+emails or for admin pages. (Other template systems may refer to these
+as "groups", "folders", or "namespaces".)
 
 To associate a directory path with a collection, prefix the path with the
 collection name and a colon:

@@ -30,7 +30,7 @@ adding some default content for that block:
 ```
 
 The `setBlock()` method opens the specified block; `getBlock()` closes the
-block and echoes the captured output between the two method calls.
+block and echoes the captured output from between the two method calls.
 
 Then, a view file might redefine that block:
 

@@ -14,14 +14,13 @@ You should also be sure to document each variable used in the template file.
 
 In PHP code, the docblock might look like this ...
 
-```html+php
+```
 <?php
 /**
  * @var \Qiq\Engine&\Qiq\Helper\Html\HtmlHelpers $this
  * @var string $name
  */
 ?>
-
 Hello <?= $this->h($name) ?>!
 ```
 
