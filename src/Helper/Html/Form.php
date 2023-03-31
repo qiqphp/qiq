@@ -10,8 +10,8 @@ class Form extends TagHelper
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function __invoke(
-        string $action,
         string $method = 'post',
+        string $action = '',
         string $enctype = 'multipart/form-data',
         array $attr = [],
         mixed ...$__attr
@@ -23,8 +23,8 @@ class Form extends TagHelper
             'enctype' => $enctype,
         ];
 
-        unset($attr['action']);
         unset($attr['method']);
+        unset($attr['action']);
         unset($attr['enctype']);
 
         $attr = array_merge($base, $attr);

@@ -232,8 +232,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function form(
-        string $action,
         string $method = 'post',
+        string $action = '',
         string $enctype = 'multipart/form-data',
         array $attr = [],
         mixed ...$__attr
@@ -241,7 +241,7 @@ trait HtmlHelperMethods
     {
         return $this
             ->get(Form::class)
-            ->__invoke($action, $method, $enctype, $attr, ...$__attr);
+            ->__invoke($method, $action, $enctype, $attr, ...$__attr);
     }
 
     /**
