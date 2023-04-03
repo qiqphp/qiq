@@ -87,8 +87,10 @@ class QiqToken
             (ctype_alpha($char) || $char === '_')
             && ! defined($this->firstWord)
             && ! in_array($this->firstWord, static::KNOWN)
+            && substr(ltrim($this->remainder), 0, 2) !== '::'
         ) {
-            // alphabetic or underscore, but not defined and not known.
+            // alphabetic or underscore, but not defined, not known, and not
+            // followed by a double-colon (indicating a constant or static).
             // treat as a helper. set indent so helper can use it if needed.
             $code = "\$this->{$code}";
             $indent = $this->indent($this->leadingSpaceOuter);
