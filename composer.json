@@ -1,7 +1,7 @@
 {
     "name": "qiq/qiq",
     "type": "library",
-    "description": "Provides TemplateView and TwoStepView implementations using PHP itself as the templating language, and an optional lightweight template markup.",
+    "description": "Provides a TemplateView implementations using PHP itself as the templating language, and an optional lightweight template markup.",
     "keywords": [
         "escape",
         "escaper",
