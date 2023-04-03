@@ -1,17 +1,5 @@
 # Change Log
 
-## 1.0.2
+## 2.0.0
 
-- Improved support for Windows
-
-- Infrastructure improvements (thanks @harikt)
-
-## 1.0.1
-
-- Recognize more opening keywords: `isset`, `empty`, `list`.
-
-- Update docs.
-
-## 1.0.0
-
-Initial release.
+Initial release; see upgrading notes at `./docs/en/upgrading.md`.
