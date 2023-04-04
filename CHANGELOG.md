@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.1
+
+- Recognize `::` in opening keywords. Previously, something like `{{ Foo::bar() }}` would have been compiled incorrectly as `<?php $this->Foo::bar() ?>`, but now correctly compiles to `<?php Foo::bar() ?>`.
+
 ## 1.1.0
 
 - Add `{{= ... ~}}` syntax to consume trailing newline (#17)
