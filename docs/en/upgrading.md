@@ -67,11 +67,6 @@ array into named parameters:
 
 Further:
 
-- All PHP functions must be prefixed with `\` to distinguish them from
-  Helper methods. Whereas previously you could use `{{h strtoupper($var) }}`
-  you must now use `{{h \strtoupper($var) }}`. This is in support of
-  improved static analysis.
-
 - All HTML helpers have been moved from the _Qiq\Helper_ namespace to the
   _Qiq\Helper\Html_ namespace; the _Helper_ class has been renamed
   to _TagHelper_.

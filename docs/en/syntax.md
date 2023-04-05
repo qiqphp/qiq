@@ -140,24 +140,23 @@ method. The following Qiq syntax ...
 ```
 
 If that helper method is not defined, the _Helpers_ class will call it as as
-global PHP function instead. For example, if a `strtoupper` helper method is
-not defined, the following will call the
-[`strtoupper`](https://php.net/strtoupper) PHP function:
+PHP function instead. For example, if a `time` helper method is not defined,
+the following will call the [`time`](https://php.net/time) PHP function:
 
 ```qiq
-{{= strtoupper ('foo') }}
+{{h time () }}
 ```
 
 However, this may not pass [static analysis](./static-analysis.md) checks. To
 improve static analysis results, prefix the opening keyword with a backslash
-to explicitly indicate a global PHP function:
+to explicitly indicate a PHP function:
 
 ```qiq
-{{= \strtoupper ('foo') }}
+{{h \time () }}
 ```
 
 Alternatively, you may create a [custom helper method](./helpers/custom.md)
-to override the global PHP function.
+to override the PHP function.
 
 ## Other PHP Code
 
