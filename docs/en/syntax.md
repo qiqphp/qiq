@@ -139,14 +139,25 @@ method. The following Qiq syntax ...
 ) ?>
 ```
 
-If you want Qiq code to treat the opening keyword as a global function, not
-as a template helper method, use a backslash at the start of the function name:
+If that helper method is not defined, the _Helpers_ class will call it as as
+global PHP function instead. For example, if a `strtoupper` helper method is
+not defined, the following will call the
+[`strtoupper`](https://php.net/strtoupper) PHP function:
+
+```qiq
+{{= strtoupper ('foo') }}
+```
+
+However, this may not pass [static analysis](./static-analysis.md) checks. To
+improve static analysis results, prefix the opening keyword with a backslash
+to explicitly indicate a global PHP function:
 
 ```qiq
 {{= \strtoupper ('foo') }}
 ```
 
-Normal PHP code does not require the opening backslash, but it won't hurt.
+Alternatively, you may create a [custom helper method](./helpers/custom.md)
+to override the global PHP function.
 
 ## Other PHP Code
 

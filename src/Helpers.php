@@ -14,6 +14,11 @@ class Helpers
         $this->container = $container ?? new Container();
     }
 
+    public function __call(string $func, array $args) : mixed
+    {
+        return $func(...$args);
+    }
+
     /**
      * @template T of object
      * @param class-string<T> $class
