@@ -11,9 +11,9 @@ class RadioFields extends TagHelper
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function __invoke(
-        string $name,
-        mixed $value,
-        array $options,
+        ?string $name = null,
+        mixed $value = null,
+        array $options = [],
         mixed $default = null,
         array $attr = [],
         mixed ...$__attr
@@ -44,7 +44,7 @@ class RadioFields extends TagHelper
         return ltrim($html);
     }
 
-    protected function default(string $name, mixed $default) : string
+    protected function default(?string $name, mixed $default) : string
     {
         /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> */
         $attr = [
@@ -61,7 +61,7 @@ class RadioFields extends TagHelper
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $__attr
      */
     protected function radio(
-        string $name,
+        ?string $name,
         mixed $checkedValue,
         string $optionValue,
         string $optionLabel,
