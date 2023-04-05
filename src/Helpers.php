@@ -14,6 +14,10 @@ class Helpers
         $this->container = $container ?? new Container();
     }
 
+    /**
+     * @param callable-string $func
+     * @param mixed[] $args
+     */
     public function __call(string $func, array $args) : mixed
     {
         return $func(...$args);
