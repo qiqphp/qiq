@@ -2,4 +2,6 @@
 
 ## 2.0.0
 
-Initial release; see upgrading notes at `./docs/en/upgrading.md`.
+Initial release.
+
+Please see upgrading notes at `./docs/en/upgrading.md`.
