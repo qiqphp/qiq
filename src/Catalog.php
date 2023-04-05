@@ -46,6 +46,11 @@ class Catalog
         $this->compiler = $compiler ?? new Compiler\QiqCompiler();
     }
 
+    public function getExtension() : string
+    {
+        return $this->extension;
+    }
+
     public function getCompiler() : Compiler
     {
         return $this->compiler;

@@ -30,6 +30,12 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         return new Catalog($paths, '.php', $this->compiler);
     }
 
+    public function testGetExtension() : void
+    {
+        $catalog = new Catalog([], '.foobar', $this->compiler);
+        $this->assertSame('.foobar', $catalog->getExtension());
+    }
+
     public function testHasGet() : void
     {
         $this->catalog->setPaths([__DIR__ . '/templates']);
