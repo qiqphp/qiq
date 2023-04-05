@@ -11,7 +11,7 @@ class Form extends TagHelper
      */
     public function __invoke(
         string $method = 'post',
-        string $action = '',
+        ?string $action = null,
         string $enctype = 'multipart/form-data',
         array $attr = [],
         mixed ...$__attr

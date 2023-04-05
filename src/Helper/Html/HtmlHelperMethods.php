@@ -44,8 +44,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function button(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -71,8 +71,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function checkboxField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -89,9 +89,9 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function checkboxFields(
-        string $name,
-        mixed $value,
-        array $options,
+        ?string $name = null,
+        mixed $value = null,
+        array $options = [],
         mixed $default = null,
         array $attr = [],
         mixed ...$__attr
@@ -115,8 +115,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function colorField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -132,8 +132,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function dateField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -149,8 +149,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function datetimeField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -166,8 +166,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function datetimeLocalField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -199,8 +199,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function emailField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -216,8 +216,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function fileField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -260,8 +260,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function hiddenField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -292,8 +292,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function imageButton(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -310,8 +310,8 @@ trait HtmlHelperMethods
      */
     public function inputField(
         string $type,
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -404,8 +404,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function monthField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -421,8 +421,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function numberField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -454,8 +454,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function passwordField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -471,8 +471,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function radioField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -488,9 +488,9 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function radioFields(
-        string $name,
-        mixed $value,
-        array $options,
+        ?string $name = null,
+        mixed $value = null,
+        array $options = [],
         mixed $default = null,
         array $attr = [],
         mixed ...$__attr
@@ -514,8 +514,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function rangeField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -531,8 +531,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function resetButton(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -563,8 +563,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function searchField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -580,9 +580,9 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function select(
-        string $name,
-        mixed $value,
-        array $options,
+        ?string $name = null,
+        mixed $value = null,
+        array $options = [],
         bool $multiple = false,
         ?string $placeholder = null,
         mixed $default = null,
@@ -610,8 +610,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function submitButton(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -627,8 +627,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function telField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -644,8 +644,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function textarea(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -661,8 +661,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function textField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -678,8 +678,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function timeField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -721,8 +721,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function urlField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
@@ -738,8 +738,8 @@ trait HtmlHelperMethods
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
     public function weekField(
-        string $name,
-        mixed $value,
+        ?string $name = null,
+        mixed $value = null,
         array $attr = [],
         mixed ...$__attr
     ) : string
