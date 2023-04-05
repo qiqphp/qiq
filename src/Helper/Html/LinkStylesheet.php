@@ -16,6 +16,7 @@ class LinkStylesheet extends TagHelper
     ) : string
     {
         $base = [
+            'id' => null,
             'rel' => 'stylesheet',
             'href' => $href,
             'type' => 'text/css',

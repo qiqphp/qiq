@@ -17,6 +17,7 @@ class Anchor extends TagHelper
     ) : string
     {
         $base = [
+            'id' => null,
             'href' => $href,
         ];
 

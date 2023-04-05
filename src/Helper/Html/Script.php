@@ -16,6 +16,7 @@ class Script extends TagHelper
     ) : string
     {
         $base = [
+            'id' => null,
             'src' => $src,
             'type' => 'text/javascript'
         ];

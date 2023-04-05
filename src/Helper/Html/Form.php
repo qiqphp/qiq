@@ -18,6 +18,7 @@ class Form extends TagHelper
     ) : string
     {
         $base = [
+            'id' => null,
             'method' => $method,
             'action' => $action,
             'enctype' => $enctype,

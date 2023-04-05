@@ -19,6 +19,7 @@ class InputField extends TagHelper
     ) : string
     {
         $base = array(
+            'id' => null,
             'type' => $type,
             'name' => $name,
             'value' => $value,

@@ -24,6 +24,8 @@ class Ul extends Items
             return '';
         }
 
+        $attr = array_merge(['id' => null], $attr);
+
         return $this->openTag('ul', $attr, $__attr) . PHP_EOL
             . $list
             . $this->indent->get() . '</ul>';

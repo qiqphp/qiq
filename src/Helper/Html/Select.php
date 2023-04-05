@@ -26,6 +26,7 @@ class Select extends TagHelper
         }
 
         $base = [
+            'id' => null,
             'name' => $name,
             'multiple' => $multiple,
         ];

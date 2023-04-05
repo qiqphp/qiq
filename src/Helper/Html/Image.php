@@ -16,6 +16,7 @@ class Image extends TagHelper
     ) : string
     {
         $base = [
+            'id' => null,
             'src' => $src,
             'alt' => basename($src),
         ];

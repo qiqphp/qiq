@@ -17,6 +17,7 @@ class Link extends TagHelper
     ) : string
     {
         $base = [
+            'id' => null,
             'rel' => $rel,
             'href' => $href,
         ];

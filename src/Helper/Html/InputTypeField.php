@@ -20,6 +20,7 @@ abstract class InputTypeField extends TagHelper
     ) : string
     {
         $base = array(
+            'id' => null,
             'type' => $this->type,
             'name' => $name,
             'value' => $value,

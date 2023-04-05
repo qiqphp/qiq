@@ -17,7 +17,12 @@ class Textarea extends TagHelper
         mixed ...$__attr
     ) : string
     {
-        $attr = array_merge(['name' => $name], $attr);
+        $base = [
+            'id' => null,
+            'name' => $name,
+        ];
+
+        $attr = array_merge($base, $attr);
         return $this->fullTag('textarea', $attr, $value, $__attr);
     }
 }

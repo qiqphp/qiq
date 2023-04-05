@@ -15,6 +15,7 @@ class Label extends TagHelper
         mixed ...$__attr
     ) : string
     {
+        $attr = array_merge(['id' => null], $attr);
         return $this->fullTag('label', $attr, $text, $__attr);
     }
 }

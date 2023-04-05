@@ -24,6 +24,8 @@ class Dl extends TagHelper
             return '';
         }
 
+        $attr = array_merge(['id' => null], $attr);
+
         return $this->openTag('dl', $attr, $__attr) . PHP_EOL
             . $list
             . $this->indent->get() . '</dl>';
