@@ -170,7 +170,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         }
 
         // the count will change as number of templates changes
-        $this->assertCount(21, $actual);
+        $this->assertCount(22, $actual);
     }
 
     protected function assertOutput(string $expect, string $file) : void

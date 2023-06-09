@@ -7,6 +7,8 @@ use Qiq\Compiler\NonCompiler;
 use Qiq\Compiler\QiqCompiler;
 use RuntimeException;
 
+use function file_get_contents;
+
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {
     protected HtmlTemplate $template;
@@ -160,5 +162,19 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $template = Template::new(cachePath: false);
         $actual = $template->getCatalog()->getCompiler();
         $this->assertInstanceOf(NonCompiler::class, $actual);
+    }
+
+    public function testAssignment() : void
+    {
+        $path = $this->template->getCatalog()->getCompiled('ext/assignment');
+        $actual = $this->template->getCatalog()->getCompiler()->compile($path);
+        $expect = <<<'EOT'
+<?php /** @var Qiq\Engine&Qiq\Helper\Html\HtmlHelpers $this */ ?>
+<?= $this->anchor ('https://qiqphp.com', 'Qiq Project') ?><?= PHP_EOL ?>
+<?php $a = $this->anchor ('https://qiqphp.com', 'Qiq Project') ?>
+
+EOT;
+
+        $this->assertSame($expect, file_get_contents($actual));
     }
 }
