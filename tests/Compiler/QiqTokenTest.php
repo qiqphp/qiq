@@ -181,6 +181,26 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
         $qiq = '{{= Foo::BAR }}';
         $php = '<?= Foo::BAR ?>';
         $this->assertPhp($php, $qiq);
+
+        $qiq = '{{= Foo::bar() }}';
+        $php = '<?= Foo::bar() ?>';
+        $this->assertPhp($php, $qiq);
+
+        $qiq = '{{ $fn = function () { }; }}';
+        $php = '<?php $fn = function () { }; ?>';
+        $this->assertPhp($php, $qiq);
+
+        $qiq = '{{ function foo() { } }}';
+        $php = '<?php function foo() { } ?>';
+        $this->assertPhp($php, $qiq);
+
+        $qiq = '{{ $a = $this->anchor("http://example.net") }}';
+        $php = '<?php $a = $this->anchor("http://example.net") ?>';
+        $this->assertPhp($php, $qiq);
+
+        $qiq = '{{ $a = anchor("http://example.net") }}';
+        $php = '<?php $a = $this->anchor("http://example.net") ?>';
+        $this->assertPhp($php, $qiq);
     }
 
     public function testIndenting() : void

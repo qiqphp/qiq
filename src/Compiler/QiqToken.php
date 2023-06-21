@@ -3,41 +3,14 @@ declare(strict_types=1);
 
 namespace Qiq\Compiler;
 
+use PhpToken;
+
 class QiqToken
 {
     protected const INDENT = [
         "\n" => '\n',
         "\r" => '\r',
         "\t" => '\t',
-    ];
-
-    protected const KNOWN = [
-        '__DIR__',
-        '__FILE__',
-        '__LINE__',
-        'break',
-        'continue',
-        'declare',
-        'else',
-        'elseif',
-        'empty',
-        'endfor',
-        'endforeach',
-        'endif',
-        'endwhile',
-        'for',
-        'foreach',
-        'goto',
-        'if',
-        'include',
-        'include_once',
-        'isset',
-        'list',
-        'namespace',
-        'require',
-        'require_once',
-        'use',
-        'while',
     ];
 
     public static function new(string $part) : ?self
@@ -66,6 +39,10 @@ class QiqToken
 
     protected string $closing = '';
 
+    protected array $tokens = [];
+
+    protected int $tokensCount = 0;
+
     public function __construct(
         protected string $leadingSpaceOuter,
         protected string $leadingSpaceInner,
@@ -81,28 +58,9 @@ class QiqToken
 
     public function __toString()
     {
-        $code = $this->firstWord . $this->remainder;
-        $char = substr($this->firstWord, 0, 1);
-        $indent = '';
-
-        if (
-            (ctype_alpha($char) || $char === '_')
-            && ! defined($this->firstWord)
-            && ! in_array($this->firstWord, static::KNOWN)
-            && substr(ltrim($this->remainder), 0, 2) !== '::'
-        ) {
-            // alphabetic or underscore, but not defined, not known, and not
-            // followed by a double-colon (indicating a constant or static).
-            // treat as a helper. set indent so helper can use it if needed.
-            $code = "\$this->{$code}";
-            $indent = $this->indent($this->leadingSpaceOuter);
-        }
-
         return $this->leadingSpaceOuter
-            . $indent
-            . $this->opening
-            . $code
-            . $this->closing
+            . $this->indent($this->leadingSpaceOuter)
+            . $this->code()
             . $this->tailingSpaceOuter;
     }
 
@@ -213,5 +171,88 @@ class QiqToken
     protected function lclip(string $str) : string
     {
         return ltrim($str, "\t ");
+    }
+
+    protected function code(): string
+    {
+        if ($this->firstWord === 'extends') {
+            // subvert the tokenizer process, because 'extends' is a PHP keyword
+            $this->firstWord = '$this->extends';
+        }
+
+        $this->tokens = PhpToken::tokenize(
+            $this->opening
+            . $this->firstWord
+            . $this->remainder
+            . $this->closing
+        );
+
+        $this->tokensCount = count($this->tokens);
+
+        $code = '';
+
+        foreach ($this->tokens as $i => $token) {
+            if ($this->isFunctionCall($i)) {
+                $code .= '$this->';
+            }
+
+            $code .= $token->text;
+        }
+
+        return $code;
+    }
+
+    protected function isFunctionCall(int $i): bool
+    {
+        $curr = $this->tokens[$i];
+
+        if (! $curr->is(T_STRING)) {
+            return false;
+        }
+
+        $next = $this->nextToken($i);
+
+        if (! $next?->is('(')) {
+            return false;
+        }
+
+        $prev = $this->prevToken($i);
+
+        if ($prev?->is([
+            T_OBJECT_OPERATOR,
+            T_NULLSAFE_OBJECT_OPERATOR,
+            T_DOUBLE_COLON,
+            T_FUNCTION,
+        ])) {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function prevToken(int $i): ?PhpToken
+    {
+        while ($i > 0) {
+            $i --;
+
+            if (! $this->tokens[$i]->is(T_WHITESPACE)) {
+                return $this->tokens[$i];
+            }
+        }
+
+        return null;
+    }
+
+    protected function nextToken(int $i): ?PhpToken
+    {
+        while ($i < $this->tokensCount) {
+            $i ++;
+
+            if (! $this->tokens[$i]->is(T_WHITESPACE)) {
+                return $this->tokens[$i];
+            }
+        }
+
+        return null;
     }
 }
