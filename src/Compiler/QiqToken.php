@@ -39,6 +39,9 @@ class QiqToken
 
     protected string $closing = '';
 
+    /**
+     * @var PhpToken[]
+     */
     protected array $tokens = [];
 
     protected int $tokensCount = 0;
@@ -75,7 +78,6 @@ class QiqToken
         $space = strtr($space, self::INDENT);
         return "<?php \$this->setIndent(\"$space\") ?>";
     }
-
 
     protected function fixEcho() : void
     {
