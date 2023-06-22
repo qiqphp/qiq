@@ -206,30 +206,14 @@ class QiqToken
 
     protected function isFunctionCall(int $i): bool
     {
-        $curr = $this->tokens[$i];
-
-        if (! $curr->is(T_STRING)) {
-            return false;
-        }
-
-        $next = $this->nextToken($i);
-
-        if (! $next?->is('(')) {
-            return false;
-        }
-
-        $prev = $this->prevToken($i);
-
-        if ($prev?->is([
-            T_OBJECT_OPERATOR,
-            T_NULLSAFE_OBJECT_OPERATOR,
-            T_DOUBLE_COLON,
-            T_FUNCTION,
-        ])) {
-            return false;
-        }
-
-        return true;
+        return $this->tokens[$i]->is(T_STRING)
+            && $this->nextToken($i)?->is('(')
+            && ! $this->prevToken($i)?->is([
+                T_OBJECT_OPERATOR,
+                T_NULLSAFE_OBJECT_OPERATOR,
+                T_DOUBLE_COLON,
+                T_FUNCTION,
+            ]);
     }
 
     protected function prevToken(int $i): ?PhpToken
@@ -237,7 +221,11 @@ class QiqToken
         while ($i > 0) {
             $i --;
 
-            if (! $this->tokens[$i]->is(T_WHITESPACE)) {
+            if (! $this->tokens[$i]->is([
+                T_WHITESPACE,
+                T_COMMENT,
+                T_DOC_COMMENT,
+            ])) {
                 return $this->tokens[$i];
             }
         }
@@ -250,7 +238,11 @@ class QiqToken
         while ($i < $this->tokensCount) {
             $i ++;
 
-            if (! $this->tokens[$i]->is(T_WHITESPACE)) {
+            if (! $this->tokens[$i]->is([
+                T_WHITESPACE,
+                T_COMMENT,
+                T_DOC_COMMENT,
+            ])) {
                 return $this->tokens[$i];
             }
         }
