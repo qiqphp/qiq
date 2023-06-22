@@ -100,11 +100,12 @@ Qiq syntax recognizes most PHP control structures:
 - `goto`
 - `if`, `elseif`, `else`, `endif`
 - `include`, `include_once`
+- `match`
 - `require`, `require_once`
+- `switch`, `case`, `endswtich`
 - `while`, `endwhile`
 
-Qiq does not recognize `else if`, `switch`, `case`, or `match`; for these, you
-can always fall back to plain PHP.
+Qiq does not recognize `else if` -- use `elseif` instead.
 
 ## Reserved Words
 
