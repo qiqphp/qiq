@@ -39,6 +39,8 @@ class QiqToken
 
     protected string $closing = '';
 
+    protected bool $echoing = false;
+
     /**
      * @var PhpToken[]
      */
@@ -69,6 +71,10 @@ class QiqToken
 
     protected function indent(string $space) : string
     {
+        if (! $this->echoing) {
+            return '';
+        }
+
         $space = strrchr($space, PHP_EOL);
 
         if ($space === false) {
@@ -86,6 +92,7 @@ class QiqToken
             return;
         }
 
+        $this->echoing = true;
         $char = substr($this->opening, 0, 1);
 
         switch ($char) {

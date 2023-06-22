@@ -205,6 +205,12 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
 
     public function testIndenting() : void
     {
+        // non-echoing
+        $qiq = PHP_EOL . '    {{ if (true): endif; }}';
+        $php = PHP_EOL . '    <?php if (true): endif; ?>';
+        $this->assertPhp($php, $qiq);
+
+        // echoing
         $set = PHP_OS_FAMILY === 'Windows' ? '\r\n' : '\n';
         $qiq = PHP_EOL . '    {{= textField(["name" => "street", "value" => $street]) }}';
         $php = PHP_EOL . '    <?php $this->setIndent("' . $set . '    ") ?><?= $this->textField(["name" => "street", "value" => $street]) ?>';
