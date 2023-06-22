@@ -90,37 +90,11 @@ For example, this Qiq code ...
 <?php endforeach ?>
 ```
 
-Qiq syntax recognizes most PHP control structures:
-
-- `break`
-- `continue`
-- `declare`
-- `for`, `endfor`
-- `foreach`, `endforeach`
-- `goto`
-- `if`, `elseif`, `else`, `endif`
-- `include`, `include_once`
-- `match`
-- `require`, `require_once`
-- `switch`, `case`, `endswtich`
-- `while`, `endwhile`
-
-Qiq does not recognize `else if` -- use `elseif` instead.
-
-## Reserved Words
-
-Qiq recognizes the following reserved words.
-
-- `empty`
-- `isset`
-- `list`
-- `namespace`
-- `use`
-
 ## Helpers
 
-Any opening keyword Qiq does not recognize is treated as a template helper
-method. The following Qiq syntax ...
+Any code inside Qiq tags, that PHP would recognize as a potential function
+call, is treated as a Qiq template helper method. Thus, the following Qiq
+syntax ...
 
 ```qiq
 {{= label ("Street Address", for: 'street') }}
@@ -132,7 +106,7 @@ method. The following Qiq syntax ...
 
 ... is equivalent to this PHP code with Qiq helpers:
 
-```html+php
+```php
 <?= $this->label("Street Address", for: 'street') ?>
 <?= $this->textField(
     name: 'street',
@@ -140,7 +114,19 @@ method. The following Qiq syntax ...
 ) ?>
 ```
 
-If that helper method is not defined, the _Helpers_ class will call it as as
+You can use helper method names anywhere inside Qiq code with or without the
+`$this->` prefix. In all of the below examples, the `anchor()` helper result
+is assigned to a variable:
+
+```qiq
+{{ $a_com = anchor ('http://example.com') }}
+{{ $a_net = $this->anchor ('http://example.net') }}
+<?php $a_org = $this->anchor('http://example.org') ?>
+```
+
+## Undefined Helpers
+
+If a helper method name is not defined, the _Helpers_ class will call it as as
 PHP function instead. For example, if a `time` helper method is not defined,
 the following will call the [`time`](https://php.net/time) PHP function:
 
@@ -149,8 +135,8 @@ the following will call the [`time`](https://php.net/time) PHP function:
 ```
 
 However, this may not pass [static analysis](./static-analysis.md) checks. To
-improve static analysis results, prefix the opening keyword with a backslash
-to explicitly indicate a PHP function:
+improve static analysis results, prefix the call with a backslash to
+explicitly indicate a PHP function:
 
 ```qiq
 {{h \time () }}
@@ -260,6 +246,6 @@ This Qiq code ...
 
 ```qiq
 <ul>
-    <?php $this->setIndent('    ') ?><?= $this->items(['foo', 'bar', 'baz']) ?>
+    <?php $this->setIndent("    ") ?><?= $this->items(['foo', 'bar', 'baz']) ?>
 </ul>
 ```
