@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Qiq\Compiler;
 
-use PhpToken;
-
 class QiqToken
 {
     protected const INDENT = [
@@ -44,9 +42,9 @@ class QiqToken
     /**
      * @var PhpToken[]
      */
-    protected array $tokens = [];
+    protected array $phpTokens = [];
 
-    protected int $tokensCount = 0;
+    protected int $phpTokensCount = 0;
 
     public function __construct(
         protected string $leadingSpaceOuter,
@@ -185,27 +183,29 @@ class QiqToken
     protected function code(): string
     {
         if ($this->firstWord === 'extends') {
-            // subvert the tokenizer process, because 'extends' is a PHP keyword
+            // subvert the tokenizer process for BC,
+            // because 'extends' is a PHP keyword.
+            // use 'inherits' instead.
             $this->firstWord = '$this->extends';
         }
 
-        $this->tokens = PhpToken::tokenize(
+        $this->phpTokens = PhpToken::tokenize(
             $this->opening
             . $this->firstWord
             . $this->remainder
             . $this->closing
         );
 
-        $this->tokensCount = count($this->tokens);
+        $this->phpTokensCount = count($this->phpTokens);
 
         $code = '';
 
-        foreach ($this->tokens as $i => $token) {
+        foreach ($this->phpTokens as $i => $phpToken) {
             if ($this->isFunctionCall($i)) {
                 $code .= '$this->';
             }
 
-            $code .= $token->text;
+            $code .= $phpToken->text;
         }
 
         return $code;
@@ -213,9 +213,9 @@ class QiqToken
 
     protected function isFunctionCall(int $i): bool
     {
-        return $this->tokens[$i]->is(T_STRING)
-            && $this->nextToken($i)?->is('(')
-            && ! $this->prevToken($i)?->is([
+        return $this->phpTokens[$i]->is(T_STRING)
+            && $this->nextSignificantToken($i)?->is('(')
+            && ! $this->prevSignificantToken($i)?->is([
                 T_OBJECT_OPERATOR,
                 T_NULLSAFE_OBJECT_OPERATOR,
                 T_DOUBLE_COLON,
@@ -223,34 +223,26 @@ class QiqToken
             ]);
     }
 
-    protected function prevToken(int $i): ?PhpToken
+    protected function prevSignificantToken(int $i): ?PhpToken
     {
         while ($i > 0) {
             $i --;
 
-            if (! $this->tokens[$i]->is([
-                T_WHITESPACE,
-                T_COMMENT,
-                T_DOC_COMMENT,
-            ])) {
-                return $this->tokens[$i];
+            if ($this->phpTokens[$i]->isSignificant()) {
+                return $this->phpTokens[$i];
             }
         }
 
         return null;
     }
 
-    protected function nextToken(int $i): ?PhpToken
+    protected function nextSignificantToken(int $i): ?PhpToken
     {
-        while ($i < $this->tokensCount) {
+        while ($i < $this->phpTokensCount) {
             $i ++;
 
-            if (! $this->tokens[$i]->is([
-                T_WHITESPACE,
-                T_COMMENT,
-                T_DOC_COMMENT,
-            ])) {
-                return $this->tokens[$i];
+            if ($this->phpTokens[$i]->isSignificant()) {
+                return $this->phpTokens[$i];
             }
         }
 
