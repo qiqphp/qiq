@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Qiq\Compiler;
 
+use PhpToken;
+
 class QiqToken
 {
     protected const INDENT = [
@@ -228,7 +230,7 @@ class QiqToken
         while ($i > 0) {
             $i --;
 
-            if ($this->phpTokens[$i]->isSignificant()) {
+            if ($this->isSignificantToken($this->phpTokens[$i])) {
                 return $this->phpTokens[$i];
             }
         }
@@ -241,11 +243,20 @@ class QiqToken
         while ($i < $this->phpTokensCount) {
             $i ++;
 
-            if ($this->phpTokens[$i]->isSignificant()) {
+            if ($this->isSignificantToken($this->phpTokens[$i])) {
                 return $this->phpTokens[$i];
             }
         }
 
         return null;
+    }
+
+    protected function isSignificantToken(PhpToken $token): bool
+    {
+        return ! $token->is([
+            T_WHITESPACE,
+            T_COMMENT,
+            T_DOC_COMMENT,
+        ]);
     }
 }
