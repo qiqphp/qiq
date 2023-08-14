@@ -13,18 +13,12 @@ class Link extends TagHelper
         string $rel,
         string $href,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        $base = [
-            'id' => null,
-            'rel' => $rel,
-            'href' => $href,
-        ];
-
+        $base = ['id' => null, 'rel' => $rel, 'href' => $href];
         unset($attr['rel']);
         unset($attr['href']);
-
         $attr = array_merge($base, $attr);
         return $this->voidTag('link', $attr, $__attr);
     }

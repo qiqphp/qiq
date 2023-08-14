@@ -14,15 +14,13 @@ class QiqCompiler implements Compiler
     public function __construct(protected ?string $cachePath = null)
     {
         $this->cachePath ??= rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR)
-            . DIRECTORY_SEPARATOR . 'qiq';
+            . DIRECTORY_SEPARATOR
+            . 'qiq';
     }
 
     public function compile(string $source) : string
     {
-        $append = (PHP_OS_FAMILY === 'Windows')
-            ? substr($source, 2)
-            : $source;
-
+        $append = PHP_OS_FAMILY === 'Windows' ? substr($source, 2) : $source;
         $cached = $this->cachePath . $append;
 
         if (! $this->isCompiled($source, $cached)) {
@@ -43,11 +41,8 @@ class QiqCompiler implements Compiler
         }
 
         $files = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator(
-                $cachePath,
-                FilesystemIterator::SKIP_DOTS
-            ),
-            RecursiveIteratorIterator::CHILD_FIRST
+            new RecursiveDirectoryIterator($cachePath, FilesystemIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST,
         );
 
         /** @var SplFileInfo $file */
@@ -83,17 +78,16 @@ class QiqCompiler implements Compiler
     protected function convert(string $text) : string
     {
         $parts = preg_split(
-            '/(\s*{{.*?}}\s*)/ms',
+            '/(\\s*{{.*?}}\\s*)/ms',
             $text,
             -1,
-            PREG_SPLIT_DELIM_CAPTURE
+            PREG_SPLIT_DELIM_CAPTURE,
         );
-
         $compiled = '';
 
         foreach ((array) $parts as $part) {
             $token = $this->newToken((string) $part);
-            $compiled .= ($token === null) ? $this->embrace((string) $part) : $token;
+            $compiled .= $token === null ? $this->embrace((string) $part) : $token;
         }
 
         return $compiled;
@@ -101,10 +95,7 @@ class QiqCompiler implements Compiler
 
     protected function embrace(string $part) : string
     {
-        return strtr($part, [
-            '{\\{' => '{{',
-            '}\\}' => '}}',
-        ]);
+        return strtr($part, ['{\\{' => '{{', '}\\}' => '}}']);
     }
 
     protected function newToken(string $part) : ?QiqToken

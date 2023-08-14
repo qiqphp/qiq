@@ -23,7 +23,6 @@ class Indent
 
     public function get(int $add = 0) : string
     {
-        return $this->base
-            . str_repeat($this->indent, $this->level + $add);
+        return $this->base . str_repeat($this->indent, $this->level + $add);
     }
 }

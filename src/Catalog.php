@@ -39,7 +39,7 @@ class Catalog
     public function __construct(
         array $paths = [],
         string $extension = '.php',
-        Compiler $compiler = null
+        Compiler $compiler = null,
     ) {
         $this->setPaths($paths);
         $this->setExtension($extension);
@@ -73,6 +73,7 @@ class Catalog
 
         foreach ($this->paths[$collection] as $path) {
             $file = $path . DIRECTORY_SEPARATOR . $name . $this->extension;
+
             if (is_readable($file)) {
                 $this->source[$key] = $file;
                 return $file;
@@ -93,13 +94,19 @@ class Catalog
         if ($source === null) {
             list($collection, $name) = $this->split($name);
 
-            throw new Exception\FileNotFound(
-                PHP_EOL
-                . "File: $name" . PHP_EOL
-                . "Extension: {$this->extension}" . PHP_EOL
-                . "Collection: " . ($collection === '' ? '(default)' : $collection) . PHP_EOL
-                . "Paths: " . print_r($this->paths[$collection], true) . PHP_EOL
-                . "Catalog class: " . print_r(get_class($this), true)
+            throw new Exception\FileNotFound(PHP_EOL
+                . "File: {$name}"
+                . PHP_EOL
+                . "Extension: {$this->extension}"
+                . PHP_EOL
+                . "Collection: "
+                . ($collection === '' ? '(default)' : $collection)
+                . PHP_EOL
+                . "Paths: "
+                . print_r($this->paths[$collection], true)
+                . PHP_EOL
+                . "Catalog class: "
+                . print_r(get_class($this), true)
             );
         }
 
@@ -161,7 +168,6 @@ class Catalog
     {
         $this->source = [];
         $this->compiled = [];
-
         $compiled = [];
 
         foreach ($this->paths as $collection => $paths) {
@@ -169,14 +175,15 @@ class Catalog
                 $files = new RecursiveIteratorIterator(
                     new RecursiveDirectoryIterator(
                         $path,
-                        FilesystemIterator::SKIP_DOTS
+                        FilesystemIterator::SKIP_DOTS,
                     ),
-                    RecursiveIteratorIterator::CHILD_FIRST
+                    RecursiveIteratorIterator::CHILD_FIRST,
                 );
 
                 /** @var SplFileInfo $file */
                 foreach ($files as $file) {
                     $source = $file->getPathname();
+
                     if (str_ends_with($source, $this->extension)) {
                         $compiled[] = $this->compiler->compile($source);
                     }
@@ -199,10 +206,12 @@ class Catalog
     protected function split(string $spec) : array
     {
         if (strpos($spec, '..') !== false) {
-            throw new Exception\FileNotFound("Double-dots not allowed in template specifications: $spec");
+            throw new Exception\FileNotFound(
+                "Double-dots not allowed in template specifications: {$spec}",
+            );
         }
 
-        $offset = (PHP_OS_FAMILY === 'Windows') ? 2 : 0;
+        $offset = PHP_OS_FAMILY === 'Windows' ? 2 : 0;
         $pos = strpos($spec, ':', $offset);
 
         if (! $pos) {
@@ -217,9 +226,6 @@ class Catalog
             $this->paths[$collection] = [];
         }
 
-        return [
-            $collection,
-            $spec
-        ];
+        return [$collection, $spec];
     }
 }

@@ -10,9 +10,7 @@ trait HtmlHelperMethods
      */
     public function a(mixed $raw) : string
     {
-        return $this
-            ->get(Escape::class)
-            ->a($raw);
+        return $this->get(Escape::class)->a($raw);
     }
 
     /**
@@ -23,19 +21,15 @@ trait HtmlHelperMethods
         string $href,
         string $text,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(Anchor::class)
-            ->__invoke($href, $text, $attr, ...$__attr);
+        return $this->get(Anchor::class)->__invoke($href, $text, $attr, ...$__attr);
     }
 
     public function base(string $href) : string
     {
-        return $this
-            ->get(Base::class)
-            ->__invoke($href);
+        return $this->get(Base::class)->__invoke($href);
     }
 
     /**
@@ -47,12 +41,10 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(Button::class)
-            ->__invoke($name, $value, $attr, ...$__attr);
+        return $this->get(Button::class)->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
@@ -60,9 +52,7 @@ trait HtmlHelperMethods
      */
     public function c(mixed $raw) : string
     {
-        return $this
-            ->get(Escape::class)
-            ->c($raw);
+        return $this->get(Escape::class)->c($raw);
     }
 
     /**
@@ -74,7 +64,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -94,19 +84,12 @@ trait HtmlHelperMethods
         array $options = [],
         mixed $default = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
             ->get(CheckboxFields::class)
-            ->__invoke(
-                $name,
-                $value,
-                $options,
-                $default,
-                $attr,
-                ...$__attr
-            );
+            ->__invoke($name, $value, $options, $default, $attr, ...$__attr);
     }
 
     /**
@@ -118,7 +101,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -135,12 +118,10 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(DateField::class)
-            ->__invoke($name, $value, $attr, ...$__attr);
+        return $this->get(DateField::class)->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
@@ -152,7 +133,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -169,7 +150,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -182,15 +163,9 @@ trait HtmlHelperMethods
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function dl(
-        array $terms,
-        array $attr = [],
-        mixed ...$__attr
-    ) : string
+    public function dl(array $terms, array $attr = [], mixed ...$__attr) : string
     {
-        return $this
-            ->get(Dl::class)
-            ->__invoke($terms, $attr, ...$__attr);
+        return $this->get(Dl::class)->__invoke($terms, $attr, ...$__attr);
     }
 
     /**
@@ -202,7 +177,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -219,12 +194,10 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(FileField::class)
-            ->__invoke($name, $value, $attr, ...$__attr);
+        return $this->get(FileField::class)->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
@@ -236,7 +209,7 @@ trait HtmlHelperMethods
         string $action = '',
         string $enctype = 'multipart/form-data',
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -249,9 +222,7 @@ trait HtmlHelperMethods
      */
     public function h(mixed $raw) : string
     {
-        return $this
-            ->get(Escape::class)
-            ->h($raw);
+        return $this->get(Escape::class)->h($raw);
     }
 
     /**
@@ -263,7 +234,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -275,15 +246,9 @@ trait HtmlHelperMethods
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function image(
-        string $src,
-        array $attr = [],
-        mixed ...$__attr
-    ) : string
+    public function image(string $src, array $attr = [], mixed ...$__attr) : string
     {
-        return $this
-            ->get(Image::class)
-            ->__invoke($src, $attr, ...$__attr);
+        return $this->get(Image::class)->__invoke($src, $attr, ...$__attr);
     }
 
     /**
@@ -295,7 +260,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -313,7 +278,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -326,9 +291,7 @@ trait HtmlHelperMethods
      */
     public function items(array $items) : string
     {
-        return $this
-            ->get(Items::class)
-            ->__invoke($items);
+        return $this->get(Items::class)->__invoke($items);
     }
 
     /**
@@ -336,24 +299,16 @@ trait HtmlHelperMethods
      */
     public function j(mixed $raw) : string
     {
-        return $this
-            ->get(Escape::class)
-            ->j($raw);
+        return $this->get(Escape::class)->j($raw);
     }
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function label(
-        string $text,
-        array $attr = [],
-        mixed ...$__attr
-    ) : string
+    public function label(string $text, array $attr = [], mixed ...$__attr) : string
     {
-        return $this
-            ->get(Label::class)
-            ->__invoke($text, $attr, ...$__attr);
+        return $this->get(Label::class)->__invoke($text, $attr, ...$__attr);
     }
 
     /**
@@ -364,12 +319,10 @@ trait HtmlHelperMethods
         string $rel,
         string $href,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(Link::class)
-            ->__invoke($rel, $href, $attr, ...$__attr);
+        return $this->get(Link::class)->__invoke($rel, $href, $attr, ...$__attr);
     }
 
     /**
@@ -379,12 +332,10 @@ trait HtmlHelperMethods
     public function linkStylesheet(
         string $href,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(LinkStylesheet::class)
-            ->__invoke($href, $attr, ...$__attr);
+        return $this->get(LinkStylesheet::class)->__invoke($href, $attr, ...$__attr);
     }
 
     /**
@@ -393,9 +344,7 @@ trait HtmlHelperMethods
      */
     public function meta(array $attr = [], mixed ...$__attr) : string
     {
-        return $this
-            ->get(Meta::class)
-            ->__invoke($attr, ...$__attr);
+        return $this->get(Meta::class)->__invoke($attr, ...$__attr);
     }
 
     /**
@@ -407,7 +356,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -424,7 +373,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -437,15 +386,9 @@ trait HtmlHelperMethods
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function ol(
-        array $items,
-        array $attr = [],
-        mixed ...$__attr
-    ) : string
+    public function ol(array $items, array $attr = [], mixed ...$__attr) : string
     {
-        return $this
-            ->get(Ol::class)
-            ->__invoke($items, $attr, ...$__attr);
+        return $this->get(Ol::class)->__invoke($items, $attr, ...$__attr);
     }
 
     /**
@@ -457,7 +400,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -474,7 +417,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -493,19 +436,12 @@ trait HtmlHelperMethods
         array $options = [],
         mixed $default = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
             ->get(RadioFields::class)
-            ->__invoke(
-                $name,
-                $value,
-                $options,
-                $default,
-                $attr,
-                ...$__attr
-            );
+            ->__invoke($name, $value, $options, $default, $attr, ...$__attr);
     }
 
     /**
@@ -517,7 +453,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -534,7 +470,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -546,15 +482,9 @@ trait HtmlHelperMethods
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function script(
-        string $src,
-        array $attr = [],
-        mixed ...$__attr
-    ) : string
+    public function script(string $src, array $attr = [], mixed ...$__attr) : string
     {
-        return $this
-            ->get(Script::class)
-            ->__invoke($src, $attr, ...$__attr);
+        return $this->get(Script::class)->__invoke($src, $attr, ...$__attr);
     }
 
     /**
@@ -566,7 +496,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -587,11 +517,13 @@ trait HtmlHelperMethods
         ?string $placeholder = null,
         mixed $default = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
-            ->get(Select::class)
+            ->get(
+                Select::class,
+            )
             ->__invoke(
                 $name,
                 $value,
@@ -600,7 +532,7 @@ trait HtmlHelperMethods
                 $placeholder,
                 $default,
                 $attr,
-                ...$__attr
+                ...$__attr,
             );
     }
 
@@ -613,7 +545,7 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         return $this
@@ -630,12 +562,10 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(TelField::class)
-            ->__invoke($name, $value, $attr, ...$__attr);
+        return $this->get(TelField::class)->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
@@ -647,12 +577,10 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(Textarea::class)
-            ->__invoke($name, $value, $attr, ...$__attr);
+        return $this->get(Textarea::class)->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
@@ -664,12 +592,10 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(TextField::class)
-            ->__invoke($name, $value, $attr, ...$__attr);
+        return $this->get(TextField::class)->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
@@ -681,12 +607,10 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(TimeField::class)
-            ->__invoke($name, $value, $attr, ...$__attr);
+        return $this->get(TimeField::class)->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
@@ -694,9 +618,7 @@ trait HtmlHelperMethods
      */
     public function u(mixed $raw) : string
     {
-        return $this
-            ->get(Escape::class)
-            ->u($raw);
+        return $this->get(Escape::class)->u($raw);
     }
 
     /**
@@ -704,15 +626,9 @@ trait HtmlHelperMethods
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function ul(
-        array $items,
-        array $attr = [],
-        mixed ...$__attr
-    ) : string
+    public function ul(array $items, array $attr = [], mixed ...$__attr) : string
     {
-        return $this
-            ->get(Ul::class)
-            ->__invoke($items, $attr, ...$__attr);
+        return $this->get(Ul::class)->__invoke($items, $attr, ...$__attr);
     }
 
     /**
@@ -724,12 +640,10 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(UrlField::class)
-            ->__invoke($name, $value, $attr, ...$__attr);
+        return $this->get(UrlField::class)->__invoke($name, $value, $attr, ...$__attr);
     }
 
     /**
@@ -741,11 +655,9 @@ trait HtmlHelperMethods
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        return $this
-            ->get(WeekField::class)
-            ->__invoke($name, $value, $attr, ...$__attr);
+        return $this->get(WeekField::class)->__invoke($name, $value, $attr, ...$__attr);
     }
 }

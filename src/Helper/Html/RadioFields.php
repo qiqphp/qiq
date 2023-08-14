@@ -16,14 +16,13 @@ class RadioFields extends TagHelper
         array $options = [],
         mixed $default = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         unset($attr['type']);
         unset($attr['name']);
         unset($attr['value']);
         unset($attr['checked']);
-
         $html = '';
 
         if ($default !== null) {
@@ -31,14 +30,15 @@ class RadioFields extends TagHelper
         }
 
         foreach ($options as $optionValue => $optionLabel) {
-            $html .= $this->radio(
-                $name,
-                $value,
-                (string) $optionValue,
-                (string) $optionLabel,
-                $attr,
-                $__attr
-            );
+            $html .= $this
+                ->radio(
+                    $name,
+                    $value,
+                    (string) $optionValue,
+                    (string) $optionLabel,
+                    $attr,
+                    $__attr,
+                );
         }
 
         return ltrim($html);
@@ -47,12 +47,7 @@ class RadioFields extends TagHelper
     protected function default(?string $name, mixed $default) : string
     {
         /** @var array<null|scalar|\Stringable|array<null|scalar|\Stringable>> */
-        $attr = [
-            'type' => 'hidden',
-            'name' => $name,
-            'value' => $default,
-        ];
-
+        $attr = ['type' => 'hidden', 'name' => $name, 'value' => $default];
         return $this->indent->get() . $this->voidTag('input', $attr) . PHP_EOL;
     }
 
@@ -66,7 +61,7 @@ class RadioFields extends TagHelper
         string $optionValue,
         string $optionLabel,
         array $attr,
-        array $__attr
+        array $__attr,
     ) : string
     {
         $base = [
@@ -75,7 +70,6 @@ class RadioFields extends TagHelper
             'value' => $optionValue,
             'checked' => $optionValue == $checkedValue,
         ];
-
         $attr = array_merge($base, $attr);
         $input = $this->voidTag('input', $attr, $__attr);
         $label = $this->escape->h($optionLabel);

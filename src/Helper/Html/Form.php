@@ -14,7 +14,7 @@ class Form extends TagHelper
         ?string $action = null,
         string $enctype = 'multipart/form-data',
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
         $base = [
@@ -23,11 +23,9 @@ class Form extends TagHelper
             'action' => $action,
             'enctype' => $enctype,
         ];
-
         unset($attr['method']);
         unset($attr['action']);
         unset($attr['enctype']);
-
         $attr = array_merge($base, $attr);
         return $this->openTag('form', $attr, $__attr);
     }

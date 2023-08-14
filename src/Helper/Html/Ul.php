@@ -10,11 +10,7 @@ class Ul extends Items
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable> $__attr
      */
-    public function __invoke(
-        array $items,
-        array $attr = [],
-        mixed ...$__attr
-    ) : string
+    public function __invoke(array $items, array $attr = [], mixed ...$__attr) : string
     {
         $this->indent->level(+1);
         $list = $this->items($items);
@@ -25,9 +21,10 @@ class Ul extends Items
         }
 
         $attr = array_merge(['id' => null], $attr);
-
-        return $this->openTag('ul', $attr, $__attr) . PHP_EOL
+        return $this->openTag('ul', $attr, $__attr)
+            . PHP_EOL
             . $list
-            . $this->indent->get() . '</ul>';
+            . $this->indent->get()
+            . '</ul>';
     }
 }

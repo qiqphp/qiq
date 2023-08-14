@@ -7,21 +7,15 @@ use Qiq\Indent;
 
 abstract class TagHelper
 {
-    public function __construct(
-        protected Escape $escape,
-        protected Indent $indent,
-    ) {
+    public function __construct(protected Escape $escape, protected Indent $indent)
+    {
     }
 
     /**
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $__attr
      */
-    protected function openTag(
-        string $tag,
-        array $attr,
-        array $__attr = []
-    ) : string
+    protected function openTag(string $tag, array $attr, array $__attr = []) : string
     {
         $tag = $this->escape->a($tag);
         $attr = $this->attr($attr, $__attr);
@@ -37,7 +31,7 @@ abstract class TagHelper
         string $tag,
         array $attr,
         mixed $text = '',
-        array $__attr = []
+        array $__attr = [],
     ) : string
     {
         $text = $this->escape->h($text);
@@ -48,11 +42,7 @@ abstract class TagHelper
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $attr
      * @param array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $__attr
      */
-    protected function voidTag(
-        string $tag,
-        array $attr,
-        array $__attr = []
-    ) : string
+    protected function voidTag(string $tag, array $attr, array $__attr = []) : string
     {
         $tag = $this->escape->a($tag);
         $attr = $this->attr($attr, $__attr);

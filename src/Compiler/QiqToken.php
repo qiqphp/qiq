@@ -5,16 +5,12 @@ namespace Qiq\Compiler;
 
 class QiqToken
 {
-    protected const INDENT = [
-        "\n" => '\n',
-        "\r" => '\r',
-        "\t" => '\t',
-    ];
+    protected const INDENT = ["\n" => '\\n', "\r" => '\\r', "\t" => '\\t'];
 
     public static function new(string $part) : ?self
     {
         $result = preg_match(
-            '/(\s*){{(\s*)([a-z=~]\s+|\s*)(\W|\w+)(.*?)(\s*)(~\s*)?}}(\s*)/msi',
+            '/(\\s*){{(\\s*)([a-z=~]\\s+|\\s*)(\\W|\\w+)(.*?)(\\s*)(~\\s*)?}}(\\s*)/msi',
             $part,
             $matches,
         );
@@ -80,7 +76,7 @@ class QiqToken
         }
 
         $space = strtr($space, self::INDENT);
-        return "<?php \$this->setIndent(\"$space\") ?>";
+        return "<?php \$this->setIndent(\"{$space}\") ?>";
     }
 
     protected function fixEcho() : void
@@ -97,9 +93,11 @@ class QiqToken
             case '~':
                 $this->fixEchoPreline();
                 return;
+
             case '=':
                 $this->fixEchoRaw();
                 return;
+
             default:
                 $this->fixEchoEscaped($char);
                 return;
@@ -114,7 +112,7 @@ class QiqToken
             $space = ' ';
         }
 
-        $this->opening = '<?php'. $space;
+        $this->opening = '<?php' . $space;
         $this->closing = $this->tailingSpaceInner . '?>';
     }
 
@@ -127,8 +125,7 @@ class QiqToken
 
     protected function fixEchoRaw() : void
     {
-        $space = $this->leadingSpaceInner
-            . $this->lclip(substr($this->opening, 1));
+        $space = $this->leadingSpaceInner . $this->lclip(substr($this->opening, 1));
 
         if ($space === '') {
             $space = ' ';
@@ -180,7 +177,7 @@ class QiqToken
         return ltrim($str, "\t ");
     }
 
-    protected function code(): string
+    protected function code() : string
     {
         if ($this->firstWord === 'extends') {
             // subvert the tokenizer process for BC,
@@ -189,15 +186,13 @@ class QiqToken
             $this->firstWord = '$this->extends';
         }
 
-        $this->phpTokens = PhpToken::tokenize(
-            $this->opening
+        $this->phpTokens = PhpToken::tokenize(''
+            . $this->opening
             . $this->firstWord
             . $this->remainder
             . $this->closing
         );
-
         $this->phpTokensCount = count($this->phpTokens);
-
         $code = '';
 
         foreach ($this->phpTokens as $i => $phpToken) {
@@ -211,7 +206,7 @@ class QiqToken
         return $code;
     }
 
-    protected function isFunctionCall(int $i): bool
+    protected function isFunctionCall(int $i) : bool
     {
         return $this->phpTokens[$i]->is(T_STRING)
             && $this->nextSignificantToken($i)?->is('(')
@@ -223,7 +218,7 @@ class QiqToken
             ]);
     }
 
-    protected function prevSignificantToken(int $i): ?PhpToken
+    protected function prevSignificantToken(int $i) : ?PhpToken
     {
         while ($i > 0) {
             $i --;
@@ -236,7 +231,7 @@ class QiqToken
         return null;
     }
 
-    protected function nextSignificantToken(int $i): ?PhpToken
+    protected function nextSignificantToken(int $i) : ?PhpToken
     {
         while ($i < $this->phpTokensCount) {
             $i ++;

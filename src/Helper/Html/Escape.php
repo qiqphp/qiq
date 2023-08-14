@@ -24,6 +24,7 @@ class Escape
         }
 
         $esc = '';
+
         foreach ($raw as $key => $val) {
             // do not add null and false values
             if ($val === null || $val === false) {
@@ -44,8 +45,10 @@ class Escape
                 $esc .= $this->escaper->escapeHtmlAttr($key);
             } else {
                 // full; because the it is quoted, we can use html ecaping
-                $esc .= $this->escaper->escapeHtmlAttr($key) . '="'
-                      . $this->escaper->escapeHtml((string) $val) . '"';
+                $esc .= $this->escaper->escapeHtmlAttr($key)
+                    . '="'
+                    . $this->escaper->escapeHtml((string) $val)
+                    . '"';
             }
 
             // space separator

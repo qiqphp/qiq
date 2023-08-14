@@ -70,8 +70,10 @@ class Blocks
 
         foreach ($parts as $i => $concatBuffers) {
             $level[$i] = '';
+
             foreach ($concatBuffers as $concatBuffer) {
                 list($concat, $buffer) = $concatBuffer;
+
                 if ($concat === self::CONCAT_PARENT) {
                     $level[$i] .= $level[$i - 1] ?? '';
                 } else {

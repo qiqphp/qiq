@@ -14,14 +14,10 @@ class Textarea extends TagHelper
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        $base = [
-            'id' => null,
-            'name' => $name,
-        ];
-
+        $base = ['id' => null, 'name' => $name];
         $attr = array_merge($base, $attr);
         return $this->fullTag('textarea', $attr, $value, $__attr);
     }

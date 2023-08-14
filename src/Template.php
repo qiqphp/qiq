@@ -15,7 +15,7 @@ class Template extends Kernel
             ob_start();
             $__SHARED__ =& $this->refData();
             extract($__LOCAL__, EXTR_SKIP);
-            extract($__SHARED__, EXTR_SKIP|EXTR_REFS);
+            extract($__SHARED__, EXTR_SKIP | EXTR_REFS);
             $__NAME__ = $this->getRenderStack()->push($__NAME__);
             require $this->getCatalog()->getCompiled($__NAME__);
             $this->getRenderStack()->pop();
@@ -24,6 +24,7 @@ class Template extends Kernel
             while (ob_get_level() > $__OBLEVEL__) {
                 ob_end_clean();
             }
+
             throw $e;
         }
     }

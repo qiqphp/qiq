@@ -15,20 +15,13 @@ class InputField extends TagHelper
         ?string $name = null,
         mixed $value = null,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        $base = array(
-            'id' => null,
-            'type' => $type,
-            'name' => $name,
-            'value' => $value,
-        );
-
+        $base = ['id' => null, 'type' => $type, 'name' => $name, 'value' => $value];
         unset($attr['type']);
         unset($attr['name']);
         unset($attr['value']);
-
         $attr = array_merge($base, $attr);
         return $this->voidTag('input', $attr, $__attr);
     }

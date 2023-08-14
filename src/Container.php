@@ -66,14 +66,12 @@ class Container implements ContainerInterface
     {
         if (! $this->has($class)) {
             throw new Exception\ObjectNotFound(
-                "Object of class '{$class}' does not exist."
+                "Object of class '{$class}' does not exist.",
             );
         }
 
         $constructor = (new ReflectionClass($class))->getConstructor();
-        $arguments = $constructor
-            ? $this->arguments($class, $constructor)
-            : [];
+        $arguments = $constructor ? $this->arguments($class, $constructor) : [];
 
         /** @var T of object */
         return new $class(...$arguments);
@@ -142,7 +140,7 @@ class Container implements ContainerInterface
         }
 
         throw new Exception\ParameterNotResolved(
-            "Cannot create argument for '{$declaringClass}::\${$name}' of type '{$type}'."
+            "Cannot create argument for '{$declaringClass}::\${$name}' of type '{$type}'.",
         );
     }
 }

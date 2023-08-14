@@ -13,17 +13,12 @@ class Anchor extends TagHelper
         string $href,
         string $text,
         array $attr = [],
-        mixed ...$__attr
+        mixed ...$__attr,
     ) : string
     {
-        $base = [
-            'id' => null,
-            'href' => $href,
-        ];
-
+        $base = ['id' => null, 'href' => $href];
         unset($attr['href']);
         $attr = array_merge($base, $attr);
-
         return $this->fullTag('a', $attr, $text, $__attr);
     }
 }
