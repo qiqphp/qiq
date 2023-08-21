@@ -30,15 +30,14 @@ class RadioFields extends TagHelper
         }
 
         foreach ($options as $optionValue => $optionLabel) {
-            $html .= $this
-                ->radio(
-                    $name,
-                    $value,
-                    (string) $optionValue,
-                    (string) $optionLabel,
-                    $attr,
-                    $__attr,
-                );
+            $html .= $this->radio(
+                $name,
+                $value,
+                (string) $optionValue,
+                (string) $optionLabel,
+                $attr,
+                $__attr,
+            );
         }
 
         return ltrim($html);

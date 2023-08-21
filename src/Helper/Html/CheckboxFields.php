@@ -34,15 +34,14 @@ class CheckboxFields extends TagHelper
         }
 
         foreach ($options as $optionValue => $optionLabel) {
-            $html .= $this
-                ->checkbox(
-                    $name,
-                    $value,
-                    (string) $optionValue,
-                    (string) $optionLabel,
-                    $attr,
-                    $__attr,
-                );
+            $html .= $this->checkbox(
+                $name,
+                $value,
+                (string) $optionValue,
+                (string) $optionLabel,
+                $attr,
+                $__attr,
+            );
         }
 
         return ltrim($html);
