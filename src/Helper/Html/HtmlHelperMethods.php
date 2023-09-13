@@ -521,9 +521,7 @@ trait HtmlHelperMethods
     ) : string
     {
         return $this
-            ->get(
-                Select::class,
-            )
+            ->get(Select::class)
             ->__invoke(
                 $name,
                 $value,

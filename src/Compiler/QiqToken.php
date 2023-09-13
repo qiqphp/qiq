@@ -186,11 +186,8 @@ class QiqToken
             $this->firstWord = '$this->extends';
         }
 
-        $this->phpTokens = PhpToken::tokenize(''
-            . $this->opening
-            . $this->firstWord
-            . $this->remainder
-            . $this->closing
+        $this->phpTokens = PhpToken::tokenize(
+            '' . $this->opening . $this->firstWord . $this->remainder . $this->closing,
         );
         $this->phpTokensCount = count($this->phpTokens);
         $code = '';
@@ -210,12 +207,16 @@ class QiqToken
     {
         return $this->phpTokens[$i]->is(T_STRING)
             && $this->nextSignificantToken($i)?->is('(')
-            && ! $this->prevSignificantToken($i)?->is([
-                T_OBJECT_OPERATOR,
-                T_NULLSAFE_OBJECT_OPERATOR,
-                T_DOUBLE_COLON,
-                T_FUNCTION,
-            ]);
+            && ! $this
+                ->prevSignificantToken($i)
+                ?->is(
+                    [
+                        T_OBJECT_OPERATOR,
+                        T_NULLSAFE_OBJECT_OPERATOR,
+                        T_DOUBLE_COLON,
+                        T_FUNCTION,
+                    ],
+                );
     }
 
     protected function prevSignificantToken(int $i) : ?PhpToken

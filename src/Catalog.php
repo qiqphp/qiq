@@ -94,19 +94,20 @@ class Catalog
         if ($source === null) {
             list($collection, $name) = $this->split($name);
 
-            throw new Exception\FileNotFound(PHP_EOL
-                . "File: {$name}"
-                . PHP_EOL
-                . "Extension: {$this->extension}"
-                . PHP_EOL
-                . "Collection: "
-                . ($collection === '' ? '(default)' : $collection)
-                . PHP_EOL
-                . "Paths: "
-                . print_r($this->paths[$collection], true)
-                . PHP_EOL
-                . "Catalog class: "
-                . print_r(get_class($this), true)
+            throw new Exception\FileNotFound(
+                PHP_EOL
+                    . "File: {$name}"
+                    . PHP_EOL
+                    . "Extension: {$this->extension}"
+                    . PHP_EOL
+                    . "Collection: "
+                    . ($collection === '' ? '(default)' : $collection)
+                    . PHP_EOL
+                    . "Paths: "
+                    . print_r($this->paths[$collection], true)
+                    . PHP_EOL
+                    . "Catalog class: "
+                    . print_r(get_class($this), true),
             );
         }
 
