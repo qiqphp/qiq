@@ -22,11 +22,9 @@ abstract class Kernel implements Engine
         $compiler = $cachePath === false
             ? new Compiler\NonCompiler()
             : new Compiler\QiqCompiler($cachePath);
+        $catalog = new Catalog((array) $paths, $extension, $compiler);
         $helpers ??= new HtmlHelpers();
-        return new static(
-            new Catalog((array) $paths, $extension, $compiler),
-            $helpers,
-        );
+        return new static($catalog, $helpers);
     }
 
     private Blocks $blocks;
