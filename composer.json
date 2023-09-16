@@ -32,8 +32,7 @@
         "phpunit/phpunit": "^9.0",
         "phpstan/phpstan": "^1.0",
         "pds/skeleton": "^1.0",
-        "pds/composer-script-names": "^1.0",
-        "pmjones/php-styler": "0.x-dev"
+        "pds/composer-script-names": "^1.0"
     },
     "autoload-dev": {
         "psr-4": {
@@ -42,8 +41,7 @@
     },
     "scripts": {
         "analyze": "./vendor/bin/phpstan analyze -c phpstan.neon",
-        "check": "composer cs-fix && composer test && composer analyze",
-        "cs-fix": "./vendor/bin/php-styler apply",
+        "check": "composer test && composer analyze",
         "test": "./vendor/bin/phpunit"
     }
 }
