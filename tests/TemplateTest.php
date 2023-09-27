@@ -15,7 +15,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     {
         $this->template = HtmlTemplate::new(
             paths: __DIR__ . '/templates',
-            cachePath: __DIR__ . DIRECTORY_SEPARATOR . 'cache',
+            cachePath: dirname(__DIR__)
+                . DIRECTORY_SEPARATOR
+                . 'tmp'
+                . DIRECTORY_SEPARATOR
+                . 'cache',
         );
     }
 
@@ -41,7 +45,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $expect = ['foo' => 'bar'];
         $this->template->setData(['foo' => 'bar']);
         $this->assertSame($expect, $this->template->getData());
-
         $expect['baz'] = 'dib';
         $this->template->addData(['baz' => 'dib']);
         $this->assertSame($expect, $this->template->getData());
@@ -58,10 +61,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function testInvokeTwoStep() : void
     {
-        $this->template->setData([
-            'name' => 'Index',
-            'title' => 'Default Title'
-        ]);
+        $this->template->setData(['name' => 'Index', 'title' => 'Default Title']);
         $this->template->setView('index');
         $this->template->setLayout('layout/default');
         $actual = ($this->template)();
@@ -73,9 +73,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     {
         $this->template->setView('master');
         $actual = ($this->template)();
-        $expect = "foo = bar" . PHP_EOL
-                . "foo = baz" . PHP_EOL
-                . "foo = dib" . PHP_EOL;
+        $expect = "foo = bar" . PHP_EOL . "foo = baz" . PHP_EOL . "foo = dib" . PHP_EOL;
         $this->assertSame($expect, $actual);
     }
 
@@ -98,12 +96,11 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->template->setView('rel/foo/broken');
         $this->expectException(Exception\FileNotFound::class);
         $this->expectExceptionMessage(<<<EOT
-            Could not resolve dots in template name.
-            Original name: '../../../zim'
-            Resolved into: '../zim'
-            Probably too many '../' in the original name.
-            EOT
-        );
+        Could not resolve dots in template name.
+        Original name: '../../../zim'
+        Resolved into: '../zim'
+        Probably too many '../' in the original name.
+        EOT);
         ($this->template)();
     }
 
@@ -112,19 +109,19 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->template->setView('ext/view-3');
         $this->template->setLayout('ext/layout-3');
         $expect = <<<EOT
-            Layout 1 Content
-            View 1 Content
+        Layout 1 Content
+        View 1 Content
 
-            Foo 3a View
-            Foo 1 Layout
-            Foo 2 Layout
-            Foo 3 Layout
-            Foo 1 View
-            Foo 2 View
-            Foo 3b View
+        Foo 3a View
+        Foo 1 Layout
+        Foo 2 Layout
+        Foo 3 Layout
+        Foo 1 View
+        Foo 2 View
+        Foo 3b View
 
 
-            EOT;
+        EOT;
         $actual = ($this->template)();
         $this->assertSame($expect, $actual);
     }
@@ -132,25 +129,24 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testInheritanceDocExample() : void
     {
         $this->template->setView('ext/child');
-        $expect = <<<EOT
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <title>
-                    My Extended Page
-                </title>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                <link rel="stylesheet" href="/theme/basic.css" type="text/css" media="screen" />
-                <link rel="stylesheet" href="/theme/custom.css" type="text/css" media="screen" />
-            </head>
-            <body>
-                <p>The main content for my extended page.</p>
-            </body>
-            </html>
+        $expect = <<<'HTML'
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <title>
+                My Extended Page
+            </title>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" href="/theme/basic.css" type="text/css" media="screen" />
+            <link rel="stylesheet" href="/theme/custom.css" type="text/css" media="screen" />
+        </head>
+        <body>
+            <p>The main content for my extended page.</p>
+        </body>
+        </html>
 
-            EOT;
-
+        HTML;
         $actual = ($this->template)();
         $this->assertSame($expect, $actual);
     }

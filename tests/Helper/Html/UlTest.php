@@ -1,29 +1,21 @@
 <?php
 namespace Qiq\Helper\Html;
 
-class UlTest extends HtmlHelperTest
+class UlTest extends HtmlHelperTestCase
 {
     public function test() : void
     {
-        $actual = $this->helpers->ul(
-            id: 'test',
-            items: [
-                '>foo',
-                '>bar',
-                '>baz',
-                '>dib',
-            ],
-        );
-
-        $expect = '<ul id="test">' . PHP_EOL
-                . '    <li>&gt;foo</li>' . PHP_EOL
-                . '    <li>&gt;bar</li>' . PHP_EOL
-                . '    <li>&gt;baz</li>' . PHP_EOL
-                . '    <li>&gt;dib</li>' . PHP_EOL
-                . '</ul>';
-
+        $actual = $this->helpers
+            ->ul(id: 'test', items: ['>foo', '>bar', '>baz', '>dib']);
+        $expect = <<<'HTML'
+        <ul id="test">
+            <li>&gt;foo</li>
+            <li>&gt;bar</li>
+            <li>&gt;baz</li>
+            <li>&gt;dib</li>
+        </ul>
+        HTML;
         $this->assertSame($expect, $actual);
-
         $actual = $this->helpers->ul([]);
         $expect = '';
         $this->assertSame($expect, $actual);

@@ -1,36 +1,32 @@
 <?php
 namespace Qiq\Helper\Html;
 
-class DlTest extends HtmlHelperTest
+class DlTest extends HtmlHelperTestCase
 {
     public function test() : void
     {
-        $actual = $this->helpers->dl(
-            id: 'test',
-            terms: [
-                'foo' => 'Foo Def',
-                'bar' => [
-                    'Bar Def A',
-                    'Bar Def B',
-                    'Bar Def C',
+        $actual = $this->helpers
+            ->dl(
+                id: 'test',
+                terms: [
+                    'foo' => 'Foo Def',
+                    'bar' => ['Bar Def A', 'Bar Def B', 'Bar Def C'],
+                    'baz' => 'Baz Def',
                 ],
-                'baz' => 'Baz Def',
-            ],
-        );
-
-        $expect = '<dl id="test">' . PHP_EOL
-                . '    <dt>foo</dt>' . PHP_EOL
-                . '        <dd>Foo Def</dd>' . PHP_EOL
-                . '    <dt>bar</dt>' . PHP_EOL
-                . '        <dd>Bar Def A</dd>' . PHP_EOL
-                . '        <dd>Bar Def B</dd>' . PHP_EOL
-                . '        <dd>Bar Def C</dd>' . PHP_EOL
-                . '    <dt>baz</dt>' . PHP_EOL
-                . '        <dd>Baz Def</dd>' . PHP_EOL
-                . '</dl>';
-
+            );
+        $expect = <<<'HTML'
+        <dl id="test">
+            <dt>foo</dt>
+                <dd>Foo Def</dd>
+            <dt>bar</dt>
+                <dd>Bar Def A</dd>
+                <dd>Bar Def B</dd>
+                <dd>Bar Def C</dd>
+            <dt>baz</dt>
+                <dd>Baz Def</dd>
+        </dl>
+        HTML;
         $this->assertSame($expect, $actual);
-
         $actual = $this->helpers->dl([]);
         $expect = '';
         $this->assertSame($expect, $actual);

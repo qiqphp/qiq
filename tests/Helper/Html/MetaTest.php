@@ -1,7 +1,7 @@
 <?php
 namespace Qiq\Helper\Html;
 
-class MetaTest extends HtmlHelperTest
+class MetaTest extends HtmlHelperTestCase
 {
     public function test() : void
     {

@@ -1,22 +1,18 @@
 <?php
 namespace Qiq\Helper\Html;
 
-class ItemsTest extends HtmlHelperTest
+class ItemsTest extends HtmlHelperTestCase
 {
     public function test() : void
     {
-        $actual = $this->helpers->items([
-            '>foo',
-            '>bar',
-            '>baz',
-            '>dib',
-        ]);
+        $actual = $this->helpers->items(['>foo', '>bar', '>baz', '>dib']);
+        $expect = <<<'HTML'
+        <li>&gt;foo</li>
+        <li>&gt;bar</li>
+        <li>&gt;baz</li>
+        <li>&gt;dib</li>
 
-        $expect = '<li>&gt;foo</li>' . PHP_EOL
-                . '<li>&gt;bar</li>' . PHP_EOL
-                . '<li>&gt;baz</li>' . PHP_EOL
-                . '<li>&gt;dib</li>' . PHP_EOL;
-
+        HTML;
         $this->assertSame($expect, $actual);
     }
 }

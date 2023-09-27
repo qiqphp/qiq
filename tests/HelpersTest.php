@@ -11,6 +11,7 @@ class HelpersTest extends \PHPUnit\Framework\TestCase
     {
         $helpers = new Helpers();
         $expect = 'FOOBAR';
+
         /** @phpstan-ignore-next-line checking function fallback for missing method */
         $actual = $helpers->strtoupper('foobar');
         $this->assertSame($expect, $actual);

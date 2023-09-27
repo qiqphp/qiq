@@ -1,29 +1,30 @@
 <?php
 namespace Qiq\Helper\Html;
 
-class InputTypeFieldTest extends HtmlHelperTest
+class InputTypeFieldTest extends HtmlHelperTestCase
 {
     /**
      * @dataProvider provide
      */
     public function test(string $method, string $type) : void
     {
-        $actual = $this->helpers->$method(
-            name: 'fake-name',
-            value: 'fake-value',
-            attr: [
-                'foo' => 'bar',
-            ],
-            baz_dib: 'gir',
-        );
-        $expect = '<input type="' . $type . '" name="fake-name" value="fake-value" foo="bar" baz-dib="gir" />';
+        $actual = $this->helpers
+            ->{$method}(
+                name: 'fake-name',
+                value: 'fake-value',
+                attr: ['foo' => 'bar'],
+                baz_dib: 'gir',
+            );
+        $expect = '<input type="'
+            . $type
+            . '" name="fake-name" value="fake-value" foo="bar" baz-dib="gir" />';
         $this->assertSame($expect, $actual);
     }
 
     /**
      * @return mixed[]
      */
-    public function provide() : array
+    public static function provide() : array
     {
         return [
             ['button', 'button'],

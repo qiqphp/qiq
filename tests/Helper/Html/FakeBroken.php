@@ -6,8 +6,7 @@ use stdClass;
 
 class FakeBroken
 {
-    public function __construct(
-        protected SplFileObject|stdClass $object
-    ) {
+    public function __construct(protected SplFileObject|stdClass $object)
+    {
     }
 }

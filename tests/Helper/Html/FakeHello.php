@@ -8,7 +8,7 @@ class FakeHello
 {
     public function __construct(
         protected string $suffix = '',
-        protected null|SplFileObject|stdClass $object = null
+        protected null|SplFileObject|stdClass $object = null,
     ) {
     }
 

@@ -1,7 +1,7 @@
 <?php
 namespace Qiq\Helper\Html;
 
-class LinkTest extends HtmlHelperTest
+class LinkTest extends HtmlHelperTestCase
 {
     public function test() : void
     {

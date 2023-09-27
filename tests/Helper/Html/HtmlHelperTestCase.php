@@ -4,7 +4,7 @@ namespace Qiq\Helper\Html;
 use Qiq\Container;
 use Qiq\Indent;
 
-abstract class HtmlHelperTest extends \PHPUnit\Framework\TestCase
+abstract class HtmlHelperTestCase extends \PHPUnit\Framework\TestCase
 {
     protected HtmlHelpers $helpers;
 
