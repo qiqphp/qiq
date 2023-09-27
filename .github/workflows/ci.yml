@@ -1,10 +1,10 @@
-name: pmjones/php-styler
+name: qiq/qiq
 
 on:
   push:
-    branches: [ 0.x ]
+    branches: [ 3.x ]
   pull_request:
-    branches: [ 0.x ]
+    branches: [ 3.x ]
 
 jobs:
   build:
