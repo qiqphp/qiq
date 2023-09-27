@@ -77,12 +77,7 @@ class QiqCompiler implements Compiler
 
     protected function convert(string $text) : string
     {
-        $parts = preg_split(
-            '/(\s*{{.*?}}\s*)/ms',
-            $text,
-            -1,
-            PREG_SPLIT_DELIM_CAPTURE,
-        );
+        $parts = preg_split('/(\s*{{.*?}}\s*)/ms', $text, -1, PREG_SPLIT_DELIM_CAPTURE);
         $compiled = '';
 
         foreach ((array) $parts as $part) {
