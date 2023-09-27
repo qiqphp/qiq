@@ -180,9 +180,8 @@ class QiqToken
     protected function code() : string
     {
         if ($this->firstWord === 'extends') {
-            // subvert the tokenizer process for BC,
+            // subvert the tokenizer process,
             // because 'extends' is a PHP keyword.
-            // use 'inherits' instead.
             $this->firstWord = '$this->extends';
         }
 
