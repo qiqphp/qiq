@@ -13,6 +13,6 @@ class ItemsTest extends HtmlHelperTestCase
         <li>&gt;dib</li>
 
         HTML;
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
     }
 }

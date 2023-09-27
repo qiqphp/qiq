@@ -15,9 +15,9 @@ class UlTest extends HtmlHelperTestCase
             <li>&gt;dib</li>
         </ul>
         HTML;
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
         $actual = $this->helpers->ul([]);
         $expect = '';
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
     }
 }

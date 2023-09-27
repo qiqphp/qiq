@@ -19,7 +19,7 @@ class CheckboxFieldsTest extends HtmlHelperTestCase
         <label><input type="checkbox" name="foo[]" value="maybe" />May &amp; be</label>
 
         HTML;
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
     }
 
     public function testSingleOption() : void
@@ -36,7 +36,7 @@ class CheckboxFieldsTest extends HtmlHelperTestCase
         <label><input type="checkbox" name="foo" value="1" checked />Yes</label>
 
         HTML;
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
     }
 
     public function testScalarChecked() : void
@@ -53,6 +53,6 @@ class CheckboxFieldsTest extends HtmlHelperTestCase
         <label><input type="checkbox" name="foo[]" value="maybe" />May &amp; be</label>
 
         HTML;
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
     }
 }

@@ -44,7 +44,7 @@ class SelectTest extends HtmlHelperTestCase
             </optgroup>
         </select>
         HTML;
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
     }
 
     public function testMultiple() : void
@@ -87,6 +87,6 @@ class SelectTest extends HtmlHelperTestCase
             </optgroup>
         </select>
         HTML;
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
     }
 }

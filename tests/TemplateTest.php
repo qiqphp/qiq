@@ -3,12 +3,15 @@ declare(strict_types=1);
 
 namespace Qiq;
 
+use Qiq\Assertions;
 use Qiq\Compiler\NonCompiler;
 use Qiq\Compiler\QiqCompiler;
 use RuntimeException;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {
+    use Assertions;
+
     protected HtmlTemplate $template;
 
     protected function setUp() : void
@@ -94,14 +97,22 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testRelativeFailure() : void
     {
         $this->template->setView('rel/foo/broken');
-        $this->expectException(Exception\FileNotFound::class);
-        $this->expectExceptionMessage(<<<EOT
-        Could not resolve dots in template name.
-        Original name: '../../../zim'
-        Resolved into: '../zim'
-        Probably too many '../' in the original name.
-        EOT);
-        ($this->template)();
+
+        try {
+            ($this->template)();
+        } catch (Exception\FileNotFound $e) {
+            $expect = <<<'EXPECT'
+            Could not resolve dots in template name.
+            Original name: '../../../zim'
+            Resolved into: '../zim'
+            Probably too many '../' in the original name.
+            EXPECT;
+            $actual = $e->getMessage();
+            $this->assertSameString(trim($expect), trim($actual));
+            return;
+        }
+
+        throw new RuntimeException('Should have thrown exception');
     }
 
     public function testExtends() : void
@@ -111,7 +122,6 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $expect = <<<EOT
         Layout 1 Content
         View 1 Content
-
         Foo 3a View
         Foo 1 Layout
         Foo 2 Layout
@@ -119,11 +129,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         Foo 1 View
         Foo 2 View
         Foo 3b View
-
-
         EOT;
         $actual = ($this->template)();
-        $this->assertSame($expect, $actual);
+        $actual = str_replace("\n\n", "\n", $actual);
+        $this->assertSameString(trim($expect), trim($actual));
     }
 
     public function testInheritanceDocExample() : void

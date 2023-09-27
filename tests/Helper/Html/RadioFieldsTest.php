@@ -19,6 +19,6 @@ class RadioFieldsTest extends HtmlHelperTestCase
         <label><input type="radio" name="foo" value="maybe" />May &amp; be</label>
 
         HTML;
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
     }
 }

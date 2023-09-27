@@ -1,11 +1,14 @@
 <?php
 namespace Qiq\Helper\Html;
 
+use Qiq\Assertions;
 use Qiq\Container;
 use Qiq\Indent;
 
 abstract class HtmlHelperTestCase extends \PHPUnit\Framework\TestCase
 {
+    use Assertions;
+
     protected HtmlHelpers $helpers;
 
     protected Container $container;

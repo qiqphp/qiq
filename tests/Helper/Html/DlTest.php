@@ -26,9 +26,9 @@ class DlTest extends HtmlHelperTestCase
                 <dd>Baz Def</dd>
         </dl>
         HTML;
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
         $actual = $this->helpers->dl([]);
         $expect = '';
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
     }
 }

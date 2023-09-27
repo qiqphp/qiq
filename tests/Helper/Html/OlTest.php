@@ -15,9 +15,9 @@ class OlTest extends HtmlHelperTestCase
             <li>&gt;dib</li>
         </ol>
         HTML;
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
         $actual = $this->helpers->ol([]);
         $expect = '';
-        $this->assertSame($expect, $actual);
+        $this->assertSameString($expect, $actual);
     }
 }
