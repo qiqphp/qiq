@@ -1,5 +1,9 @@
 # Change Log
 
+## 3.0.1
+
+Soothe PHP 8.4 notices about implicit nulls.
+
 ## 3.0.0
 
 Initial release; no API or feature changes, just bumping the minimum PHP to 8.1.
