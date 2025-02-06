@@ -21,6 +21,7 @@ class Dl extends TagHelper
         }
 
         $attr = array_merge(['id' => null], $attr);
+
         return $this->openTag('dl', $attr, $__attr)
             . PHP_EOL
             . $list

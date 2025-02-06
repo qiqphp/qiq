@@ -6,6 +6,7 @@ class ItemsTest extends HtmlHelperTestCase
     public function test() : void
     {
         $actual = $this->helpers->items(['>foo', '>bar', '>baz', '>dib']);
+
         $expect = <<<'HTML'
         <li>&gt;foo</li>
         <li>&gt;bar</li>
@@ -13,6 +14,7 @@ class ItemsTest extends HtmlHelperTestCase
         <li>&gt;dib</li>
 
         HTML;
+
         $this->assertSameString($expect, $actual);
     }
 }

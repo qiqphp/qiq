@@ -34,9 +34,11 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
     {
         $container = new Container();
         $this->expectException(Exception\ParameterNotResolved::class);
+
         $this->expectExceptionMessage(
             "Cannot create argument for 'Qiq\Helper\Html\FakeBroken::\$object' of type 'SplFileObject|stdClass",
         );
+
         $container->get(FakeBroken::class);
     }
 }

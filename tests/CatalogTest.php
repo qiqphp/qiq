@@ -20,6 +20,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
             . 'tmp'
             . DIRECTORY_SEPARATOR
             . 'cache';
+
         $this->compiler = new QiqCompiler($this->cachePath);
         $this->compiler->clear();
         $this->catalog = $this->newCatalog();
@@ -44,6 +45,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->catalog->setPaths([__DIR__ . '/templates']);
         $this->assertTrue($this->catalog->has('index'));
         $actual = $this->catalog->getCompiled('index');
+
         $target = str_replace(
             '/',
             DIRECTORY_SEPARATOR,
@@ -64,9 +66,11 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
     public function testDoubleDots() : void
     {
         $this->expectException(Exception\FileNotFound::CLASS);
+
         $this->expectExceptionMessage(
             "Double-dots not allowed in template specifications",
         );
+
         $this->catalog->getCompiled('foo/../bar');
     }
 
@@ -85,6 +89,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
                 DIRECTORY_SEPARATOR . 'baz',
             ],
         ];
+
         $this->catalog->setPaths(['/foo', '/bar', '/baz']);
         $actual = $this->catalog->getPaths();
         $this->assertSame($expect, $actual);
@@ -95,6 +100,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->catalog->prependPath('/foo');
         $this->catalog->prependPath('/bar');
         $this->catalog->prependPath('/baz');
+
         $expect = [
             '__DEFAULT__' => [
                 DIRECTORY_SEPARATOR . 'baz',
@@ -102,6 +108,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
                 DIRECTORY_SEPARATOR . 'foo',
             ],
         ];
+
         $actual = $this->catalog->getPaths();
         $this->assertSame($expect, $actual);
     }
@@ -111,6 +118,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
         $this->catalog->appendPath('/foo');
         $this->catalog->appendPath('/bar');
         $this->catalog->appendPath('/baz');
+
         $expect = [
             '__DEFAULT__' => [
                 DIRECTORY_SEPARATOR . 'foo',
@@ -118,6 +126,7 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
                 DIRECTORY_SEPARATOR . 'baz',
             ],
         ];
+
         $actual = $this->catalog->getPaths();
         $this->assertSame($expect, $actual);
     }
@@ -144,8 +153,10 @@ class CatalogTest extends \PHPUnit\Framework\TestCase
     public function testCollections() : void
     {
         $dir = __DIR__ . '/templates';
+
         $this->catalog
             ->setPaths(["foo:{$dir}/foo", "bar:{$dir}/bar", "baz:{$dir}/baz"]);
+
         $this->assertOutput('foo', $this->catalog->getCompiled('foo:test'));
         $this->assertOutput('bar', $this->catalog->getCompiled('bar:test'));
         $this->assertOutput('baz', $this->catalog->getCompiled('baz:test'));

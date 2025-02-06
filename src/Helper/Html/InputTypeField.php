@@ -25,6 +25,7 @@ abstract class InputTypeField extends TagHelper
             'name' => $name,
             'value' => $value,
         ];
+
         unset($attr['type']);
         unset($attr['name']);
         unset($attr['value']);

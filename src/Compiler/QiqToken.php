@@ -188,6 +188,7 @@ class QiqToken
         $this->phpTokens = PhpToken::tokenize(
             '' . $this->opening . $this->firstWord . $this->remainder . $this->closing,
         );
+
         $this->phpTokensCount = count($this->phpTokens);
         $code = '';
 

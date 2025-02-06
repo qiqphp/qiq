@@ -69,6 +69,7 @@ class RadioFields extends TagHelper
             'value' => $optionValue,
             'checked' => $optionValue == $checkedValue,
         ];
+
         $attr = array_merge($base, $attr);
         $input = $this->voidTag('input', $attr, $__attr);
         $label = $this->escape->h($optionLabel);

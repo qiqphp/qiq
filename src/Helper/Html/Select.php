@@ -42,6 +42,7 @@ class Select extends TagHelper
                 'disabled' => true,
                 'selected' => $selected == $default,
             ];
+
             $html .= $this->indent->get()
                 . $this->fullTag('option', $placeholderAttr, $placeholder)
                 . PHP_EOL;
@@ -77,9 +78,11 @@ class Select extends TagHelper
 
         $attr = [];
         $attr['value'] = $key;
+
         $attr['selected'] = is_array($selected)
             ? in_array($attr['value'], $selected)
             : $attr['value'] == $selected;
+
         $attr = $this->escape->a($attr);
         $label = $this->escape->h($val);
         return $this->indent->get() . "<option {$attr}>{$label}</option>" . PHP_EOL;
@@ -98,6 +101,7 @@ class Select extends TagHelper
         $this->indent->level(+1);
         $group = $this->options($options, $selected);
         $this->indent->level(-1);
+
         return $this->indent->get()
             . "<optgroup {$attr}>"
             . PHP_EOL

@@ -12,6 +12,7 @@ class CheckboxFieldsTest extends HtmlHelperTestCase
                 default: '',
                 options: ['yes' => 'Yes', 'no' => 'No', 'maybe' => 'May & be'],
             );
+
         $expect = <<<'HTML'
         <input type="hidden" name="foo" value="" />
         <label><input type="checkbox" name="foo[]" value="yes" checked />Yes</label>
@@ -19,6 +20,7 @@ class CheckboxFieldsTest extends HtmlHelperTestCase
         <label><input type="checkbox" name="foo[]" value="maybe" />May &amp; be</label>
 
         HTML;
+
         $this->assertSameString($expect, $actual);
     }
 
@@ -31,11 +33,13 @@ class CheckboxFieldsTest extends HtmlHelperTestCase
                 default: '0',
                 options: ['1' => 'Yes'],
             );
+
         $expect = <<<'HTML'
         <input type="hidden" name="foo" value="0" />
         <label><input type="checkbox" name="foo" value="1" checked />Yes</label>
 
         HTML;
+
         $this->assertSameString($expect, $actual);
     }
 
@@ -47,12 +51,14 @@ class CheckboxFieldsTest extends HtmlHelperTestCase
                 value: 'no',
                 options: ['yes' => 'Yes', 'no' => 'No', 'maybe' => 'May & be'],
             );
+
         $expect = <<<'HTML'
         <label><input type="checkbox" name="foo[]" value="yes" />Yes</label>
         <label><input type="checkbox" name="foo[]" value="no" checked />No</label>
         <label><input type="checkbox" name="foo[]" value="maybe" />May &amp; be</label>
 
         HTML;
+
         $this->assertSameString($expect, $actual);
     }
 }

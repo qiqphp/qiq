@@ -7,6 +7,7 @@ class UlTest extends HtmlHelperTestCase
     {
         $actual = $this->helpers
             ->ul(id: 'test', items: ['>foo', '>bar', '>baz', '>dib']);
+
         $expect = <<<'HTML'
         <ul id="test">
             <li>&gt;foo</li>
@@ -15,6 +16,7 @@ class UlTest extends HtmlHelperTestCase
             <li>&gt;dib</li>
         </ul>
         HTML;
+
         $this->assertSameString($expect, $actual);
         $actual = $this->helpers->ul([]);
         $expect = '';

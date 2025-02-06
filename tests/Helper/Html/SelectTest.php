@@ -26,6 +26,7 @@ class SelectTest extends HtmlHelperTestCase
                     ],
                 ],
             );
+
         $expect = <<<'HTML'
         <select name="field_name">
             <option value="" disabled>Pick One</option>
@@ -44,6 +45,7 @@ class SelectTest extends HtmlHelperTestCase
             </optgroup>
         </select>
         HTML;
+
         $this->assertSameString($expect, $actual);
     }
 
@@ -70,6 +72,7 @@ class SelectTest extends HtmlHelperTestCase
                     ],
                 ],
             );
+
         $expect = <<<'HTML'
         <select name="field_name[]" multiple>
             <option value="opt1">Label 1</option>
@@ -87,6 +90,7 @@ class SelectTest extends HtmlHelperTestCase
             </optgroup>
         </select>
         HTML;
+
         $this->assertSameString($expect, $actual);
     }
 }

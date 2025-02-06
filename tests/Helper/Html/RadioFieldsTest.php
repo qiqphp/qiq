@@ -12,6 +12,7 @@ class RadioFieldsTest extends HtmlHelperTestCase
                 default: '',
                 options: ['yes' => 'Yes', 'no' => 'No', 'maybe' => 'May & be'],
             );
+
         $expect = <<<'HTML'
         <input type="hidden" name="foo" value="" />
         <label><input type="radio" name="foo" value="yes" />Yes</label>
@@ -19,6 +20,7 @@ class RadioFieldsTest extends HtmlHelperTestCase
         <label><input type="radio" name="foo" value="maybe" />May &amp; be</label>
 
         HTML;
+
         $this->assertSameString($expect, $actual);
     }
 }

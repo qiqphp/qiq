@@ -14,6 +14,7 @@ class DlTest extends HtmlHelperTestCase
                     'baz' => 'Baz Def',
                 ],
             );
+
         $expect = <<<'HTML'
         <dl id="test">
             <dt>foo</dt>
@@ -26,6 +27,7 @@ class DlTest extends HtmlHelperTestCase
                 <dd>Baz Def</dd>
         </dl>
         HTML;
+
         $this->assertSameString($expect, $actual);
         $actual = $this->helpers->dl([]);
         $expect = '';

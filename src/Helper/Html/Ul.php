@@ -21,6 +21,7 @@ class Ul extends Items
         }
 
         $attr = array_merge(['id' => null], $attr);
+
         return $this->openTag('ul', $attr, $__attr)
             . PHP_EOL
             . $list

@@ -14,11 +14,13 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
     protected function setUp() : void
     {
         $this->sourceDir = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'templates';
+
         $this->cachePath = dirname(__DIR__, 2)
             . DIRECTORY_SEPARATOR
             . 'tmp'
             . DIRECTORY_SEPARATOR
             . 'cache';
+
         $this->compiler = new QiqCompiler($this->cachePath);
         $this->compiler->clear();
     }
@@ -49,9 +51,11 @@ class QiqCompilerTest extends \PHPUnit\Framework\TestCase
     protected function cachedFile(string $name) : string
     {
         $file = $this->cachePath;
+
         $file .= PHP_OS_FAMILY === 'Windows'
             ? substr($this->sourceDir, 2)
             : $this->sourceDir;
+
         return $file
             . DIRECTORY_SEPARATOR
             . str_replace('/', DIRECTORY_SEPARATOR, $name)

@@ -23,6 +23,7 @@ class Form extends TagHelper
             'action' => $action,
             'enctype' => $enctype,
         ];
+
         unset($attr['method']);
         unset($attr['action']);
         unset($attr['enctype']);

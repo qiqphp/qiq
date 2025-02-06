@@ -107,6 +107,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             Resolved into: '../zim'
             Probably too many '../' in the original name.
             EXPECT;
+
             $actual = $e->getMessage();
             $this->assertSameString(trim($expect), trim($actual));
             return;
@@ -119,6 +120,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     {
         $this->template->setView('ext/view-3');
         $this->template->setLayout('ext/layout-3');
+
         $expect = <<<EOT
         Layout 1 Content
         View 1 Content
@@ -130,6 +132,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         Foo 2 View
         Foo 3b View
         EOT;
+
         $actual = ($this->template)();
         $actual = str_replace("\n\n", "\n", $actual);
         $this->assertSameString(trim($expect), trim($actual));
@@ -138,6 +141,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testInheritanceDocExample() : void
     {
         $this->template->setView('ext/child');
+
         $expect = <<<'HTML'
         <!DOCTYPE html>
         <html lang="en">
@@ -156,6 +160,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         </html>
 
         HTML;
+
         $actual = ($this->template)();
         $this->assertSame($expect, $actual);
     }

@@ -101,11 +101,13 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
 
             // indent and newlines
             $qiq = "    {{{$esc}" . PHP_EOL . "        {$str}" . PHP_EOL . "    }}";
+
             $php = "    <?= \$this->{$esc}("
                 . PHP_EOL
                 . "        {$str}"
                 . PHP_EOL
                 . "    ) ?>";
+
             $this->assertPhp($php, $qiq);
         }
     }
@@ -194,11 +196,13 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
             "name" => "street", "value" => $street
         ]) }}
         QIQ;
+
         $php = <<<'PHP'
         <?= $this->textField([
             "name" => "street", "value" => $street
         ]) ?>
         PHP;
+
         $this->assertPhp($php, $qiq);
 
         // no params
@@ -251,12 +255,15 @@ class QiqTokenTest extends \PHPUnit\Framework\TestCase
 
         // echoing
         $set = PHP_OS_FAMILY === 'Windows' ? '\r\n' : '\n';
+
         $qiq = PHP_EOL
             . '    {{= textField(["name" => "street", "value" => $street]) }}';
+
         $php = PHP_EOL
             . '    <?php $this->setIndent("'
             . $set
             . '    ") ?><?= $this->textField(["name" => "street", "value" => $street]) ?>';
+
         $this->assertPhp($php, $qiq);
     }
 

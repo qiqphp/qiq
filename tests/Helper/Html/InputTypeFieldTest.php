@@ -15,9 +15,11 @@ class InputTypeFieldTest extends HtmlHelperTestCase
                 attr: ['foo' => 'bar'],
                 baz_dib: 'gir',
             );
+
         $expect = '<input type="'
             . $type
             . '" name="fake-name" value="fake-value" foo="bar" baz-dib="gir" />';
+
         $this->assertSame($expect, $actual);
     }
 

@@ -7,6 +7,7 @@ class OlTest extends HtmlHelperTestCase
     {
         $actual = $this->helpers
             ->ol(id: 'test', items: ['>foo', '>bar', '>baz', '>dib']);
+
         $expect = <<<'HTML'
         <ol id="test">
             <li>&gt;foo</li>
@@ -15,6 +16,7 @@ class OlTest extends HtmlHelperTestCase
             <li>&gt;dib</li>
         </ol>
         HTML;
+
         $this->assertSameString($expect, $actual);
         $actual = $this->helpers->ol([]);
         $expect = '';

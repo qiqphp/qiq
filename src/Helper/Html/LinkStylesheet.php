@@ -18,6 +18,7 @@ class LinkStylesheet extends TagHelper
             'type' => 'text/css',
             'media' => 'screen',
         ];
+
         unset($attr['rel']);
         unset($attr['href']);
         $attr = array_merge($base, $attr);
