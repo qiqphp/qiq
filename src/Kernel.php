@@ -15,13 +15,14 @@ abstract class Kernel implements Engine
     public static function new(
         string|array $paths = [],
         string $extension = '.php',
-        string|false $cachePath = null,
-        Helpers $helpers = null,
+        null|string|false $cachePath = null,
+        ?Helpers $helpers = null,
     ) : static
     {
         $compiler = $cachePath === false
             ? new Compiler\NonCompiler()
             : new Compiler\QiqCompiler($cachePath);
+
         $catalog = new Catalog((array) $paths, $extension, $compiler);
         $helpers ??= new HtmlHelpers();
         return new static($catalog, $helpers);
