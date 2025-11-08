@@ -9,6 +9,16 @@ pattern using PHP itself as the templating language, along with an optional
 
 Read the docs at <https://qiqphp.com>.
 
+## IDE Support
+
+### JetBrains IDEs
+
+The [Qiq Templates Support](https://plugins.jetbrains.com/plugin/28576-qiq-templates-support) plugin for PhpStorm, IntelliJ IDEA, and other JetBrains IDEs provides:
+
+- Syntax highlighting for Qiq templates
+- Simple navigation between templates
+- HTML-aware comment toggle
+
 ## Background
 
 I don't like compiled templates or specialized template languages. Smarty, Twig,
