@@ -19,6 +19,8 @@ class Escape
 
     /**
      * @param null|scalar|\Stringable|array<null|scalar|\Stringable|array<null|scalar|\Stringable>> $raw
+     *
+     * @psalm-taint-escape html
      */
     public function a(mixed $raw) : string
     {
@@ -64,6 +66,8 @@ class Escape
 
     /**
      * @param null|scalar|\Stringable $raw
+     *
+     * @psalm-taint-escape css
      */
     public function c(mixed $raw) : string
     {
@@ -72,6 +76,8 @@ class Escape
 
     /**
      * @param null|scalar|\Stringable $raw
+     *
+     * @psalm-taint-escape html
      */
     public function h(mixed $raw) : string
     {
@@ -80,6 +86,8 @@ class Escape
 
     /**
      * @param null|scalar|\Stringable $raw
+     *
+     * @psalm-taint-escape html
      */
     public function j(mixed $raw) : string
     {
@@ -88,6 +96,8 @@ class Escape
 
     /**
      * @param null|scalar|\Stringable $raw
+     *
+     * @psalm-taint-escape html
      */
     public function u(mixed $raw) : string
     {
