@@ -9,7 +9,7 @@ class Helpers
 {
     protected ContainerInterface $container;
 
-    public function __construct(ContainerInterface $container = null)
+    public function __construct(?ContainerInterface $container = null)
     {
         $this->container = $container ?? new Container();
     }

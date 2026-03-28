@@ -39,7 +39,7 @@ class Catalog
     public function __construct(
         array $paths = [],
         string $extension = '.php',
-        Compiler $compiler = null,
+        ?Compiler $compiler = null,
     ) {
         $this->setPaths($paths);
         $this->setExtension($extension);

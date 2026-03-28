@@ -15,8 +15,8 @@ abstract class Kernel implements Engine
     public static function new(
         string|array $paths = [],
         string $extension = '.php',
-        string|false $cachePath = null,
-        Helpers $helpers = null,
+        string|false|null $cachePath = null,
+        ?Helpers $helpers = null,
     ) : static
     {
         $compiler = $cachePath === false
