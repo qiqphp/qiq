@@ -1,5 +1,9 @@
 # Change Log
 
+## 2.1.1
+
+Hygeine release, include PHP 8.4 compatibility.
+
 ## 2.1.0
 
 - Allow for helper use **without `$this->`** anywhere inside `{{ ... }}`. Fixes #20.
